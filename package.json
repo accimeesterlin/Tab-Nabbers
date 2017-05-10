@@ -22,12 +22,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cbrannon/passportSequelizeTest.git"
+    "url": "git+https://github.com/cbrannon/Tab-Nabbers.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/cbrannon/passportSequelizeTest/issues"
+    "url": "https://github.com/cbrannon/Tab-Nabbers/issues"
   },
-  "homepage": "https://github.com/cbrannon/passportSequelizeTest#readme"
+  "homepage": "https://github.com/cbrannon/Tab-Nabbers#readme"
 }
