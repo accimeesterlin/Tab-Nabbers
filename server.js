@@ -1,11 +1,11 @@
-var express    = require('express');
-var app        = express();
-var passport   = require('passport');
-var session    = require('express-session');
-var bodyParser = require('body-parser');
-var env        = require('dotenv').load();
-var exphbs     = require('express-handlebars');
-
+var express    = require('express'),
+    passport   = require('passport'),
+    session    = require('express-session'),
+    bodyParser = require('body-parser'),
+    env        = require('dotenv').load(),
+    exphbs     = require('express-handlebars');
+var app = express(),
+    port = process.env.PORT || 8080;
 //For BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -16,7 +16,7 @@ app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
 //For Handlebars
-app.set('views', './app/views')
+app.set('views', './app/views');
 app.engine('hbs', exphbs({
     extname: '.hbs'
 }));
@@ -45,7 +45,7 @@ models.sequelize.sync().then(function() {
     console.log(err, "Something went wrong with the Database Update!");
 });
  
-app.listen(5000, function(err) {
+app.listen(port, function(err) {
  
     if (!err)
         console.log("Site is live");

@@ -29,5 +29,8 @@
   "bugs": {
     "url": "https://github.com/cbrannon/Tab-Nabbers/issues"
   },
-  "homepage": "https://github.com/cbrannon/Tab-Nabbers#readme"
+  "homepage": "https://github.com/cbrannon/Tab-Nabbers#readme",
+  "engines":{
+    "node":"7.8.0"
+  }
 }
