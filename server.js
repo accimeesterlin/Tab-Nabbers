@@ -3,8 +3,8 @@ var app        = express();
 var passport   = require('passport');
 var session    = require('express-session');
 var bodyParser = require('body-parser');
-var env = require('dotenv').load();
-var exphbs = require('express-handlebars');
+var env        = require('dotenv').load();
+var exphbs     = require('express-handlebars');
 
 //For BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -27,7 +27,7 @@ app.get('/', function(req, res) {
 });
 
 // Static directory
-app.use(express.static("./public"));
+app.use(express.static("./app/public"));
 
 //Models
 var models = require("./app/models");

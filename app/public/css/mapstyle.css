@@ -1,0 +1,35 @@
+path:hover {
+    background-color: red;
+}
+
+div {
+    margin: 0 auto;
+    width: 960px;
+}
+svg {
+    position: absolute;
+    margin: 100px auto;
+}
+
+.tree {
+    z-index:9999;
+    top: 110px; 
+    left: 235px; 
+    position: absolute;
+}
+line {
+    stroke: #666;
+}
+
+.node {
+    pointer-events: all;
+}
+
+circle {
+    stroke: none;
+    stroke-width: 40px;
+}
+
+.node text {
+    font: 8px sans-serif;
+}
