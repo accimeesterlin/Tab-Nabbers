@@ -22,11 +22,15 @@ module.exports = function(app, passport) {
         }
     ));
 
+    app.get('/index',authController.index);
+
+    app.get('*', isLoggedIn, authController.dashboard);
+
     function isLoggedIn(req, res, next) {
         if (req.isAuthenticated())
             return next();
 
-        res.redirect('/signin');
+        res.redirect('/index');
     }
 }
 

@@ -41,7 +41,7 @@ var root = {
             "name": "server999",
             "_children": null,
             "children": [{
-                "name": "server992"
+                "name": "server992",
             }]
         }]
     }]
