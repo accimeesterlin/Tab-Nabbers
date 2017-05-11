@@ -15,7 +15,7 @@ var isLoggedIn = function (req, res, next) {
     res.redirect("/signin");
 };
 
-router.get("/", function (req, res) {
+router.get("/index", function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/index.html"));
 });
 
@@ -43,13 +43,17 @@ router.post('/signin', passport.authenticate("local-signin", {
 
 router.get("/logout", function (req, res) {
     req.session.destroy(function (err) {
-        res.redirect("/");
+        res.redirect("/index");
     });
 });
 
 
 router.get("/signin", function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/signin.html"));
+});
+
+router.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname + "/../views/index.html"));
 });
 
 module.exports = router;
