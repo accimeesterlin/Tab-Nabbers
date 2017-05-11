@@ -22,6 +22,8 @@ module.exports = function(app, passport) {
         }
     ));
 
+    app.get('*', isLoggedIn, authController.dashboard);
+
     function isLoggedIn(req, res, next) {
         if (req.isAuthenticated())
             return next();
