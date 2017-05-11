@@ -52,3 +52,8 @@ footer.page-footer {
     margin-bottom: 1rem;
     color: #1C2331;
 }
+
+/* Login styles */
+.options {
+    color: #757575;
+}
