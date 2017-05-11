@@ -5,6 +5,12 @@ module.exports = function(app, passport) {
     app.get('/signup', authController.signup);
 
     app.get('/signin', authController.signin);
+
+    app.get('/about', authController.about);
+
+    app.get('/contact', authController.contact);
+
+    app.get('/features', authController.features);
  
     app.post('/signup', passport.authenticate('local-signup', {
             successRedirect: '/dashboard',
@@ -14,7 +20,7 @@ module.exports = function(app, passport) {
     
     app.get('/dashboard', isLoggedIn, authController.dashboard);
 
-    app.get('/logout',authController.logout);
+    app.get('/logout', authController.logout);
 
     app.post('/signin', passport.authenticate('local-signin',  { 
         successRedirect: '/dashboard',
@@ -22,7 +28,7 @@ module.exports = function(app, passport) {
         }
     ));
 
-    app.get('/index',authController.index);
+    app.get('/index', authController.index);
 
     app.get('*', isLoggedIn, authController.dashboard);
 

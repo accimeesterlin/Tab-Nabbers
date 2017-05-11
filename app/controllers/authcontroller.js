@@ -24,6 +24,24 @@ exports.index = function(req, res) {
  
 }
 
+exports.about = function(req, res) {
+ 
+    res.render('about');
+ 
+}
+
+exports.contact = function(req, res) {
+ 
+    res.render('contact');
+ 
+}
+
+exports.features = function(req, res) {
+ 
+    res.render('features');
+ 
+}
+
 exports.logout = function(req, res) {
  
     req.session.destroy(function(err) {

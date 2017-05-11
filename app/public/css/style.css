@@ -57,3 +57,7 @@ footer.page-footer {
 .options {
     color: #757575;
 }
+
+.md-form > i {
+   color: #757575;
+}
