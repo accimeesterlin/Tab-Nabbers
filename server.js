@@ -1,8 +1,8 @@
-var express    = require('express'),
-    passport   = require('passport'),
-    session    = require('express-session'),
+var express = require('express'),
+    passport = require('passport'),
+    session = require('express-session'),
     bodyParser = require('body-parser'),
-    env        = require('dotenv').load();
+    env = require('dotenv').load();
 
 var app = express(),
     port = process.env.PORT || 8080;
@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // For Passport
-app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized:true })); // session secret
+app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
@@ -31,18 +31,18 @@ app.use("/", routes);
 
 //load passport strategies
 require('./app/config/passport/passport.js')(passport, db.user);
- 
+
 //Sync Database
-db.sequelize.sync().then(function() {
+db.sequelize.sync({ force: true }).then(function() {
     console.log('Nice! Database looks fine');
 }).catch(function(err) {
     console.log(err, "Something went wrong with the Database Update!");
 });
- 
+
 app.listen(port, function(err) {
- 
+
     if (!err)
         console.log("Site is live");
     else console.log(err)
- 
+
 });

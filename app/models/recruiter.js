@@ -9,22 +9,42 @@ module.exports = function(sequelize, Sequelize) {
 
         firstname: {
             type: Sequelize.STRING,
-            notEmpty: true
+            validate: {
+                allowNull: false,
+                notEmpty: true
+            }
         },
 
         lastname: {
             type: Sequelize.STRING,
-            notEmpty: true
+            validate: {
+                allowNull: false,
+                notEmpty: true
+            }
         },
 
         username: {
             type: Sequelize.STRING,
-            allowNull:
+            validate: {
+                allowNull: false,
+                notEmpty: true
+            }
+        },
+
+        email: {
+            type: Sequelize.STRING,
+            validate: {
+                isEmail: true
+            }
         },
 
         company: {
             type: Sequelize.STRING,
-        },
+            validate: {
+                allowNull: false,
+                notEmpty: true
+            }
+        }
     });
 
     return Recruiter;
