@@ -7,18 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
-    <title>BootRecruit</title>
+    <title>BootCruit</title>
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
 
     <!-- Bootstrap core CSS -->
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Material Design Bootstrap -->
-    <link href="./css/mdb.min.css" rel="stylesheet">
+    <link href="../css/mdb.min.css" rel="stylesheet">
 
-    <link href="./css/style.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
 
 </head>
 
@@ -49,6 +49,9 @@
 
                     </li>
                 </ul>
+                <!--<form class="form-inline waves-effect waves-light">
+                    <input class="form-control" type="text" placeholder="Search">
+                </form>-->
             </div>
         </div>
     </nav>
@@ -57,17 +60,45 @@
     <!--Mask-->
     <div class="view hm-black-strong">
         <div class="full-bg-img flex-center">
-            <ul>
-                <li>
-                    <h1 class="h1-responsive wow fadeInDown" data-wow-delay="0.2s">BootCruit</h1></li>
-                <li>
-                    <p class="wow fadeInDown">One-click staffing solutions</p>
-                </li>
-                <li>
-                    <a href="signin/recruiter" class="btn btn-indigo btn-lg wow fadeInLeft" data-wow-delay="0.2s" rel="nofollow">Recruiter</a>
-                    <a href="signin/student" class="btn btn-default btn-lg wow fadeInRight" data-wow-delay="0.2s" rel="nofollow">Student</a>
-                </li>
-            </ul>
+			<!--Form with header-->
+			<div class="card wow fadeInDown" data-wow-delay="0.2s">
+				<div class="card-block">
+					<form id="signup" name="signup" method="post" action="/signup/recruiter">
+						<!--Header-->
+						<div class="form-header blue-gradient">
+							<h3><i class="fa fa-user"></i> Student Register:</h3>
+						</div>
+
+						<!--Body-->
+						<div class="md-form wow fadeIn" data-wow-delay="1.0s">
+							<i class="fa fa-user prefix"></i>
+							<input type="text" class="form-control" name="firstname" id="firstname">
+							<label for="firstname">First name</label>
+						</div>
+						<div class="md-form wow fadeIn" data-wow-delay="1.5s">
+							<i class="fa fa-user prefix"></i>
+							<input type="text" class="form-control" name="lastname" id="lastname">
+							<label for="lastname">Last name</label>
+						</div>
+						<div class="md-form wow fadeIn" data-wow-delay="2.0s">
+							<i class="fa fa-envelope prefix"></i>
+							<input type="text" class="form-control" name="email" id="email">
+							<label for="email">Your email</label>
+						</div>
+
+						<div class="md-form wow fadeIn" data-wow-delay="2.5s">
+							<i class="fa fa-lock prefix"></i>
+							<input type="password" class="form-control" name="password" id="password">
+							<label for="password">Your password</label>
+						</div>
+
+						<div class="text-center wow fadeIn" data-wow-delay="3.0s">
+							<button class="btn btn-indigo" type="submit">Sign up</button>
+							<hr>
+						</div>
+					</form>
+				</div>
+			</div>
         </div>
     </div>
     <!--/.Mask-->
@@ -84,16 +115,16 @@
     <!-- SCRIPTS -->
 
     <!-- JQuery -->
-    <script type="text/javascript" src="./js/jquery-2.2.3.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
 
     <!-- Bootstrap tooltips -->
-    <script type="text/javascript" src="./js/tether.min.js"></script>
+    <script type="text/javascript" src="../js/tether.min.js"></script>
 
     <!-- Bootstrap core JavaScript -->
-    <script type="text/javascript" src="./js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
 
     <!-- MDB core JavaScript -->
-    <script type="text/javascript" src="./js/mdb.min.js"></script>
+    <script type="text/javascript" src="../js/mdb.min.js"></script>
 
     <!-- Animations init-->
     <script>

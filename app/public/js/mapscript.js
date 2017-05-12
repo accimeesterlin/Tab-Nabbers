@@ -59,7 +59,7 @@ var nodeSvg, linkSvg, simulation, nodeEnter, linkEnter ;
 var svg = d3.select(".tree").append("svg")
     .attr("width", width)
     .attr("height", height)
-    // .call(d3.zoom().scaleExtent([1 / 2, 8]).on("zoom", zoomed))
+    .call(d3.zoom().scaleExtent([1 / 2, 8]).on("zoom", zoomed))
     .append("g");
     // .attr("transform", "translate(230,100)");
 

@@ -9,16 +9,24 @@ module.exports = function(sequelize, Sequelize) {
 
         firstname: {
             type: Sequelize.STRING,
+            allowNull: false,
             validate: {
-                allowNull: false,
                 notEmpty: true
             }
         },
 
         lastname: {
             type: Sequelize.STRING,
+            allowNull: false,
             validate: {
-                allowNull: false,
+                notEmpty: true
+            }
+        },
+
+        username: {
+            type: Sequelize.STRING,
+            allowNull: true,
+            validate: {
                 notEmpty: true
             }
         },
@@ -32,16 +40,16 @@ module.exports = function(sequelize, Sequelize) {
 
         company: {
             type: Sequelize.STRING,
+            allowNull: true,
             validate: {
-                allowNull: false,
                 notEmpty: true
             }
         },
 
         phone: {
             type: Sequelize.STRING,
+            allowNull: true,
             validate: {
-                allowNull: false,
                 notEmpty: true,
                 len: [10]
             }
@@ -53,4 +61,4 @@ module.exports = function(sequelize, Sequelize) {
     });
 
     return Recruiter;
-}
+};
