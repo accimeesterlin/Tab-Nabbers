@@ -52,7 +52,7 @@ router.get("/dashboard", function (req, res) {
 });
 
 router.get("/profile", isLoggedIn, function (req, res) {
-    res.sendFile(path.join(__dirname + "/../views/recruiter_login.html"));
+    res.sendFile(path.join(__dirname + "/../views/student_profile.html"));
 });
 
 
