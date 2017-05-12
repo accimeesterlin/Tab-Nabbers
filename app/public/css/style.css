@@ -66,4 +66,26 @@ footer.page-footer {
     width: 600px;
 }
 
+/* Edit Profile styles */
+.form {
+  background-color: white;
+  opacity: 0.9;
+  padding: 1em;
+  margin: 0 auto;
+}
+
+.pskills{
+  color:gray;
+}
+
+.form-group {
+  color:gray;
+}
+
+.editprof {
+  color:white;
+  text-align: center;
+font-variant: small-caps;
+}
+
 /* Map styles */
