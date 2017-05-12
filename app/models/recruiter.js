@@ -23,14 +23,6 @@ module.exports = function(sequelize, Sequelize) {
             }
         },
 
-        username: {
-            type: Sequelize.STRING,
-            validate: {
-                allowNull: false,
-                notEmpty: true
-            }
-        },
-
         email: {
             type: Sequelize.STRING,
             validate: {

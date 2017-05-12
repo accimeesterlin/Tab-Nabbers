@@ -42,7 +42,7 @@ module.exports = function(sequelize, Sequelize) {
             phoneNumber: {
                 type: Sequelize.STRING,
                 validate: {
-                    allowNull: false,
+                    //allowNull: false,
                     notEmpty: true,
                     len: [10]
                 }
