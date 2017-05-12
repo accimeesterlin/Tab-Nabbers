@@ -1,53 +1,55 @@
-var exports = module.exports = {}
- 
-exports.signup = function(req, res) {
- 
-    res.render('signup');
- 
-}
+/**
+ * Created by esterlingaccime on 5/10/17.
+ */
+var express = require("express");
+var passport = require("passport");
+var path = require("path");
 
-exports.signin = function(req, res) {
- 
-    res.render('signin');
- 
-}
+var router = express.Router();
 
-exports.dashboard = function(req, res) {
- 
-    res.render('dashboard');
- 
-}
+// Verified that the user needs to sign in
+var isLoggedIn = function (req, res, next) {
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect("/signin");
+};
 
-exports.index = function(req, res) {
- 
-    res.render('index');
- 
-}
+router.get("/", function (req, res) {
+    res.sendFile(path.join(__dirname + "/../views/index.html"));
+});
 
-exports.about = function(req, res) {
- 
-    res.render('about');
- 
-}
+router.get("/signup", function (req, res) {
+    res.sendFile(path.join(__dirname + "/../views/signup.html"));
+});
 
-exports.contact = function(req, res) {
- 
-    res.render('contact');
- 
-}
 
-exports.features = function(req, res) {
- 
-    res.render('features');
- 
-}
+router.get("/dashboard", isLoggedIn, function (req, res) {
+    res.sendFile(path.join(__dirname + "/../views/dashboard.html"));
+});
 
-exports.logout = function(req, res) {
- 
-    req.session.destroy(function(err) {
- 
-        res.redirect('/index');
- 
+
+router.post('/signup', passport.authenticate("local-signup", {
+    successRedirect: '/dashboard',
+    failureRedicrect: '/signup'
+}));
+
+
+router.post('/signin', passport.authenticate("local-signin", {
+    successRedirect: '/dashboard',
+    failureRedicrect: '/signin'
+}));
+
+
+router.get("/logout", function (req, res) {
+    req.session.destroy(function (err) {
+        res.redirect("/");
     });
- 
-}
+});
+
+
+router.get("/signin", function (req, res) {
+    res.sendFile(path.join(__dirname + "/../views/signin.html"));
+});
+
+module.exports = router;
