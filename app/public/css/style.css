@@ -61,3 +61,7 @@ footer.page-footer {
 .md-form > i {
    color: #757575;
 }
+
+.card {
+    width: 600px;
+}
