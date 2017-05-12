@@ -29,6 +29,7 @@ module.exports = function(passport, user) {
         },
 
         function (req, email, password, done) {
+            // Creating long string password for users
             var generateHash = function(password) {
                 return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
             };
@@ -54,6 +55,8 @@ module.exports = function(passport, user) {
                             lastname: req.body.lastname
                     };
 
+                    console.log(student);
+
 
                     User.create(student).then(function(newUser, created) {
                         if (!newUser) {
@@ -77,10 +80,10 @@ module.exports = function(passport, user) {
     },
 
     function(req, email, password, done) {
-        var User = user;
+        // Generating long string password
         var isValidPassword = function(userpass,password){
-        return bCrypt.compareSync(password, userpass);
-        }
+            return bCrypt.compareSync(password, userpass);
+        };
 
         User.findOne({ 
             where : { 
@@ -111,4 +114,4 @@ module.exports = function(passport, user) {
     }
   ));
     
-}
+};

@@ -10,34 +10,34 @@ module.exports = function(sequelize, Sequelize) {
 
             firstname: {
                 type: Sequelize.STRING,
-                validate: {
-                    notEmpty: true,
-                    allowNull: false
-                }
+                notEmpty: true
+                // validate: {
+                //     allowNull: false
+                // }
             },
 
             lastname: {
                 type: Sequelize.STRING,
-                validate: {
-                    notEmpty: true,
-                    allowNull: false
-                }
+                notEmpty: true
+                // validate: {
+                //     allowNull: false
+                // }
             },
 
             username: {
-                type: Sequelize.TEXT,
-                validate: {
-                    notEmpty: true,
-                    allowNull: false
-                }
+                type: Sequelize.TEXT
+                // notEmpty: true
+                // validate: {
+                //     allowNull: false
+                // }
             },
 
             password: {
                 type: Sequelize.STRING,
-                validate: {
-                    notEmpty: true,
+                // notEmpty: true,
+                // validate: {
                     allowNull: false
-                }
+                // }
             },
 
             email: {
@@ -48,12 +48,12 @@ module.exports = function(sequelize, Sequelize) {
             },
 
             phoneNumber: {
-                type: Sequelize.STRING,
-                validate: {
-                    allowNull: false,
-                    notEmpty: true,
-                    len: [10]
-                }
+                type: Sequelize.STRING
+                // notEmpty: true
+                // validate: {
+                //     allowNull: false,
+                //     len: [10]
+                // }
             },
 
             photo: {
@@ -79,37 +79,37 @@ module.exports = function(sequelize, Sequelize) {
 
             //Skills
             html: {
-                type: Sequelize.BOOLEAN,
-                validate: {
-                    defaultValue: false
-                }
+                type: Sequelize.BOOLEAN
+                // validate: {
+                //     defaultValue: false
+                // }
             },
             css: {
-                type: Sequelize.BOOLEAN,
-                validate: {
-                    defaultValue: false
-                }
+                type: Sequelize.BOOLEAN
+                // validate: {
+                //     defaultValue: false
+                // }
             },
 
             javascript: {
-                type: Sequelize.BOOLEAN,
-                validate: {
-                    defaultValue: false
-                }
+                type: Sequelize.BOOLEAN
+                // validate: {
+                //     defaultValue: false
+                // }
             },
 
             node: {
-                type: Sequelize.BOOLEAN,
-                validate: {
-                    defaultValue: false
-                }
+                type: Sequelize.BOOLEAN
+                // validate: {
+                //     defaultValue: false
+                // }
             },
 
             database: {
-                type: Sequelize.BOOLEAN,
-                validate: {
-                    defaultValue: false
-                }
+                type: Sequelize.BOOLEAN
+                // validate: {
+                //     defaultValue: false
+                // }
             }
         },
         //Associations
@@ -127,4 +127,4 @@ module.exports = function(sequelize, Sequelize) {
 
     return User;
 
-}
+};
