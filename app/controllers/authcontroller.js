@@ -51,7 +51,7 @@ router.get("/dashboard", function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/dashboard.html"));
 });
 
-router.get("/profile", isLoggedIn, function (req, res) {
+router.get("/profile", function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/student_profile.html"));
 });
 
