@@ -35,14 +35,17 @@ require('./app/config/passport/passport.js')(passport, db.user);
 //Sync Database
 db.sequelize.sync({ force: true }).then(function() {
     console.log('Nice! Database looks fine');
+
+    app.listen(port, function(err) {
+
+        if (!err)
+            console.log("Site is live");
+        else console.log(err)
+
+    });
+
 }).catch(function(err) {
     console.log(err, "Something went wrong with the Database Update!");
 });
 
-app.listen(port, function(err) {
 
-    if (!err)
-        console.log("Site is live");
-    else console.log(err)
-
-});
