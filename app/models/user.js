@@ -24,14 +24,6 @@ module.exports = function(sequelize, Sequelize) {
                 }
             },
 
-            username: {
-                type: Sequelize.TEXT,
-                validate: {
-                    notEmpty: true,
-                    allowNull: false
-                }
-            },
-
             password: {
                 type: Sequelize.STRING,
                 validate: {
