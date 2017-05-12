@@ -47,7 +47,7 @@ router.get("/signup/:name?", function (req, res) {
 
 });
 
-router.get("/dashboard", isLoggedIn, function (req, res) {
+router.get("/dashboard", function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/dashboard.html"));
 });
 
@@ -65,24 +65,26 @@ router.get("/logout", function (req, res) {
 
 // All the POSTS Request below
 
-router.post('/signup', passport.authenticate("local-signup", {
+router.post('/signup/recruiter', passport.authenticate("local-signup", {
     successRedirect: '/dashboard',
-    failureRedicrect: '/signup'
+    failureRedirect: '/signup'
+
 }));
 
 
-router.post('/signin', passport.authenticate("local-signin", {
+router.post('/signin/recruiter', passport.authenticate("local-signin", {
     successRedirect: '/dashboard',
-    failureRedicrect: '/signin'
+    failureRedirect: '/signin'
+
 }));
 
 
 
 
 
-router.get("/signin", function (req, res) {
-    res.sendFile(path.join(__dirname + "/../views/signin.html"));
-});
+// router.get("/signin", function (req, res) {
+//     res.sendFile(path.join(__dirname + "/../views/signin.html"));
+// });
 
 router.get("*", function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/index.html"));

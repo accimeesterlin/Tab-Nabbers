@@ -10,38 +10,39 @@ module.exports = function(sequelize, Sequelize) {
 
             firstname: {
                 type: Sequelize.STRING,
+                allowNull: false,
                 validate: {
-                    notEmpty: true,
-                    allowNull: false
+                    notEmpty: true
                 }
             },
 
             lastname: {
                 type: Sequelize.STRING,
+                allowNull: false,
                 validate: {
-                    notEmpty: true,
-                    allowNull: false
+                    notEmpty: true
                 }
             },
 
             username: {
                 type: Sequelize.TEXT,
+                allowNull: true,
                 validate: {
-                    notEmpty: true,
-                    allowNull: false
+                    notEmpty: true
                 }
             },
 
             password: {
                 type: Sequelize.STRING,
+                allowNull: false,
                 validate: {
-                    notEmpty: true,
-                    allowNull: false
+                    notEmpty: true
                 }
             },
 
             email: {
                 type: Sequelize.STRING,
+                allowNull: false,
                 validate: {
                     isEmail: true
                 }
@@ -49,8 +50,8 @@ module.exports = function(sequelize, Sequelize) {
 
             phoneNumber: {
                 type: Sequelize.STRING,
+                allowNull: true,
                 validate: {
-                    allowNull: false,
                     notEmpty: true,
                     len: [10]
                 }
@@ -127,4 +128,4 @@ module.exports = function(sequelize, Sequelize) {
 
     return User;
 
-}
+};
