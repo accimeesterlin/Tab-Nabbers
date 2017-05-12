@@ -29,17 +29,17 @@ router.get("/dashboard", isLoggedIn, function (req, res) {
 });
 
 
-router.get("/student/login", function (req, res) {
+router.get("/student", function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/student_login.html"));
 });
 
 
-router.get("/recruiter/login", function (req, res) {
+router.get("/recruiter", function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/recruiter_login.html"));
 });
 
 
-router.get("/student/profile", function (req, res) {
+router.get("/profile", isLoggedIn, function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/recruiter_login.html"));
 });
 
@@ -51,6 +51,7 @@ router.get("/logout", function (req, res) {
     });
 });
 
+// All the POSTS Request below
 
 router.post('/signup', passport.authenticate("local-signup", {
     successRedirect: '/dashboard',

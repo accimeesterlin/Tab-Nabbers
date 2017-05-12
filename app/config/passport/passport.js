@@ -55,7 +55,7 @@ module.exports = function(passport, user) {
                     };
 
 
-                    User.create(data).then(function(newUser, created) {
+                    User.create(student).then(function(newUser, created) {
                         if (!newUser) {
                             return done(null, false);
                         }
