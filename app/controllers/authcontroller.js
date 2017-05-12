@@ -19,23 +19,27 @@ router.get("/index", function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/index.html"));
 });
 
-router.get("/signup", function (req, res) {
+router.get("/signup/:recruiter?", function (req, res) {
+    console.log();
     res.sendFile(path.join(__dirname + "/../views/signup.html"));
 });
 
 
+router.get("/signin/:name?", function (req, res) {
+    if(req.params.name === 'recruiter'){
+        res.sendFile(path.join(__dirname + "/../views/recruiter_login.html"));
+
+    }
+
+    else if(req.params.name === "student"){
+        res.sendFile(path.join(__dirname + "/../views/student_login.html"));
+
+    }
+
+});
+
 router.get("/dashboard", isLoggedIn, function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/dashboard.html"));
-});
-
-
-router.get("/student", function (req, res) {
-    res.sendFile(path.join(__dirname + "/../views/student_login.html"));
-});
-
-
-router.get("/recruiter", function (req, res) {
-    res.sendFile(path.join(__dirname + "/../views/recruiter_login.html"));
 });
 
 
