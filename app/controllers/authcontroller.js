@@ -38,7 +38,6 @@ router.get("/recruiter", function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/recruiter_login.html"));
 });
 
-
 router.get("/profile", isLoggedIn, function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/recruiter_login.html"));
 });
