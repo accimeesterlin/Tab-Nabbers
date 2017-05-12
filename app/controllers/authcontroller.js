@@ -65,19 +65,36 @@ router.get("/logout", function (req, res) {
 
 // All the POSTS Request below
 
-router.post('/signup/recruiter', passport.authenticate("local-signup", {
+// Sign Up for Recruiters
+router.post('/signup/recruiter', passport.authenticate("recruiter-signup", {
     successRedirect: '/dashboard',
-    failureRedirect: '/signup'
+    failureRedirect: '/signup/recruiter'
 
 }));
 
 
-router.post('/signin/recruiter', passport.authenticate("local-signin", {
+// Signin for Recruiters
+router.post('/signin/recruiter', passport.authenticate("recruiter-signin", {
     successRedirect: '/dashboard',
-    failureRedirect: '/signin'
+    failureRedirect: '/signin/recruiter'
 
 }));
 
+
+// Sign Up for Students
+router.post('/signup/student', passport.authenticate("student-signup", {
+    successRedirect: '/dashboard',
+    failureRedirect: '/signup/student'
+
+}));
+
+
+// Signin for Students
+router.post('/signin/student', passport.authenticate("student-signin", {
+    successRedirect: '/dashboard',
+    failureRedirect: '/signin/student'
+
+}));
 
 
 
