@@ -1,9 +1,9 @@
 /**
  * Created by esterlingaccime on 5/10/17.
  */
-var express = require("express");
-var passport = require("passport");
-var path = require("path");
+var express = require("express"),
+    passport = require("passport"),
+    path = require("path");
 
 var router = express.Router();
 
@@ -29,6 +29,29 @@ router.get("/dashboard", isLoggedIn, function (req, res) {
 });
 
 
+router.get("/student/login", function (req, res) {
+    res.sendFile(path.join(__dirname + "/../views/student_login.html"));
+});
+
+
+router.get("/recruiter/login", function (req, res) {
+    res.sendFile(path.join(__dirname + "/../views/recruiter_login.html"));
+});
+
+
+router.get("/student/profile", function (req, res) {
+    res.sendFile(path.join(__dirname + "/../views/recruiter_login.html"));
+});
+
+
+
+router.get("/logout", function (req, res) {
+    req.session.destroy(function (err) {
+        res.redirect("/index");
+    });
+});
+
+
 router.post('/signup', passport.authenticate("local-signup", {
     successRedirect: '/dashboard',
     failureRedicrect: '/signup'
@@ -41,11 +64,7 @@ router.post('/signin', passport.authenticate("local-signin", {
 }));
 
 
-router.get("/logout", function (req, res) {
-    req.session.destroy(function (err) {
-        res.redirect("/index");
-    });
-});
+
 
 
 router.get("/signin", function (req, res) {
