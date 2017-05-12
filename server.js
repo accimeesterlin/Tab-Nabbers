@@ -33,7 +33,7 @@ app.use("/", routes);
 require('./app/config/passport/passport.js')(passport, db.user);
 
 //Sync Database
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({}).then(function() {
     console.log('Nice! Database looks fine');
 
     app.listen(port, function(err) {
