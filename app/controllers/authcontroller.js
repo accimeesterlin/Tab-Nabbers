@@ -67,13 +67,13 @@ router.get("/logout", function (req, res) {
 
 router.post('/signup', passport.authenticate("local-signup", {
     successRedirect: '/dashboard',
-    failureRedicrect: '/signup'
+    failureRedirect: '/signup'
 }));
 
 
 router.post('/signin', passport.authenticate("local-signin", {
     successRedirect: '/dashboard',
-    failureRedicrect: '/signin'
+    failureRedirect: '/signin'
 }));
 
 
