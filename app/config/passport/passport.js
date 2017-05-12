@@ -47,14 +47,15 @@ module.exports = function(passport, user) {
                 } else {
                     var userPassword = generateHash(password);
 
-                    var data = {
+                    var student = {
                             email: email,
                             password: userPassword,
                             firstname: req.body.firstname,
                             lastname: req.body.lastname
-                        };
-            
-                    User.create(data).then(function(newUser, created) {
+                    };
+
+
+                    User.create(student).then(function(newUser, created) {
                         if (!newUser) {
                             return done(null, false);
                         }

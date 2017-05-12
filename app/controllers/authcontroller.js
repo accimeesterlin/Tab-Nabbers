@@ -1,9 +1,9 @@
 /**
  * Created by esterlingaccime on 5/10/17.
  */
-var express = require("express");
-var passport = require("passport");
-var path = require("path");
+var express = require("express"),
+    passport = require("passport"),
+    path = require("path");
 
 var router = express.Router();
 
@@ -19,15 +19,51 @@ router.get("/index", function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/index.html"));
 });
 
-router.get("/signup", function (req, res) {
-    res.sendFile(path.join(__dirname + "/../views/signup.html"));
+
+router.get("/signin/:name?", function (req, res) {
+    if(req.params.name === 'recruiter'){
+        res.sendFile(path.join(__dirname + "/../views/recruiter_login.html"));
+
+    }
+
+    else if(req.params.name === "student"){
+        res.sendFile(path.join(__dirname + "/../views/student_login.html"));
+
+    }
+
 });
 
+
+router.get("/signup/:name?", function (req, res) {
+    if(req.params.name === 'recruiter'){
+        res.sendFile(path.join(__dirname + "/../views/recruiter_signup.html"));
+
+    }
+
+    else if(req.params.name === "student"){
+        res.sendFile(path.join(__dirname + "/../views/student_signup.html"));
+
+    }
+
+});
 
 router.get("/dashboard", isLoggedIn, function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/dashboard.html"));
 });
 
+router.get("/profile", isLoggedIn, function (req, res) {
+    res.sendFile(path.join(__dirname + "/../views/recruiter_login.html"));
+});
+
+
+
+router.get("/logout", function (req, res) {
+    req.session.destroy(function (err) {
+        res.redirect("/index");
+    });
+});
+
+// All the POSTS Request below
 
 router.post('/signup', passport.authenticate("local-signup", {
     successRedirect: '/dashboard',
@@ -41,11 +77,7 @@ router.post('/signin', passport.authenticate("local-signin", {
 }));
 
 
-router.get("/logout", function (req, res) {
-    req.session.destroy(function (err) {
-        res.redirect("/index");
-    });
-});
+
 
 
 router.get("/signin", function (req, res) {
