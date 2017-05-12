@@ -44,6 +44,19 @@ module.exports = function(sequelize, Sequelize) {
                 allowNull: false,
                 notEmpty: true
             }
+        },
+
+        phone: {
+            type: Sequelize.STRING,
+            validate: {
+                allowNull: false,
+                notEmpty: true,
+                len: [10]
+            }
+        },
+
+        photo: {
+            type: Sequelize.STRING
         }
     });
 
