@@ -306,6 +306,20 @@
                     info.html(msg)
                             .attr("id", 'infoUpdated');
                 $("#container").prepend(info);
+
+                var counter = 0;
+                var timer = setInterval(function () {
+                    counter++;
+                    console.log(counter);
+                    if(counter >= 5){
+
+                        clearInterval(timer);
+                        $("#infoUpdated").remove();
+
+                    }
+
+                }, 1000)
+
             };
 
             $.post("/update/profile", profileInfo, function (data) {
@@ -318,6 +332,8 @@
                 }
             });
         });
+
+
 
 
     </script>

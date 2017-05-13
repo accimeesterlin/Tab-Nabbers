@@ -100,6 +100,18 @@ footer.page-footer {
     font-family: 'Audiowide', cursive;
 }
 
+#infoUpdated{
+    text-align: center;
+    background: green;
+    padding:10px;
+    color:#fff;
+    border:1px solid darkgreen;
+    margin:0 auto;
+    margin-top:60px;
+    width:70%;
+
+}
+
 
 /* The switch - the box around the slider */
 
@@ -177,6 +189,11 @@ input:checked + .slider:before {
 #cardfeature, #cardcontact{
   width: 100%;
 }
+
+
+/* Map styles */
+
+
 
 
 /* Map styles */
