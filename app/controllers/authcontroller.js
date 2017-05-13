@@ -2,8 +2,9 @@
  * Created by esterlingaccime on 5/10/17.
  */
 var express = require("express"),
-    passport = require("passport"),
-    path = require("path");
+    passport = require("passport");
+
+var db = require("../models");
 
 var router = express.Router();
 
@@ -15,55 +16,88 @@ var isLoggedIn = function (req, res, next) {
     res.redirect("/signin");
 };
 
+
+// Home page
 router.get("/index", function (req, res) {
-    res.sendFile(path.join(__dirname + "/../views/index.html"));
+    res.render("index");
 });
 
 
+// Sign in for Recruiters and Students
 router.get("/signin/:name?", function (req, res) {
     if(req.params.name === 'recruiter'){
-        res.sendFile(path.join(__dirname + "/../views/recruiter_login.html"));
+        res.render("recruiter_login");
 
     }
-
     else if(req.params.name === "student"){
-        res.sendFile(path.join(__dirname + "/../views/student_login.html"));
+        res.render("student_login");
 
     }
 
 });
 
 
+
+// Sigin up Routers for Recruiters and Students
 router.get("/signup/:name?", function (req, res) {
     if(req.params.name === 'recruiter'){
-        res.sendFile(path.join(__dirname + "/../views/recruiter_signup.html"));
+        res.render("recruiter_signup");
 
     }
 
     else if(req.params.name === "student"){
-        res.sendFile(path.join(__dirname + "/../views/student_signup.html"));
+        res.render("student_signup");
 
     }
 
 });
 
-router.get("/dashboard", function (req, res) {
-    res.sendFile(path.join(__dirname + "/../views/dashboard.html"));
+
+// Dashboard included the map that recruiters see
+// If user not logged in, they're not able to see it
+router.get("/dashboard", isLoggedIn, function (req, res) {
+    res.render("dashboard");
 });
 
-router.get("/profile", function (req, res) {
-    res.sendFile(path.join(__dirname + "/../views/student_profile.html"));
+
+// Profile page for Students
+// If user not logged in, they're not able to see it
+router.get("/profile", isLoggedIn, function (req, res) {
+    var currentUser = req.user;
+    db.bootcamp.findOne({
+        where:{
+            id: currentUser.id
+        }
+    }).then(function (data) {
+        // console.log(data.get());
+        currentUser.institution = data.get().institution;
+        console.log(currentUser);
+
+        // console.log(req.user);
+        res.render("student_profile", currentUser);
+    });
+
 });
 
 
-
-router.get("/logout", function (req, res) {
+// Log the user out
+// If user not logged in, they're not able to see it
+router.get("/logout", isLoggedIn, function (req, res) {
     req.session.destroy(function (err) {
         res.redirect("/index");
     });
 });
 
-// All the POSTS Request below
+
+router.get("*", function (req, res) {
+    res.render("index");
+});
+
+
+
+////////////////////////////////////////////////////////////////////
+///////////////////Post Request Go below////////////////////////////
+////////////////////////////////////////////////////////////////////
 
 // Sign Up for Recruiters
 router.post('/signup/recruiter', passport.authenticate("recruiter-signup", {
@@ -83,7 +117,7 @@ router.post('/signin/recruiter', passport.authenticate("recruiter-signin", {
 
 // Sign Up for Students
 router.post('/signup/student', passport.authenticate("student-signup", {
-    successRedirect: '/dashboard',
+    successRedirect: '/profile',
     failureRedirect: '/signup/student'
 
 }));
@@ -91,20 +125,11 @@ router.post('/signup/student', passport.authenticate("student-signup", {
 
 // Signin for Students
 router.post('/signin/student', passport.authenticate("student-signin", {
-    successRedirect: '/dashboard',
+    successRedirect: '/profile',
     failureRedirect: '/signin/student'
 
 }));
 
 
-
-
-// router.get("/signin", function (req, res) {
-//     res.sendFile(path.join(__dirname + "/../views/signin.html"));
-// });
-
-router.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname + "/../views/index.html"));
-});
 
 module.exports = router;
