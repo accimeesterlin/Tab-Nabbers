@@ -283,9 +283,45 @@
     <script>
         new WOW().init();
 
+        ////////////////////////////////////////////////////////////
+        ///////////////////Notifications Updates////////////////////
+        ////////////////////////////////////////////////////////////
+        // Sending a notification messages that mentioned data has been updated
+        var updateMsg = function (msg) {
+            $("#infoUpdated").remove();
+            var info = $("<p>");
+            info.html(msg)
+                    .attr("id", 'infoUpdated');
+            $("#container").prepend(info);
+
+            var counter = 0;
+
+            var timer = setInterval(function () {
+                counter++;
+                console.log(counter);
+                if(counter >= 5){
+
+                    clearInterval(timer);
+                    $("#infoUpdated").remove();
+
+                }
+
+            }, 1000)
+
+        }; // End of Update Msg
+
+
+
+
+
+
+        ////////////////////////////////////////////////////////////
+        //////////////////////On Click event////////////////////////
+        ////////////////////////////////////////////////////////////
         $("#update").on("click", function (event) {
             event.preventDefault();
 
+            // Getting the user input from the DOM
             var firstname = $("#firstname").val().trim(), lastname = $("#lastname").val().trim(),
                 phoneNumber = $("#phonenumber").val().trim(), email = $("#email").val().trim(),
                 github = $("#github").val().trim();
@@ -298,30 +334,11 @@
                 github: github
             };
 
-            console.log(profileInfo);
 
-            var updateMsg = function (msg) {
-                $("#infoUpdated").remove();
-                var info = $("<p>");
-                    info.html(msg)
-                            .attr("id", 'infoUpdated');
-                $("#container").prepend(info);
 
-                var counter = 0;
-                var timer = setInterval(function () {
-                    counter++;
-                    console.log(counter);
-                    if(counter >= 5){
 
-                        clearInterval(timer);
-                        $("#infoUpdated").remove();
 
-                    }
-
-                }, 1000)
-
-            };
-
+            // Posting to the Database
             $.post("/update/profile", profileInfo, function (data) {
                 console.log("Data has successfully been posted!!!");
                 if(data === "ok"){
