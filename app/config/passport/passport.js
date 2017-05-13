@@ -7,37 +7,36 @@ module.exports = function(passport, user) {
     var LocalStrategy = require('passport-local').Strategy;
     var Recruiter = user.recruiter;
 
-var recruiterSerialize = function () {
-    //serialize
-    passport.serializeUser(function(user, done) {
-        done(null, user.id);
-    });
-
-    // deserialize user
-    passport.deserializeUser(function(id, done) {
-        Recruiter.findById(id).then(function(user) {
-            if (user) {
-                done(null, user.get());
-            } else {
-                done(user.errors, null);
-            }
+    var recruiterSerialize = function() {
+        //serialize
+        passport.serializeUser(function(user, done) {
+            done(null, user.id);
         });
-    });
-};
+
+        // deserialize user
+        passport.deserializeUser(function(id, done) {
+            Recruiter.findById(id).then(function(user) {
+                if (user) {
+                    done(null, user.get());
+                } else {
+                    done(user.errors, null);
+                }
+            });
+        });
+    };
 
 
-////////////////////////////////////////////////////////////////////
-///////////////////Recruiter Access Below///////////////////////////
-////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////
+    ///////////////////Recruiter Access Below///////////////////////////
+    ////////////////////////////////////////////////////////////////////
     // Sign Up Recruiter
-    passport.use('recruiter-signup', new LocalStrategy(
-        {
+    passport.use('recruiter-signup', new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password',
             passReqToCallback: true // allows us to pass back the entire request to the callback
         },
 
-        function (req, email, password, done) {
+        function(req, email, password, done) {
             //serialize
             recruiterSerialize();
 
@@ -51,8 +50,7 @@ var recruiterSerialize = function () {
                     email: email
                 }
             }).then(function(user) {
-                if (user)
-                {
+                if (user) {
                     return done(null, false, {
                         message: 'That email is already taken'
                     });
@@ -79,7 +77,7 @@ var recruiterSerialize = function () {
                         }
                     });
                 }
-            }).catch(function (err) {
+            }).catch(function(err) {
                 console.log("Errors: " + err);
                 return done(null, false, { message: 'Something went wrong with your Sign Up' });
             });
@@ -87,32 +85,31 @@ var recruiterSerialize = function () {
     ));
 
     // Recruiter Sign in
-    passport.use('recruiter-signin', new LocalStrategy(
-        {
+    passport.use('recruiter-signin', new LocalStrategy({
             // by default, local strategy uses username and password, we will override with email
-            usernameField : 'email',
-            passwordField : 'password',
-            passReqToCallback : true // allows us to pass back the entire request to the callback
+            usernameField: 'email',
+            passwordField: 'password',
+            passReqToCallback: true // allows us to pass back the entire request to the callback
         },
 
         function(req, email, password, done) {
             recruiterSerialize();
             // Generating long string password
-            var isValidPassword = function(userpass,password){
+            var isValidPassword = function(userpass, password) {
                 return bCrypt.compareSync(password, userpass);
             };
 
             Recruiter.findOne({
-                where : {
+                where: {
                     email: email
                 }
-            }).then(function (user) {
+            }).then(function(user) {
 
                 if (!user) {
                     return done(null, false, { message: 'Email does not exist' });
                 }
 
-                if (!isValidPassword(user.password,password)) {
+                if (!isValidPassword(user.password, password)) {
 
                     return done(null, false, { message: 'Incorrect password.' });
 
@@ -120,11 +117,11 @@ var recruiterSerialize = function () {
 
                 var userinfo = user.get();
 
-                return done(null,userinfo);
+                return done(null, userinfo);
 
-            }).catch(function(err){
+            }).catch(function(err) {
 
-                console.log("Error:",err);
+                console.log("Error:", err);
 
                 return done(null, false, { message: 'Something went wrong with your Signin' });
             });
@@ -147,7 +144,7 @@ var recruiterSerialize = function () {
     var Student = user.user,
         BootCamp = user.bootcamp;
 
-    var studentSerialize = function () {
+    var studentSerialize = function() {
         //serialize Student
         passport.serializeUser(function(user, done) {
             done(null, user.id);
@@ -166,14 +163,13 @@ var recruiterSerialize = function () {
     };
 
     // Sign Up Student
-    passport.use('student-signup', new LocalStrategy(
-        {
+    passport.use('student-signup', new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password',
             passReqToCallback: true // allows us to pass back the entire request to the callback
         },
 
-        function (req, email, password, done) {
+        function(req, email, password, done) {
 
             studentSerialize();
 
@@ -190,8 +186,7 @@ var recruiterSerialize = function () {
                     email: email
                 }
             }).then(function(user) {
-                if (user)
-                {
+                if (user) {
                     return done(null, false, {
                         message: 'That email is already taken'
                     });
@@ -217,8 +212,8 @@ var recruiterSerialize = function () {
                         }
                     });
                 }
-            }).catch(function (err) {
-                console.log("Errors: " );
+            }).catch(function(err) {
+                console.log("Errors: ");
                 return done(null, false, { message: 'Something went wrong with your Signup' });
             });
 
@@ -244,12 +239,11 @@ var recruiterSerialize = function () {
     ));
 
     //Student Signin
-    passport.use('student-signin', new LocalStrategy(
-        {
+    passport.use('student-signin', new LocalStrategy({
             // by default, local strategy uses username and password, we will override with email
-            usernameField : 'email',
-            passwordField : 'password',
-            passReqToCallback : true // allows us to pass back the entire request to the callback
+            usernameField: 'email',
+            passwordField: 'password',
+            passReqToCallback: true // allows us to pass back the entire request to the callback
         },
 
         function(req, email, password, done) {
@@ -257,21 +251,21 @@ var recruiterSerialize = function () {
             studentSerialize();
 
             // Generating long string password
-            var isValidPassword = function(userpass,password){
+            var isValidPassword = function(userpass, password) {
                 return bCrypt.compareSync(password, userpass);
             };
 
             Student.findOne({
-                where : {
+                where: {
                     email: email
                 }
-            }).then(function (user) {
+            }).then(function(user) {
 
                 if (!user) {
                     return done(null, false, { message: 'Email does not exist' });
                 }
 
-                if (!isValidPassword(user.password,password)) {
+                if (!isValidPassword(user.password, password)) {
 
                     return done(null, false, { message: 'Incorrect password.' });
 
@@ -279,9 +273,9 @@ var recruiterSerialize = function () {
 
                 var userinfo = user.get();
 
-                return done(null,userinfo);
+                return done(null, userinfo);
 
-            }).catch(function(err){
+            }).catch(function(err) {
                 console.log("Errors: " + err);
                 return done(null, false, { message: 'Something went wrong with your Signin' });
             });
@@ -289,10 +283,3 @@ var recruiterSerialize = function () {
     )); // Sigin Student
 
 };
-
-
-
-
-
-
-
