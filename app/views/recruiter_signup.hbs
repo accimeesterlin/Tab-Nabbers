@@ -66,7 +66,7 @@
 					<form id="signup" name="signup" method="post" action="/signup/recruiter">
 						<!--Header-->
 						<div class="form-header blue-gradient">
-							<h3><i class="fa fa-user"></i> Recruiter Register:</h3>
+							<h3><i class="fa fa-user"></i> Recruiter Registration:</h3>
 						</div>
 
 						<!--Body-->
@@ -82,7 +82,7 @@
 						</div>
 						<div class="md-form wow fadeIn" data-wow-delay="2.0s">
 							<i class="fa fa-envelope prefix"></i>
-							<input type="text" class="form-control" name="email" id="email">
+							<input type="text" class="form-control" name="email" data-validation="email" id="email">
 							<label for="email">Your email</label>
 						</div>
 
@@ -117,6 +117,9 @@
     <!-- JQuery -->
     <script type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
 
+    <!-- JQuery Form Validation -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="../js/tether.min.js"></script>
 
@@ -129,6 +132,9 @@
     <!-- Animations init-->
     <script>
         new WOW().init();
+        $.validate({
+            form: '#signup'
+        });
     </script>
 
 
