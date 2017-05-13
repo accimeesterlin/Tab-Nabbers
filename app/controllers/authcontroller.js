@@ -8,7 +8,7 @@ var db = require("../models");
 
 var router = express.Router();
 
-var userId;
+var user;
 
 // Verified that the user needs to sign in
 var isLoggedIn = function (req, res, next) {
@@ -70,7 +70,7 @@ router.get("/dashboard", isLoggedIn, function (req, res) {
 // If user not logged in, they're not able to see it
 router.get("/profile", isLoggedIn, function (req, res) {
     var currentUser = req.user;
-    userId = currentUser;
+    user = currentUser;
     db.bootcamp.findOne({
         where:{
             id: currentUser.id
@@ -142,19 +142,24 @@ router.post("/update/profile", function (req, res) {
 
 
     var student = req.body;
-
-    var profileInfo = {
-
+    var profileUpdate = {
+        email:student.email,
+        firstname: student.firstname,
+        lastname: student.lastname,
+        github: student.github,
         phoneNumber: student.phoneNumber
     };
 
-    db.user.update({phoneNumber: '4543'}, {
+    db.user.update(profileUpdate, {
         where:{
-            id: userId
+            id: user.id
         }
     }).then(function (data) {
         console.log("Data has successfully beeen updated!!", data);
-        res.json("/profile");
+        res.json("ok");
+    }).catch(function (err) {
+        console.log(err);
+        res.json("err");
     });
 
 });

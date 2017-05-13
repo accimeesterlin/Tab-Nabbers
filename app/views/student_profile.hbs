@@ -65,7 +65,7 @@
         <div class="full-bg-img flex-center">
               <br>
             <!--Form with header-->
-            <div class="container">
+            <div class="container" id="container">
                 <br>
                 <div class=row>
                     <div class="col-md-2"></div>
@@ -238,8 +238,8 @@
                     <center>
                     <p class="text-left"><strong>Contact Information: </strong></p>
                     <p>{{email}}: </p>
-                    <p>Phone: </p>
-                    <p>GitHub: </p>
+                    <p>Phone: {{phoneNumber}}</p>
+                    <p>GitHub: {{github}}</p>
                     </center>
                 </div>
                 <div class="modal-footer">
@@ -300,6 +300,18 @@
 
             $.post("/update/profile", profileInfo, function (data) {
                 console.log("Data has successfully been posted!!!");
+                if(data === "ok"){
+                    $("#container").prepend();
+                    var info = $("<p>");
+                        info.html("Your info has been updated!");
+                    $("#container").prepend(info);
+
+
+                }else{
+                    var info = $("<p>");
+                    info.html("Customer hasn't been updated, something happened");
+                    $("#container").prepend(info);
+                }
             });
         });
 
