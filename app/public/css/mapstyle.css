@@ -1,20 +1,28 @@
-div {
+.map-container {
     margin: 0 auto;
+    height: 600px;
     width: 960px;
 }
+
 svg {
     position: absolute;
-    margin: 100px auto;
 }
 
 .tree {
     z-index:9999;
-    top: 110px; 
+    /*top: 110px; 
     left: 235px; 
-    position: absolute;
+    position: absolute;*/
 }
+
+.map > path {
+    stroke: white;
+    /*fill: white;*/
+}
+
 line {
-    stroke: #666;
+    stroke: white;
+    fill: white;
 }
 
 .node {
