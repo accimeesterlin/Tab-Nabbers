@@ -7,7 +7,23 @@ module.exports = function(passport, user) {
     var LocalStrategy = require('passport-local').Strategy;
     var Recruiter = user.recruiter;
 
+var recruiterSerialize = function () {
+    //serialize
+    passport.serializeUser(function(user, done) {
+        done(null, user.id);
+    });
 
+    // deserialize user
+    passport.deserializeUser(function(id, done) {
+        Recruiter.findById(id).then(function(user) {
+            if (user) {
+                done(null, user.get());
+            } else {
+                done(user.errors, null);
+            }
+        });
+    });
+};
 
 
 ////////////////////////////////////////////////////////////////////
@@ -23,21 +39,7 @@ module.exports = function(passport, user) {
 
         function (req, email, password, done) {
             //serialize
-            passport.serializeUser(function(user, done) {
-                done(null, user.id);
-            });
-
-            // deserialize user
-            passport.deserializeUser(function(id, done) {
-                Recruiter.findById(id).then(function(user) {
-                    if (user) {
-                        done(null, user.get());
-                    } else {
-                        done(user.errors, null);
-                    }
-                });
-            });
-
+            recruiterSerialize();
 
             // Creating long string password for users
             var generateHash = function(password) {
@@ -93,6 +95,7 @@ module.exports = function(passport, user) {
         },
 
         function(req, email, password, done) {
+            recruiterSerialize();
             // Generating long string password
             var isValidPassword = function(userpass,password){
                 return bCrypt.compareSync(password, userpass);
@@ -142,8 +145,23 @@ module.exports = function(passport, user) {
 
     var Student = user.user;
 
+    var studentSerialize = function () {
+        //serialize Student
+        passport.serializeUser(function(user, done) {
+            done(null, user.id);
+        });
 
-
+        // deserialize Student
+        passport.deserializeUser(function(id, done) {
+            Student.findById(id).then(function(user) {
+                if (user) {
+                    done(null, user.get());
+                } else {
+                    done(user.errors, null);
+                }
+            });
+        });
+    };
 
     // Sign Up Student
     passport.use('student-signup', new LocalStrategy(
@@ -155,22 +173,7 @@ module.exports = function(passport, user) {
 
         function (req, email, password, done) {
 
-            //serialize Student
-            passport.serializeUser(function(user, done) {
-                done(null, user.id);
-            });
-
-            // deserialize Student
-            passport.deserializeUser(function(id, done) {
-                Student.findById(id).then(function(user) {
-                    if (user) {
-                        done(null, user.get());
-                    } else {
-                        done(user.errors, null);
-                    }
-                });
-            });
-
+            studentSerialize();
 
 
             // Creating long string password for users
@@ -227,6 +230,8 @@ module.exports = function(passport, user) {
         },
 
         function(req, email, password, done) {
+
+            studentSerialize();
 
             // Generating long string password
             var isValidPassword = function(userpass,password){
