@@ -107,7 +107,7 @@ router.post('/signin/recruiter', passport.authenticate("recruiter-signin", {
 
 // Sign Up for Students
 router.post('/signup/student', passport.authenticate("student-signup", {
-    successRedirect: '/dashboard',
+    successRedirect: '/profile',
     failureRedirect: '/signup/student'
 
 }));
@@ -115,7 +115,7 @@ router.post('/signup/student', passport.authenticate("student-signup", {
 
 // Signin for Students
 router.post('/signin/student', passport.authenticate("student-signin", {
-    successRedirect: '/dashboard',
+    successRedirect: '/profile',
     failureRedirect: '/signin/student'
 
 }));
