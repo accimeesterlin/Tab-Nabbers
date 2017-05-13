@@ -218,16 +218,15 @@
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="profModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
+                <div class="modal-header blue-gradient">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title" id="profModal">More About {{firstname}}</h4>
+                    <h4 class="editprof modal-title" id="profModal">More About {{firstname}}</h4>
                     </div>
                 <div class="modal-body">
                     <center>
                     <img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" name="aboutme" width="200" height="200" border="0" class="img-responsive img-thumbnail"></a>
                     <h3 class="media-heading"><h2>{{firstname}} {{lastname}}</h2>
-                    <br>
-                    <small>{{institution}}</small></h3>
+                    {{institution}}</h3><br><hr>
                     <span><strong>Skills: </strong></span>
                     <span class="badge badge-default">HTML</span>
                     <span class="badge badge-primary">CSS</span>
@@ -239,14 +238,14 @@
                     <hr>
                     <center>
                     <p class="text-left"><strong>Contact Information: </strong></p>
-                    <p>{{email}}: </p>
-                    <p>Phone: {{phoneNumber}}</p>
-                    <p>GitHub: {{github}}</p>
+                    <p><i class="fa fa-envelope" aria-hidden="true"></i> {{email}}</p>
+                    <p><i class="fa fa-phone" aria-hidden="true"></i> {{phoneNumber}}</p>
+                    <p><i class="fa fa-github" aria-hidden="true"></i> {{github}}</p>
                     </center>
                 </div>
                 <div class="modal-footer">
                     <center>
-                    <button type="button" class="btn btn-deep-orange" data-dismiss="modal"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back</button>
+                    <button type="button" class="editprof btn btn-deep-orange" data-dismiss="modal"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back</button>
                     </center>
                 </div>
             </div>
