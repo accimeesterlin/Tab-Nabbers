@@ -31,8 +31,8 @@ app.use("/", routes);
 
 //load passport strategies
 
-// require('./app/config/passport/passport.js')(passport, db.recruiter); // recruiter table
-// require('./app/config/passport/student.js')(passport, db.user); // student table
+require('./app/config/passport/passport.js')(passport, db);
+
 
 
 
