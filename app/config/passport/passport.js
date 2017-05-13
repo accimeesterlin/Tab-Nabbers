@@ -81,6 +81,7 @@ var recruiterSerialize = function () {
                 }
             }).catch(function (err) {
                 console.log("Errors: " + err);
+                return done(null, false, { message: 'Something went wrong with your Sign Up' });
             });
         }
     ));
@@ -125,7 +126,7 @@ var recruiterSerialize = function () {
 
                 console.log("Error:",err);
 
-                //return done(null, false, { message: 'Something went wrong with your Signin' });
+                return done(null, false, { message: 'Something went wrong with your Signin' });
             });
         }
     )); // Sigin Recruiter
@@ -216,6 +217,7 @@ var recruiterSerialize = function () {
                 }
             }).catch(function (err) {
                 console.log("Errors: " );
+                return done(null, false, { message: 'Something went wrong with your Signup' });
             });
         }
     ));
@@ -260,7 +262,7 @@ var recruiterSerialize = function () {
 
             }).catch(function(err){
                 console.log("Errors: " + err);
-                //return done(null, false, { message: 'Something went wrong with your Signin' });
+                return done(null, false, { message: 'Something went wrong with your Signin' });
             });
         }
     )); // Sigin Student
