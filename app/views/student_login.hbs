@@ -70,13 +70,13 @@
                         <!--Body-->
                         <div class="md-form">
                             <i class="fa fa-envelope prefix"></i>
-                            <input type="text" name="email" id="email" class="form-control">
+                            <input type="text" name="email" data-validation="email" id="email" class="form-control">
                             <label for="email wow fadeInDown">Your email</label>
                         </div>
 
                         <div class="md-form">
                             <i class="fa fa-lock prefix"></i>
-                            <input type="password" name="password" id="password" class="form-control">
+                            <input type="password" name="password" data-validation="length" data-validation-length="6-30" id="password" class="form-control">
                             <label for="password wow fadeInDown">Your password</label>
                         </div>
 
@@ -113,6 +113,9 @@
     <!-- JQuery -->
     <script type="text/javascript" src="../js/jquery-2.2.3.min.js"></script>
 
+    <!-- JQuery Form Validation -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-form-validator/2.3.26/jquery.form-validator.min.js"></script>
+
     <!-- Bootstrap tooltips -->
     <script type="text/javascript" src="../js/tether.min.js"></script>
 
@@ -125,6 +128,9 @@
     <!-- Animations init-->
     <script>
         new WOW().init();
+        $.validate({
+            form: '#signin'
+        })
     </script>
 
 

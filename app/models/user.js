@@ -50,11 +50,11 @@ module.exports = function(sequelize, Sequelize) {
 
             phoneNumber: {
                 type: Sequelize.STRING,
-                allowNull: true,
-                validate: {
-                    notEmpty: true,
-                    len: [10]
-                }
+                allowNull: true
+                // validate: {
+                //     notEmpty: true,
+                //     len: [10]
+                // }
             },
 
             photo: {

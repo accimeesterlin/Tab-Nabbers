@@ -1,11 +1,15 @@
 /* YOUR CUSTOM STYLES */
-  /* TEMPLATE STYLES */
+
+
+/* TEMPLATE STYLES */
 
 html,
 body,
 .view {
     height: 100%;
 }
+
+
 /* Navigation*/
 
 .navbar {
@@ -32,6 +36,8 @@ footer.page-footer {
         background-color: #1C2331;
     }
 }
+
+
 /*Call to action*/
 
 .flex-center {
@@ -45,6 +51,8 @@ footer.page-footer {
     -o-background-size: cover;
     background-size: cover;
 }
+
+
 /*Contact section*/
 
 #contact .fa {
@@ -53,104 +61,143 @@ footer.page-footer {
     color: #1C2331;
 }
 
+
 /* Login styles */
+
 .options {
     color: #757575;
 }
 
 .md-form > i {
-   color: #757575;
+    color: #757575;
 }
 
 .card {
     width: 600px;
 }
 
+
 /* Edit Profile styles */
+
 #editform {
-  background-color: white;
-  opacity: 0.8;
-  padding: 1em;
-  margin: 0 auto;
+    background-color: white;
+    opacity: 0.8;
+    padding: 1em;
+    margin: 0 auto;
 }
 
-.pskills{
-  color:gray;
+.pskills {
+    color: gray;
 }
 
 .form-group {
-  color:gray;
+    color: gray;
 }
 
 .editprof {
-  color:white;
-  text-align: center;
-  font-family: 'Audiowide', cursive;
+    color: white;
+    text-align: center;
+    font-family: 'Audiowide', cursive;
 }
+
+#infoUpdated{
+    text-align: center;
+    background: green;
+    padding:10px;
+    color:#fff;
+    border:1px solid darkgreen;
+    margin:0 auto;
+    margin-top:60px;
+    width:70%;
+
+}
+
+#profModal{
+  color:white;
+}
+
 
 /* The switch - the box around the slider */
+
 .switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 22px;
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 22px;
 }
 
+
 /* Hide default HTML checkbox */
-.switch input {display:none;}
+
+.switch input {
+    display: none;
+}
+
 
 /* The slider */
+
 .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
 .slider:before {
-  position: absolute;
-  content: "";
-  height: 14px;
-  width: 14px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+    background-color: #2196F3;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+    box-shadow: 0 0 1px #2196F3;
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
 }
 
+
 /* Rounded sliders */
+
 .slider.round {
-  border-radius: 34px;
+    border-radius: 34px;
 }
 
 .slider.round:before {
-  border-radius: 50%;
+    border-radius: 50%;
+}
+
+.form-error {
+    color: #b94a48;
 }
 
 /* Feature Section */
 #cardfeature, #cardcontact{
   width: 100%;
 }
+
+
+/* Map styles */
+
+
 
 
 /* Map styles */

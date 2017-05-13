@@ -1,13 +1,8 @@
-/**
- * Created by esterlingaccime on 5/12/17.
- */
 // Used to secure passwords
 var bCrypt = require('bcrypt-nodejs');
 
-module.exports = function (passport, user) {
-
-
-    var Student = user;
+module.exports = function(passport, user) {
+    var Recruiter = user;
     var LocalStrategy = require('passport-local').Strategy;
 
     //serialize
@@ -15,9 +10,9 @@ module.exports = function (passport, user) {
         done(null, user.id);
     });
 
-    // deserialize user
+    // deserialize user 
     passport.deserializeUser(function(id, done) {
-        Student.findById(id).then(function(user) {
+        Recruiter.findById(id).then(function(user) {
             if (user) {
                 done(null, user.get());
             } else {
@@ -26,35 +21,30 @@ module.exports = function (passport, user) {
         });
     });
 
-////////////////////////////////////////////////////////////////////
-///////////////////Student Access Below/////////////////////////////
-////////////////////////////////////////////////////////////////////
 
 
-
-    // Sign Up Student
-    passport.use('student-signup', new LocalStrategy(
-        {
+    ////////////////////////////////////////////////////////////////////
+    ///////////////////Recruiter Access Below///////////////////////////
+    ////////////////////////////////////////////////////////////////////
+    // Sign Up Recruiter
+    passport.use('recruiter-signup', new LocalStrategy({
             usernameField: 'email',
             passwordField: 'password',
             passReqToCallback: true // allows us to pass back the entire request to the callback
         },
 
-        function (req, email, password, done) {
-
-
+        function(req, email, password, done) {
             // Creating long string password for users
             var generateHash = function(password) {
                 return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
             };
 
-            Student.findOne({
+            Recruiter.findOne({
                 where: {
                     email: email
                 }
             }).then(function(user) {
-                if (user)
-                {
+                if (user) {
                     return done(null, false, {
                         message: 'That email is already taken'
                     });
@@ -62,17 +52,17 @@ module.exports = function (passport, user) {
                 } else {
                     var userPassword = generateHash(password);
 
-                    var student = {
+                    var recruiter = {
                         email: email,
                         password: userPassword,
                         firstname: req.body.firstname,
                         lastname: req.body.lastname
                     };
 
-                    console.log(student);
+                    console.log(recruiter);
 
 
-                    Student.create(student).then(function(newUser, created) {
+                    Recruiter.create(recruiter).then(function(newUser, created) {
                         if (!newUser) {
                             return done(null, false);
                         }
@@ -85,32 +75,30 @@ module.exports = function (passport, user) {
         }
     ));
     //LOCAL SIGNIN
-    passport.use('student-signin', new LocalStrategy(
-        {
+    passport.use('recruiter-signin', new LocalStrategy({
             // by default, local strategy uses username and password, we will override with email
-            usernameField : 'email',
-            passwordField : 'password',
-            passReqToCallback : true // allows us to pass back the entire request to the callback
+            usernameField: 'email',
+            passwordField: 'password',
+            passReqToCallback: true // allows us to pass back the entire request to the callback
         },
 
         function(req, email, password, done) {
-
             // Generating long string password
-            var isValidPassword = function(userpass,password){
+            var isValidPassword = function(userpass, password) {
                 return bCrypt.compareSync(password, userpass);
             };
 
-            Student.findOne({
-                where : {
+            Recruiter.findOne({
+                where: {
                     email: email
                 }
-            }).then(function (user) {
+            }).then(function(user) {
 
                 if (!user) {
                     return done(null, false, { message: 'Email does not exist' });
                 }
 
-                if (!isValidPassword(user.password,password)) {
+                if (!isValidPassword(user.password, password)) {
 
                     return done(null, false, { message: 'Incorrect password.' });
 
@@ -118,15 +106,14 @@ module.exports = function (passport, user) {
 
                 var userinfo = user.get();
 
-                return done(null,userinfo);
+                return done(null, userinfo);
 
-            }).catch(function(err){
+            }).catch(function(err) {
 
-                console.log("Error:",err);
+                console.log("Error:", err);
 
                 return done(null, false, { message: 'Something went wrong with your Signin' });
             });
         }
-    )); // Sigin Student
-
+    ));
 };
