@@ -72,12 +72,12 @@
 						<!--Body-->
 						<div class="md-form wow fadeIn" data-wow-delay="1.0s">
 							<i class="fa fa-user prefix"></i>
-							<input type="text" class="form-control" name="firstname" id="firstname">
+							<input type="text" class="form-control" data-validation="length" data-validation-length="1-100" name="firstname" id="firstname">
 							<label for="firstname">First name</label>
 						</div>
 						<div class="md-form wow fadeIn" data-wow-delay="1.5s">
 							<i class="fa fa-user prefix"></i>
-							<input type="text" class="form-control" name="lastname" id="lastname">
+							<input type="text" class="form-control" data-validation="length" data-validation-length="1-100"  name="lastname" id="lastname">
 							<label for="lastname">Last name</label>
 						</div>
 						<div class="md-form wow fadeIn" data-wow-delay="2.0s">
@@ -88,7 +88,7 @@
 
 						<div class="md-form wow fadeIn" data-wow-delay="2.5s">
 							<i class="fa fa-lock prefix"></i>
-							<input type="password" class="form-control" name="password" id="password">
+							<input type="password" class="form-control" data-validation="length" data-validation-length="6-30"  name="password" id="password">
 							<label for="password">Your password</label>
 						</div>
 

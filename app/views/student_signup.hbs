@@ -68,12 +68,12 @@
 						<!--Body-->
 						<div class="md-form wow fadeIn" data-wow-delay="1.0s">
 							<i class="fa fa-user prefix"></i>
-							<input type="text" class="form-control" name="firstname" id="firstname">
+							<input type="text" class="form-control" data-validation="length" data-validation-length="1-100" name="firstname" id="firstname">
 							<label for="firstname">First name</label>
 						</div>
 						<div class="md-form wow fadeIn" data-wow-delay="1.5s">
 							<i class="fa fa-user prefix"></i>
-							<input type="text" class="form-control" name="lastname" id="lastname">
+							<input type="text" class="form-control" data-validation="length" data-validation-length="1-100" name="lastname" id="lastname">
 							<label for="lastname">Last name</label>
 						</div>
 						<div class="md-form wow fadeIn" data-wow-delay="2.0s">
@@ -84,22 +84,22 @@
 
 						<div class="md-form wow fadeIn" data-wow-delay="2.5s">
 							<i class="fa fa-lock prefix"></i>
-							<input type="password" class="form-control" name="password" id="password">
+							<input type="password" class="form-control" data-validation="length" data-validation-length="6-30" name="password" id="password">
 							<label for="password">Your password</label>
 						</div>
 
-                        <!-- TODO: Dynamicall add select options from bootcamps entries in database-->
+                        <!-- TODO: Dynamically add select options from bootcamps entries in database-->
                         <div class="md-form wow fadeIn" data-wow-delay="2.5s">
-                            <select class="form-control" id="bootcamp" name="bootcamp">
+                            <select class="form-control" data-validation="required" id="bootcamp" name="bootcamp">
                                 <option value="gt-bootcamp" name="Georgia Tech Bootcamp">Georgia Tech Bootcamp</option>
                                 <option value="general-assembly" name="General Assembly">General Assembly</option>
                                 <option value="iron-yard" name="The Iron Yard">The Iron Yard</option>
                             </select>
 						</div>
 
-                        <!-- TODO: Dynamicall add select options from bootcamps entries in database-->
+                        <!-- TODO: Dynamically add select options from bootcamps entries in database-->
                         <div class="md-form wow fadeIn" data-wow-delay="2.5s">
-							<select class="form-control" id="cohort" name="cohort">
+							<select class="form-control" data-validation="required" id="cohort" name="cohort">
                                 <option value="cohort-1" name="Cohort 1">Cohort 1</option>
                                 <option value="cohort-2" name="Cohort 2">Cohort 2</option>
                                 <option value="cohort-3" name="Cohort 3">Cohort 3</option>
