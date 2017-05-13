@@ -298,19 +298,21 @@
 
             console.log(profileInfo);
 
+            var updateMsg = function (msg) {
+                $("#infoUpdated").remove();
+                var info = $("<p>");
+                    info.html(msg)
+                            .attr("id", 'infoUpdated');
+                $("#container").prepend(info);
+            };
+
             $.post("/update/profile", profileInfo, function (data) {
                 console.log("Data has successfully been posted!!!");
                 if(data === "ok"){
-                    $("#container").prepend();
-                    var info = $("<p>");
-                        info.html("Your info has been updated!");
-                    $("#container").prepend(info);
-
+                    updateMsg("Your info has been updated!");
 
                 }else{
-                    var info = $("<p>");
-                    info.html("Customer hasn't been updated, something happened");
-                    $("#container").prepend(info);
+                    updateMsg("Sorry we were not able to update your profile");
                 }
             });
         });
