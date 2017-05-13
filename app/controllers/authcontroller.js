@@ -15,17 +15,19 @@ var isLoggedIn = function (req, res, next) {
     res.redirect("/signin");
 };
 
+
+// Home page
 router.get("/index", function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/index.html"));
 });
 
 
+// Sign in for Recruiters and Students
 router.get("/signin/:name?", function (req, res) {
     if(req.params.name === 'recruiter'){
         res.sendFile(path.join(__dirname + "/../views/recruiter_login.html"));
 
     }
-
     else if(req.params.name === "student"){
         res.sendFile(path.join(__dirname + "/../views/student_login.html"));
 
@@ -34,6 +36,8 @@ router.get("/signin/:name?", function (req, res) {
 });
 
 
+
+// Sigin up Routers for Recruiters and Students
 router.get("/signup/:name?", function (req, res) {
     if(req.params.name === 'recruiter'){
         res.sendFile(path.join(__dirname + "/../views/recruiter_signup.html"));
@@ -47,23 +51,43 @@ router.get("/signup/:name?", function (req, res) {
 
 });
 
-router.get("/dashboard", function (req, res) {
+
+// Dashboard included the map that recruiters see
+// If user not logged in, they're not able to see it
+router.get("/dashboard", isLoggedIn, function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/dashboard.html"));
 });
 
-router.get("/profile", function (req, res) {
+
+// Profile page for Students
+// If user not logged in, they're not able to see it
+router.get("/profile", isLoggedIn, function (req, res) {
     res.sendFile(path.join(__dirname + "/../views/student_profile.html"));
 });
 
 
-
-router.get("/logout", function (req, res) {
+// Log the user out
+// If user not logged in, they're not able to see it
+router.get("/logout", isLoggedIn, function (req, res) {
     req.session.destroy(function (err) {
         res.redirect("/index");
     });
 });
 
-// All the POSTS Request below
+
+router.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname + "/../views/index.html"));
+});
+
+
+
+
+
+
+
+////////////////////////////////////////////////////////////////////
+///////////////////Post Request Go below////////////////////////////
+////////////////////////////////////////////////////////////////////
 
 // Sign Up for Recruiters
 router.post('/signup/recruiter', passport.authenticate("recruiter-signup", {
@@ -97,14 +121,5 @@ router.post('/signin/student', passport.authenticate("student-signin", {
 }));
 
 
-
-
-// router.get("/signin", function (req, res) {
-//     res.sendFile(path.join(__dirname + "/../views/signin.html"));
-// });
-
-router.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname + "/../views/index.html"));
-});
 
 module.exports = router;
