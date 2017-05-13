@@ -212,14 +212,14 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                    <h4 class="modal-title" id="profModal">More About [insert first name]</h4>
+                    <h4 class="modal-title" id="profModal">More About {{firstname}}</h4>
                     </div>
                 <div class="modal-body">
                     <center>
                     <img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" name="aboutme" width="200" height="200" border="0" class="img-responsive img-thumbnail"></a>
-                    <h3 class="media-heading">[insert student name]
+                    <h3 class="media-heading"><h2>{{firstname}} {{lastname}}</h2>
                     <br>
-                    <small>[insert coding camp]</small></h3>
+                    <small>{{institution}}</small></h3>
                     <span><strong>Skills: </strong></span>
                     <span class="badge badge-default">HTML</span>
                     <span class="badge badge-primary">CSS</span>
@@ -231,7 +231,7 @@
                     <hr>
                     <center>
                     <p class="text-left"><strong>Contact Information: </strong></p>
-                    <p>Email: </p>
+                    <p>{{email}}: </p>
                     <p>Phone: </p>
                     <p>GitHub: </p>
                     </center>

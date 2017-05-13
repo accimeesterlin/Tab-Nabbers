@@ -144,7 +144,8 @@ var recruiterSerialize = function () {
     ////////////////////////////////////////////////////////////////////
 
 
-    var Student = user.user;
+    var Student = user.user,
+        BootCamp = user.bootcamp;
 
     var studentSerialize = function () {
         //serialize Student
@@ -182,6 +183,8 @@ var recruiterSerialize = function () {
                 return bCrypt.hashSync(password, bCrypt.genSaltSync(8), null);
             };
 
+            var userPassword;
+
             Student.findOne({
                 where: {
                     email: email
@@ -194,7 +197,7 @@ var recruiterSerialize = function () {
                     });
 
                 } else {
-                    var userPassword = generateHash(password);
+                    userPassword = generateHash(password);
 
                     var student = {
                         email: email,
@@ -203,7 +206,6 @@ var recruiterSerialize = function () {
                         lastname: req.body.lastname
                     };
 
-                    console.log(student);
 
 
                     Student.create(student).then(function(newUser, created) {
@@ -218,6 +220,25 @@ var recruiterSerialize = function () {
             }).catch(function (err) {
                 console.log("Errors: " );
                 return done(null, false, { message: 'Something went wrong with your Signup' });
+            });
+
+            // Adding data to the BootCamp Tables
+            var data = {
+                email: email,
+                firstname: req.body.firstname,
+                lastname: req.body.lastname,
+                institution: req.body.bootcamp,
+                cohort: req.body.cohort
+            };
+
+            BootCamp.create(data).then(function(newUser, created) {
+                if (!newUser) {
+                    return done(null, false);
+                }
+                if (newUser) {
+                    // return done(null, newUser);
+                    console.log("New user added");
+                }
             });
         }
     ));

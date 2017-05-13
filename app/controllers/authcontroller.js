@@ -2,8 +2,9 @@
  * Created by esterlingaccime on 5/10/17.
  */
 var express = require("express"),
-    passport = require("passport"),
-    path = require("path");
+    passport = require("passport");
+
+var db = require("../models");
 
 var router = express.Router();
 
@@ -63,8 +64,19 @@ router.get("/dashboard", isLoggedIn, function (req, res) {
 // If user not logged in, they're not able to see it
 router.get("/profile", isLoggedIn, function (req, res) {
     var currentUser = req.user;
-    // console.log(req.user);
-    res.render("student_profile", currentUser);
+    db.bootcamp.findOne({
+        where:{
+            id: currentUser.id
+        }
+    }).then(function (data) {
+        // console.log(data.get());
+        currentUser.institution = data.get().institution;
+        console.log(currentUser);
+
+        // console.log(req.user);
+        res.render("student_profile", currentUser);
+    });
+
 });
 
 
