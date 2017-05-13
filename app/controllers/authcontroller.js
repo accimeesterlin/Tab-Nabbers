@@ -18,18 +18,18 @@ var isLoggedIn = function (req, res, next) {
 
 // Home page
 router.get("/index", function (req, res) {
-    res.sendFile(path.join(__dirname + "/../views/index.html"));
+    res.render("index");
 });
 
 
 // Sign in for Recruiters and Students
 router.get("/signin/:name?", function (req, res) {
     if(req.params.name === 'recruiter'){
-        res.sendFile(path.join(__dirname + "/../views/recruiter_login.html"));
+        res.render("recruiter_login");
 
     }
     else if(req.params.name === "student"){
-        res.sendFile(path.join(__dirname + "/../views/student_login.html"));
+        res.render("student_login");
 
     }
 
@@ -40,12 +40,12 @@ router.get("/signin/:name?", function (req, res) {
 // Sigin up Routers for Recruiters and Students
 router.get("/signup/:name?", function (req, res) {
     if(req.params.name === 'recruiter'){
-        res.sendFile(path.join(__dirname + "/../views/recruiter_signup.html"));
+        res.render("recruiter_signup");
 
     }
 
     else if(req.params.name === "student"){
-        res.sendFile(path.join(__dirname + "/../views/student_signup.html"));
+        res.render("student_signup");
 
     }
 
@@ -55,14 +55,16 @@ router.get("/signup/:name?", function (req, res) {
 // Dashboard included the map that recruiters see
 // If user not logged in, they're not able to see it
 router.get("/dashboard", isLoggedIn, function (req, res) {
-    res.sendFile(path.join(__dirname + "/../views/dashboard.html"));
+    res.render("dashboard");
 });
 
 
 // Profile page for Students
 // If user not logged in, they're not able to see it
 router.get("/profile", isLoggedIn, function (req, res) {
-    res.sendFile(path.join(__dirname + "/../views/student_profile.html"));
+    var currentUser = req.user;
+    // console.log(req.user);
+    res.render("student_profile", currentUser);
 });
 
 
@@ -76,12 +78,8 @@ router.get("/logout", isLoggedIn, function (req, res) {
 
 
 router.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname + "/../views/index.html"));
+    res.render("index");
 });
-
-
-
-
 
 
 

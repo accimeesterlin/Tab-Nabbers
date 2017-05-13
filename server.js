@@ -2,15 +2,30 @@ var express = require('express'),
     passport = require('passport'),
     session = require('express-session'),
     bodyParser = require('body-parser'),
-    env = require('dotenv').load();
+    env = require('dotenv').load(),
+    exphbs = require("express-handlebars");
 
 var app = express(),
     port = process.env.PORT || 8080;
+
+// Static directory
+app.use(express.static("./app/public"));
+
 
 
 //For BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+
+//For Handlebars
+app.set('views', './app/views');
+app.engine('hbs', exphbs({
+    extname: '.hbs'
+}));
+
+app.set('view engine', '.hbs');
+
 
 // For Passport
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })); // session secret
@@ -19,8 +34,7 @@ app.use(passport.session()); // persistent login sessions
 
 
 
-// Static directory
-app.use(express.static("./app/public"));
+
 
 //Models
 var db = require("./app/models");
