@@ -145,17 +145,16 @@ router.post("/update/profile", function (req, res) {
 
     var profileInfo = {
 
-        phoneNumber: student.phoneNumber,
-        github: student.github
+        phoneNumber: student.phoneNumber
     };
 
-    db.user.update(profileInfo, {
+    db.user.update({phoneNumber: '4543'}, {
         where:{
             id: userId
         }
     }).then(function (data) {
         console.log("Data has successfully beeen updated!!", data);
-        redirect("/profile");
+        res.json("/profile");
     });
 
 });
