@@ -67,34 +67,38 @@
         <div class="full-bg-img flex-center">
               <br>
             <!--Form with header-->
-            <div class="container">
+            <div class="container" id="container">
                 <br>
                 <div class=row>
                     <div class="col-md-2"></div>
                     <div class="col-md-6">
                         <div class="form">
-                          <div class="profile wow fadeInLeft" id="editform" data-wow-delay="0.2s">
-                            <br>
-                            <div class="md-form input-group">
-                                <input placeholder="" type="text" id="form1" class="form-control" value="{{firstname}}">
-                                <label for="form1">First Name</label>
-                            </div>
-                            <div class="md-form input-group">
-                                <input placeholder="" type="text" id="form2" class="form-control" value="{{lastname}}">
-                                <label for="form2">Last Name</label>
-                            </div>
-                            <div class="md-form input-group">
-                                <input placeholder="" type="text" id="form3" class="form-control" value="{{phoneNumber:}}">
-                                <label for="form3">Phone Number</label>
-                            </div>
-                            <div class="md-form input-group">
-                                <input placeholder="" type="email" id="form4" class="form-control" value="{{email}}">
-                                <label for="form4">Email</label>
-                            </div>
-                            <div class="md-form input-group">
-                                <input placeholder="" type="text" id="form5" class="form-control" value="{{github}}">
-                                <label for="form5">GitHub Link</label>
-                            </div>
+
+                              <div class="profile wow fadeInLeft" id="editform" data-wow-delay="0.2s">
+                                  <form action="/update/profile?_method=PUT" method="POST">
+                                    <br>
+
+                                    <div class="md-form input-group">
+                                        <input placeholder="" type="text" id="firstname" class="form-control" value="{{firstname}}" name="firstname">
+                                        <label for="form1">First Name</label>
+                                    </div>
+                                    <div class="md-form input-group">
+                                        <input placeholder="" type="text" id="lastname" class="form-control" value="{{lastname}}" name="lastname">
+                                        <label for="form2">Last Name</label>
+                                    </div>
+                                    <div class="md-form input-group">
+                                        <input placeholder="" type="text" id="phonenumber" class="form-control" value="{{phoneNumber}}" name="phoneNumber">
+                                        <label for="form3">Phone Number</label>
+                                    </div>
+                                    <div class="md-form input-group">
+                                        <input placeholder="" type="email" id="email" class="form-control" value="{{email}}" name="email">
+                                        <label for="form4">Email</label>
+                                    </div>
+                                    <div class="md-form input-group">
+                                        <input placeholder="" type="text" id="github" class="form-control" value="{{github}}" name="github">
+                                        <label for="form5">GitHub Link</label>
+                                    </div>
+                                </form>
                             <p class="pskills">Please select all skills that apply:</p>
                             <form class="form-inline">
 
@@ -198,7 +202,9 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label"></label>
                             <a href="#aboutModal" class="btn btn-indigo" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye" aria-hidden="true"></i> Preview</a>
-                            <a href="#" class="btn btn-default"><i class="fa fa-check-circle" aria-hidden="true"></i> Save</a>
+                            <button class="btn btn-default" id="update"><i class="fa fa-check-circle" aria-hidden="true"></i> Save</button>
+
+
                             <a href="#" class="btn btn-deep-orange" value=""><i class="fa fa-eraser" aria-hidden="true"></i> Clear</a>
 
                           <a href="#" class="btn btn" value=""><i class="fa fa-trash" aria-hidden="true"></i> Delete Account</a>
@@ -234,8 +240,8 @@
                     <center>
                     <p class="text-left"><strong>Contact Information: </strong></p>
                     <p>{{email}}: </p>
-                    <p>Phone: </p>
-                    <p>GitHub: </p>
+                    <p>Phone: {{phoneNumber}}</p>
+                    <p>GitHub: {{github}}</p>
                     </center>
                 </div>
                 <div class="modal-footer">
@@ -276,6 +282,44 @@
     <!-- Animations init-->
     <script>
         new WOW().init();
+
+        $("#update").on("click", function (event) {
+            event.preventDefault();
+
+            var firstname = $("#firstname").val().trim(), lastname = $("#lastname").val().trim(),
+                phoneNumber = $("#phonenumber").val().trim(), email = $("#email").val().trim(),
+                github = $("#github").val().trim();
+
+            var profileInfo = {
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+                phoneNumber: phoneNumber,
+                github: github
+            };
+
+            console.log(profileInfo);
+
+            var updateMsg = function (msg) {
+                $("#infoUpdated").remove();
+                var info = $("<p>");
+                    info.html(msg)
+                            .attr("id", 'infoUpdated');
+                $("#container").prepend(info);
+            };
+
+            $.post("/update/profile", profileInfo, function (data) {
+                console.log("Data has successfully been posted!!!");
+                if(data === "ok"){
+                    updateMsg("Your info has been updated!");
+
+                }else{
+                    updateMsg("Sorry we were not able to update your profile");
+                }
+            });
+        });
+
+
     </script>
 
 

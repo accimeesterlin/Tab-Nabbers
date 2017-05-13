@@ -8,6 +8,8 @@ var db = require("../models");
 
 var router = express.Router();
 
+var user;
+
 // Verified that the user needs to sign in
 var isLoggedIn = function (req, res, next) {
     if(req.isAuthenticated()){
@@ -68,6 +70,7 @@ router.get("/dashboard", isLoggedIn, function (req, res) {
 // If user not logged in, they're not able to see it
 router.get("/profile", isLoggedIn, function (req, res) {
     var currentUser = req.user;
+    user = currentUser;
     db.bootcamp.findOne({
         where:{
             id: currentUser.id
@@ -75,7 +78,7 @@ router.get("/profile", isLoggedIn, function (req, res) {
     }).then(function (data) {
         // console.log(data.get());
         currentUser.institution = data.get().institution;
-        console.log(currentUser);
+        //console.log(currentUser);
 
         // console.log(req.user);
         res.render("student_profile", currentUser);
@@ -133,6 +136,33 @@ router.post('/signin/student', passport.authenticate("student-signin", {
     failureRedirect: '/signin/student'
 
 }));
+
+
+router.post("/update/profile", function (req, res) {
+
+
+    var student = req.body;
+    var profileUpdate = {
+        email:student.email,
+        firstname: student.firstname,
+        lastname: student.lastname,
+        github: student.github,
+        phoneNumber: student.phoneNumber
+    };
+
+    db.user.update(profileUpdate, {
+        where:{
+            id: user.id
+        }
+    }).then(function (data) {
+        console.log("Data has successfully beeen updated!!", data);
+        res.json("ok");
+    }).catch(function (err) {
+        console.log(err);
+        res.json("err");
+    });
+
+});
 
 
 
