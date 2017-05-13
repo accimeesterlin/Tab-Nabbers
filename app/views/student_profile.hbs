@@ -12,6 +12,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.0/css/font-awesome.min.css">
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Audiowide" rel="stylesheet">
+
     <!-- Bootstrap core CSS -->
     <link href="./css/bootstrap.min.css" rel="stylesheet">
 
@@ -39,19 +42,20 @@
                         <a class="nav-link">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
+                        <a class="nav-link" href="/about">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#best-features">Features</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
-
                     </li>
                 </ul>
-                <!--<form class="form-inline waves-effect waves-light">
-                    <input class="form-control" type="text" placeholder="Search">
-                </form>-->
+                <ul class="navbar-nav ml-auto nav-flex-icons">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Sign Out</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -60,6 +64,7 @@
     <!--Mask-->
     <div class="view hm-black-strong">
         <div class="full-bg-img flex-center">
+              <br>
             <!--Form with header-->
             <div class="container">
                 <br>
@@ -67,33 +72,26 @@
                     <div class="col-md-2"></div>
                     <div class="col-md-6">
                         <div class="form">
-                            <form>
-                                <div class="file-field">
-                                    <div class="btn btn-indigo btn-md">
-                                        <span>Upload your profile photo</span>
-                                        <input type="file">
-                                    </div>
-                                </div>
-                            </form>
+                          <div class="profile wow fadeInLeft" id="editform" data-wow-delay="0.2s">
                             <br>
                             <div class="md-form input-group">
-                                <input placeholder="" type="text" id="form1" class="form-control">
+                                <input placeholder="" type="text" id="form1" class="form-control" value="{{firstname}}">
                                 <label for="form1">First Name</label>
                             </div>
                             <div class="md-form input-group">
-                                <input placeholder="" type="text" id="form2" class="form-control">
+                                <input placeholder="" type="text" id="form2" class="form-control" value="{{lastname}}">
                                 <label for="form2">Last Name</label>
                             </div>
                             <div class="md-form input-group">
-                                <input placeholder="" type="text" id="form3" class="form-control">
+                                <input placeholder="" type="text" id="form3" class="form-control" value="{{phoneNumber:}}">
                                 <label for="form3">Phone Number</label>
                             </div>
                             <div class="md-form input-group">
-                                <input placeholder="" type="email" id="form5" class="form-control">
-                                <label for="form5">Email</label>
+                                <input placeholder="" type="email" id="form4" class="form-control" value="{{email}}">
+                                <label for="form4">Email</label>
                             </div>
                             <div class="md-form input-group">
-                                <input placeholder="" type="text" id="form5" class="form-control">
+                                <input placeholder="" type="text" id="form5" class="form-control" value="{{github}}">
                                 <label for="form5">GitHub Link</label>
                             </div>
                             <p class="pskills">Please select all skills that apply:</p>
@@ -173,23 +171,81 @@
                                     <input type="checkbox" class="filled-in" id="checkbox15">
                                     <label for="checkbox15">PHP</label>
                                 </fieldset>
+                                <br>
+                                <form>
+                                    <div class="file-field">
+                                        <div class="btn btn-elegant btn-md">
+                                            <span>Upload your profile photo</span>
+                                            <input type="file">
+                                        </div>
+                                    </div>
+                                </form>
                             </form>
                         </div>
                     </div>
+                  </div>
                     <div class="col-md-2 hidden-xs">
+                      <div class="profile wow fadeInRight" data-wow-delay="0.2s">
                       <h2 class="editprof">Edit BootCruit Profile</h2>
                         <img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" class="img-responsive img-thumbnail img-circle">
+                        <!-- Rounded switch -->
+                        <p>Profile Visibility:</p>
+                        <label class="switch">
+                          <input type="checkbox">
+                          <div class="slider round"></div>
+                        </label>
                         <div class="form-group">
                             <label class="col-md-4 control-label"></label>
-                            <a href="#" class="btn btn-indigo"><i class="fa fa-eye" aria-hidden="true"></i> Preview</a>
-                            <a href="#" class="btn btn-dark-green"><i class="fa fa-check-circle" aria-hidden="true"></i> Save</a>
+                            <a href="#aboutModal" class="btn btn-indigo" data-toggle="modal" data-target="#myModal"><i class="fa fa-eye" aria-hidden="true"></i> Preview</a>
+                            <a href="#" class="btn btn-default"><i class="fa fa-check-circle" aria-hidden="true"></i> Save</a>
                             <a href="#" class="btn btn-deep-orange" value=""><i class="fa fa-eraser" aria-hidden="true"></i> Clear</a>
+
+                          <a href="#" class="btn btn" value=""><i class="fa fa-trash" aria-hidden="true"></i> Delete Account</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="profModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title" id="profModal">More About {{firstname}}</h4>
+                    </div>
+                <div class="modal-body">
+                    <center>
+                    <img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" name="aboutme" width="200" height="200" border="0" class="img-responsive img-thumbnail"></a>
+                    <h3 class="media-heading"><h2>{{firstname}} {{lastname}}</h2>
+                    <br>
+                    <small>{{institution}}</small></h3>
+                    <span><strong>Skills: </strong></span>
+                    <span class="badge badge-default">HTML</span>
+                    <span class="badge badge-primary">CSS</span>
+                    <span class="badge badge-success">Javascript</span>
+                    <span class="badge badge-info">PHP</span>
+                    <span class="badge badge-warning">Nodejs</span>
+                    <span class="badge badge-danger">Angular</span>
+                    </center>
+                    <hr>
+                    <center>
+                    <p class="text-left"><strong>Contact Information: </strong></p>
+                    <p>{{email}}: </p>
+                    <p>Phone: </p>
+                    <p>GitHub: </p>
+                    </center>
+                </div>
+                <div class="modal-footer">
+                    <center>
+                    <button type="button" class="btn btn-deep-orange" data-dismiss="modal"><i class="fa fa-arrow-left" aria-hidden="true"></i> Go Back</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!--/.Mask-->
 

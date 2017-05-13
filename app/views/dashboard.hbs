@@ -20,6 +20,8 @@
 
     <link href="./css/style.css" rel="stylesheet">
 
+    <link rel="stylesheet" type="text/css" href="./css/mapstyle.css">
+
 </head>
 
 <body>
@@ -39,35 +41,32 @@
                         <a class="nav-link">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
+                        <a class="nav-link" href="about">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#best-features">Features</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
-
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto nav-flex-icons">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Sign Out</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
     <!--/.Navbar-->
-    
+
     <!--Mask-->
     <div class="view hm-black-strong">
         <div class="full-bg-img flex-center">
-            <ul>
-                <li>
-                    <h1 class="h1-responsive wow fadeInDown" data-wow-delay="0.2s">BootCruit</h1></li>
-                <li>
-                    <p class="wow fadeInDown">One-click staffing solutions</p>
-                </li>
-                <li>
-                    <a href="signin/recruiter" class="btn btn-indigo btn-lg wow fadeInLeft" data-wow-delay="0.2s" rel="nofollow">Recruiter</a>
-                    <a href="signin/student" class="btn btn-default btn-lg wow fadeInRight" data-wow-delay="0.2s" rel="nofollow">Student</a>
-                </li>
-            </ul>
+            <div class="map-container">
+                <svg class="tree" width="960" height="800"></svg>
+                <svg class="map" width="960" height="800" fill="none" stroke="#000" stroke-linejoin="round" stroke-linecap="round"></svg>
+            </div>
         </div>
     </div>
     <!--/.Mask-->
@@ -75,7 +74,7 @@
     <!-- Main container-->
     <div class="container">
 
-
+        
 
     </div>
     <!--/ Main container-->
@@ -94,6 +93,10 @@
 
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="./js/mdb.min.js"></script>
+
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://unpkg.com/topojson-client@3"></script>
+    <script src="./js/mapscript.js"></script>
 
     <!-- Animations init-->
     <script>

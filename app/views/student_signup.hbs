@@ -39,14 +39,13 @@
                         <a class="nav-link">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
+                        <a class="nav-link" href="/about">About</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#best-features">Features</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#contact">Contact</a>
-
                     </li>
                 </ul>
             </div>
@@ -57,45 +56,61 @@
     <!--Mask-->
     <div class="view hm-black-strong">
         <div class="full-bg-img flex-center">
+			<!--Form with header-->
+			<div class="card wow fadeInDown" data-wow-delay="0.2s">
+				<div class="card-block">
+					<form id="signup" name="signup" method="post" action="/signup/student">
+						<!--Header-->
+						<div class="form-header green-gradient">
+							<h3><i class="fa fa-user"></i> Student Register:</h3>
+						</div>
 
-            <!--Form with header-->
-            <div class="card wow fadeInDown" data-wow-delay="0.2s">
-                <div class="card-block">
+						<!--Body-->
+						<div class="md-form wow fadeIn" data-wow-delay="1.0s">
+							<i class="fa fa-user prefix"></i>
+							<input type="text" class="form-control" name="firstname" id="firstname">
+							<label for="firstname">First name</label>
+						</div>
+						<div class="md-form wow fadeIn" data-wow-delay="1.5s">
+							<i class="fa fa-user prefix"></i>
+							<input type="text" class="form-control" name="lastname" id="lastname">
+							<label for="lastname">Last name</label>
+						</div>
+						<div class="md-form wow fadeIn" data-wow-delay="2.0s">
+							<i class="fa fa-envelope prefix"></i>
+							<input type="text" class="form-control" name="email" id="email">
+							<label for="email">Your email</label>
+						</div>
 
-                    <form id="signin" name="signin" method="post" action="/signin/recruiter">
-                        <!--Header-->
-                        <div class="form-header blue-gradient">
-                            <h3><i class="fa fa-lock"></i> Recruiter Login:</h3>
-                        </div>
+						<div class="md-form wow fadeIn" data-wow-delay="2.5s">
+							<i class="fa fa-lock prefix"></i>
+							<input type="password" class="form-control" name="password" id="password">
+							<label for="password">Your password</label>
+						</div>
 
-                        <!--Body-->
-                        <div class="md-form">
-                            <i class="fa fa-envelope prefix"></i>
-                            <input type="text" name="email" id="email" class="form-control">
-                            <label for="email wow fadeInDown">Your email</label>
-                        </div>
+                        <div class="md-form wow fadeIn" data-wow-delay="2.5s">
+                            <select class="form-control" id="bootcamp" name="bootcamp">
+                                <option value="gt-bootcamp" name="Georgia Tech Bootcamp">Georgia Tech Bootcamp</option>
+                                <option value="general-assembly" name="General Assembly">General Assembly</option>
+                                <option value="iron-yard" name="The Iron Yard">The Iron Yard</option>
+                            </select>
+						</div>
 
-                        <div class="md-form">
-                            <i class="fa fa-lock prefix"></i>
-                            <input type="password" name="password" id="password" class="form-control">
-                            <label for="password wow fadeInDown">Your password</label>
-                        </div>
+                        <div class="md-form wow fadeIn" data-wow-delay="2.5s">
+							<select class="form-control" id="cohort" name="cohort">
+                                <option value="cohort-1" name="Cohort 1">Cohort 1</option>
+                                <option value="cohort-2" name="Cohort 2">Cohort 2</option>
+                                <option value="cohort-3" name="Cohort 3">Cohort 3</option>
+                            </select>
+						</div>
 
-                        <div class="text-center">
-                            <button class="btn btn-indigo" type="submit">Login</button>
-                        </div>
-
-                    </div>
-
-                    <!--Footer-->
-                    <div class="modal-footer">
-                        <div class="options">
-                            <p>Not a member? <a href="/signup/recruiter">Sign Up</a></p>
-                            <p>Forgot <a href="#">Password?</a></p>
-                        </div>
-                    </div>
-                </form> 
-            </div>
+						<div class="text-center wow fadeIn" data-wow-delay="3.0s">
+							<button class="btn btn-default" type="submit">Sign up</button>
+							<hr>
+						</div>
+					</form>
+				</div>
+			</div>
         </div>
     </div>
     <!--/.Mask-->
