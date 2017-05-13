@@ -22,6 +22,10 @@ router.get("/index", function (req, res) {
     res.render("index");
 });
 
+// About page
+router.get("/about", function (req, res) {
+    res.render("about");
+});
 
 // Sign in for Recruiters and Students
 router.get("/signin/:name?", function (req, res) {
