@@ -177,14 +177,15 @@
                                     <label for="checkbox15">PHP</label>
                                 </fieldset>
                                 <br>
-                                <form>
-                                    <div class="file-field">
-                                        <div class="btn btn-elegant btn-md">
-                                            <span>Upload your profile photo</span>
-                                            <input type="file">
-                                        </div>
+                            </form>
+                            <form method='post' action='upload' enctype="multipart/form-data">
+                                <div class="file-field">
+                                    <div class="btn btn-elegant btn-md">
+                                        <span>Upload your profile photo</span>
+                                        <input type='file' name='fileUploaded'>
+                                        <input id="imageSubmit" type='submit'>
                                     </div>
-                                </form>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -335,7 +336,9 @@
 
 
 
-
+            $("#imageSubmit").on("click", function (event) {
+                event.preventDefault();
+            });
 
             // Posting to the Database
             $.post("/update/profile", profileInfo, function (data) {

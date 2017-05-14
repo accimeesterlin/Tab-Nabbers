@@ -14,6 +14,7 @@ app.use(express.static("./app/public"));
 
 
 //For BodyParser
+app.use(bodyParser({defer: true}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
