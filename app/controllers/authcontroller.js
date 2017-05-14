@@ -169,14 +169,12 @@ router.post("/update/profile", function (req, res) {
 });
 
 router.route('/upload').post(function (req, res, next) {
-
-  var form = new formidable.IncomingForm();
+    var form = new formidable.IncomingForm();
     //Formidable uploads to operating systems tmp dir by default
     form.uploadDir = "app/public/img/profile_images";       //set upload directory
     form.keepExtensions = true;     //keep file extension
-    
-    console.log(form.uploadDir);
 
+    console.log(form.uploadDir);
     form.parse(req, function(err, fields, files) {
         // res.writeHead(200, {'content-type': 'text/plain'});
         // res.write('received upload:\n\n');
@@ -187,20 +185,17 @@ router.route('/upload').post(function (req, res, next) {
         console.log("file name: "+JSON.stringify(files.fileUploaded.name));
         console.log("file type: "+JSON.stringify(files.fileUploaded.type));
         console.log("astModifiedDate: "+JSON.stringify(files.fileUploaded.lastModifiedDate));
-
         //Formidable changes the name of the uploaded file
         //Rename the file to its original name
         fs.rename(files.fileUploaded.path, 'app/public/img/profile_images/'+files.fileUploaded.name, function(err) {
-        if (err)
-            throw err;
-          console.log('renamed complete');  
+            if (err)
+                throw err;
+            console.log('renamed complete');
         });
         //   res.end();
-
         var profileUpdate = {
             photo: files.fileUploaded.name
         };
-
         db.user.update(profileUpdate, {
             where:{
                 id: user.id
