@@ -178,8 +178,8 @@ router.route('/upload').post(function (req, res, next) {
     console.log(form.uploadDir);
 
     form.parse(req, function(err, fields, files) {
-        res.writeHead(200, {'content-type': 'text/plain'});
-        res.write('received upload:\n\n');
+        // res.writeHead(200, {'content-type': 'text/plain'});
+        // res.write('received upload:\n\n');
         console.log("form.bytesReceived");
         //TESTING
         console.log("file size: "+JSON.stringify(files.fileUploaded.size));
@@ -195,10 +195,24 @@ router.route('/upload').post(function (req, res, next) {
             throw err;
           console.log('renamed complete');  
         });
-          res.end();
+        //   res.end();
+
+        var profileUpdate = {
+            photo: files.fileUploaded.name
+        };
+
+        db.user.update(profileUpdate, {
+            where:{
+                id: user.id
+            }
+        }).then(function (data) {
+            console.log("Data has successfully beeen updated!!", data);
+            res.json("ok");
+        }).catch(function (err) {
+            console.log(err);
+            res.json("err");
+        });
     });
 });
-
-
 
 module.exports = router;

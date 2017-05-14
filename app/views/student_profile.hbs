@@ -334,12 +334,10 @@
                 github: github
             };
 
-
-
             $("#imageSubmit").on("click", function (event) {
                 event.preventDefault();
             });
-
+            
             // Posting to the Database
             $.post("/update/profile", profileInfo, function (data) {
                 console.log("Data has successfully been posted!!!");
@@ -351,10 +349,6 @@
                 }
             });
         });
-
-
-
-
     </script>
 
 
