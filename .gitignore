@@ -40,4 +40,10 @@ jspm_packages
 .idea
 
 .DS_Store
+<<<<<<< HEAD
+
 config.json
+
+=======
+config.json
+>>>>>>> 77b305ff8efc1641a149c783943321d405b7af36
