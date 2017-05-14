@@ -177,14 +177,15 @@
                                     <label for="checkbox15">PHP</label>
                                 </fieldset>
                                 <br>
-                                <form>
-                                    <div class="file-field">
-                                        <div class="btn btn-elegant btn-md">
-                                            <span>Upload your profile photo</span>
-                                            <input type="file">
-                                        </div>
+                            </form>
+                            <form method='post' action='upload' enctype="multipart/form-data">
+                                <div class="file-field">
+                                    <div class="btn btn-elegant btn-md">
+                                        <span>Upload your profile photo</span>
+                                        <input type='file' name='fileUploaded'>
+                                        <input id="imageSubmit" type='submit'>
                                     </div>
-                                </form>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -192,7 +193,7 @@
                     <div class="col-md-2 hidden-xs">
                       <div class="profile wow fadeInRight" data-wow-delay="0.2s">
                       <h2 class="editprof">Edit BootCruit Profile</h2>
-                        <img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" class="img-responsive img-thumbnail img-circle">
+                        <img src="../img/profile_images/{{photo}}" class="img-responsive img-thumbnail img-circle">
                         <!-- Rounded switch -->
                         <p>Profile Visibility:</p>
                         <label class="switch">
@@ -224,7 +225,7 @@
                     </div>
                 <div class="modal-body">
                     <center>
-                    <img src="http://websamplenow.com/30/userprofile/images/avatar.jpg" name="aboutme" width="200" height="200" border="0" class="img-responsive img-thumbnail"></a>
+                    <img src="../img/profile_images/{{photo}}" name="aboutme" width="200" height="200" border="0" class="img-responsive img-thumbnail"></a>
                     <h3 class="media-heading"><h2>{{firstname}} {{lastname}}</h2>
                     {{institution}}</h3><br><hr>
                     <span><strong>Skills: </strong></span>
@@ -333,10 +334,10 @@
                 github: github
             };
 
-
-
-
-
+            $("#imageSubmit").on("click", function (event) {
+                event.preventDefault();
+            });
+            
             // Posting to the Database
             $.post("/update/profile", profileInfo, function (data) {
                 console.log("Data has successfully been posted!!!");
@@ -348,10 +349,6 @@
                 }
             });
         });
-
-
-
-
     </script>
 
 
