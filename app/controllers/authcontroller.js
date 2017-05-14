@@ -207,10 +207,10 @@ router.route('/upload').post(function (req, res, next) {
             }
         }).then(function (data) {
             console.log("Data has successfully beeen updated!!", data);
-            res.json("ok");
+            res.redirect("/profile");
         }).catch(function (err) {
             console.log(err);
-            res.json("err");
+            // res.json("err");
         });
     });
 });
