@@ -242,7 +242,7 @@
                     <p class="text-left"><strong>Contact Information: </strong></p>
                     <p><i class="fa fa-envelope" aria-hidden="true"></i> {{email}}</p>
                     <p><i class="fa fa-phone" aria-hidden="true"></i> {{phoneNumber}}</p>
-                    <p><i class="fa fa-github" aria-hidden="true"></i> {{github}}</p>
+                    <p><i class="fa fa-github" aria-hidden="true"></i> <a href="{{github}}">{{github}}</a></p>
                     </center>
                 </div>
                 <div class="modal-footer">
@@ -353,7 +353,7 @@
                         updateMsg("Your info has been updated!");
 
                     }else if(data !== "ok"){
-                        //location.reload();
+                        location.reload();
                         updateMsg("Sorry we were not able to update your profile");
                     }
                 });
