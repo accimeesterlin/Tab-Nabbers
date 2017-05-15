@@ -206,7 +206,7 @@
                             <button class="btn btn-default" id="update"><i class="fa fa-check-circle" aria-hidden="true"></i> Save</button>
 
 
-                            <a href="#" class="btn btn-deep-orange" value=""><i class="fa fa-eraser" aria-hidden="true"></i> Clear</a>
+                            <a href="#" class="btn btn-deep-orange" value="" id="clear"><i class="fa fa-eraser" aria-hidden="true"></i> Clear</a>
 
                           <a href="/delete" id="delete" class="btn btn" value=""><i class="fa fa-trash" aria-hidden="true"></i> Delete Account</a>
                         </div>
@@ -313,18 +313,27 @@
 
 
 
-
-
-        ////////////////////////////////////////////////////////////
-        //////////////////////On Click event////////////////////////
-        ////////////////////////////////////////////////////////////
-        $("#update").on("click", function (event) {
-            event.preventDefault();
-
-            // Getting the user input from the DOM
-            var firstname = $("#firstname").val().trim(), lastname = $("#lastname").val().trim(),
+        // Getting the user input from the DOM
+        var firstname = $("#firstname").val().trim(), lastname = $("#lastname").val().trim(),
                 phoneNumber = $("#phonenumber").val().trim(), email = $("#email").val().trim(),
                 github = $("#github").val().trim();
+
+
+
+
+
+        ////////////////////////////////////////////////////////////
+        //////////////////////Update Profile////////////////////////
+        ////////////////////////////////////////////////////////////
+
+        var update = function () {
+            event.preventDefault();
+
+            firstname = $("#firstname").val().trim(), lastname = $("#lastname").val().trim(),
+                    phoneNumber = $("#phonenumber").val().trim(), email = $("#email").val().trim(),
+                    github = $("#github").val().trim();
+
+
 
             var profileInfo = {
                 firstname: firstname,
@@ -337,7 +346,7 @@
             $("#imageSubmit").on("click", function (event) {
                 event.preventDefault();
             });
-            
+
             // Posting to the Database
             $.post("/update/profile", profileInfo, function (data) {
                 console.log("Data has successfully been posted!!!");
@@ -348,6 +357,7 @@
                     updateMsg("Sorry we were not able to update your profile");
                 }
             });
+<<<<<<< HEAD
         });
 
         $("#delete").on("click", function (event) {
@@ -359,6 +369,25 @@
                 updateMsg("Your account has been deleted.");
             });
         });
+=======
+
+        };
+
+        $("#update").on("click", update);// updating
+
+
+        ////////////////////////////////////////////////////////////
+        //////////////////////Clear Input///////////////////////////
+        ////////////////////////////////////////////////////////////
+        var clear = function () {
+            $("#firstname").val("");
+            $("#lastname").val("");
+            $("#phonenumber").val("");
+            $("#github").val("");
+        };
+
+        $("#clear").on("click", clear);
+>>>>>>> db2a7576dc1e99eaf5aafe9afc0f711f5fbaa51b
     </script>
 
 
