@@ -52,7 +52,7 @@ require('./app/config/passport/passport.js')(passport, db);
 
 
 //Sync Database
-db.sequelize.sync({}).then(function() {
+db.sequelize.sync({ }).then(function() {
     console.log('Nice! Database looks fine');
 
     app.listen(port, function(err) {
