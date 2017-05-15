@@ -22,30 +22,6 @@
         "use_env_variable": "JAWSDB_URL",
         "define": {
             "timestamps": false
-        },
-        "development": {
-            "username": "root",
-            "password": "Septembre1",
-            "database": "sequelize_passport",
-            "host": "localhost",
-            "dialect": "mysql"
-        },
-        "test": {
-            "username": "",
-            "password": null,
-            "database": "",
-            "host": "",
-            "dialect": "mysql"
-        },
-        "production": {
-            "username": "srm4h28hgnngo8wk",
-            "password": "dqwzmkjx6fwhx5t4",
-            "database": "k1qo04yy02kdb1s8",
-            "host": "s54ham9zz83czkff.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-            "dialect": "mysql",
-            "use_env_variable": "JAWSDB_URL",
-            "define": {
-                "timestamps": false
-            }
-
         }
+    }
+}
