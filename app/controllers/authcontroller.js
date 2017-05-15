@@ -146,15 +146,18 @@ router.post("/update/profile", function (req, res) {
 
 
     var student = req.body;
-    var profileUpdate = {
-        email:student.email,
-        firstname: student.firstname,
-        lastname: student.lastname,
-        github: student.github,
-        phoneNumber: student.phoneNumber
-    };
+    console.log(student);
 
-    db.user.update(profileUpdate, {
+    // var profileUpdate = {
+    //     email:student.email,
+    //     firstname: student.firstname,
+    //     lastname: student.lastname,
+    //     github: student.github,
+    //     phoneNumber: student.phoneNumber
+    //     // HTML: student.HTML
+    // };
+
+    db.user.update(student, {
         where:{
             id: user.id
         }

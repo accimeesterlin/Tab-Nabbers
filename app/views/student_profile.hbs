@@ -103,77 +103,77 @@
                             <form class="form-inline">
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox1">
+                                    <input type="checkbox" class="filled-in" id="checkbox1" value="HTML">
                                     <label for="checkbox1">HTML</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox2">
+                                    <input type="checkbox" class="filled-in" id="checkbox2" value="CSS">
                                     <label for="checkbox2">CSS</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox3">
+                                    <input type="checkbox" class="filled-in" id="checkbox3" value="JavaScript">
                                     <label for="checkbox3">Javascript</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox4">
+                                    <input type="checkbox" class="filled-in" id="checkbox4" value="Nodejs">
                                     <label for="checkbox4">Node.js</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox5">
+                                    <input type="checkbox" class="filled-in" id="checkbox5" value="mySQL">
                                     <label for="checkbox5">mySQL</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox6">
+                                    <input type="checkbox" class="filled-in" id="checkbox6" value="Express">
                                     <label for="checkbox6">Express</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox7">
+                                    <input type="checkbox" class="filled-in" id="checkbox7" value="Handlebars">
                                     <label for="checkbox7">Handlebars</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox8">
+                                    <input type="checkbox" class="filled-in" id="checkbox8" value="Boostrap">
                                     <label for="checkbox8">Bootstrap</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox9">
+                                    <input type="checkbox" class="filled-in" id="checkbox9" value="Python">
                                     <label for="checkbox9">Python</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox10">
+                                    <input type="checkbox" class="filled-in" id="checkbox10" value="Angular">
                                     <label for="checkbox10">Angular</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox11">
+                                    <input type="checkbox" class="filled-in" id="checkbox11" value="Ruby">
                                     <label for="checkbox11">Ruby</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox12">
+                                    <input type="checkbox" class="filled-in" id="checkbox12" value="Flask">
                                     <label for="checkbox12">Flask</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox13">
+                                    <input type="checkbox" class="filled-in" id="checkbox13" value="Java">
                                     <label for="checkbox13">Java</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox14">
+                                    <input type="checkbox" class="filled-in" id="checkbox14" value="C++">
                                     <label for="checkbox14">C++</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox15">
+                                    <input type="checkbox" class="filled-in" id="checkbox15" value="PHP">
                                     <label for="checkbox15">PHP</label>
                                 </fieldset>
                                 <br>
@@ -229,12 +229,13 @@
                     <h3 class="media-heading"><h2>{{firstname}} {{lastname}}</h2>
                     {{institution}}</h3><br><hr>
                     <span><strong>Skills: </strong></span>
-                    <span class="badge badge-default">HTML</span>
-                    <span class="badge badge-primary">CSS</span>
-                    <span class="badge badge-success">Javascript</span>
-                    <span class="badge badge-info">PHP</span>
-                    <span class="badge badge-warning">Nodejs</span>
-                    <span class="badge badge-danger">Angular</span>
+                        {{#if HTML}}<span class="badge badge-primary"> HTML </span>{{/if}}
+                        {{#if CSS}}<span class="badge badge-success"> CSS </span>{{/if}}
+                        {{#if JavaScript}}<span class="badge badge-info"> JavaScript </span>{{/if}}
+                        {{#if Angularjs}}<span class="badge badge-warning"> Angular.JS </span>{{/if}}
+                        {{#if Nodejs}}<span class="badge badge-danger"> Node.js </span>{{/if}}
+                        {{#if PHP}}<span class="badge badge-primary"> PHP </span>{{/if}}
+
                     </center>
                     <hr>
                     <center>
@@ -283,97 +284,112 @@
     <script>
         new WOW().init();
 
-        ////////////////////////////////////////////////////////////
-        ///////////////////Notifications Updates////////////////////
-        ////////////////////////////////////////////////////////////
-        // Sending a notification messages that mentioned data has been updated
-        var updateMsg = function (msg) {
-            $("#infoUpdated").remove();
-            var info = $("<p>");
-            info.html(msg)
-                    .attr("id", 'infoUpdated');
-            $("#container").prepend(info);
+        var app = (function () {
 
-            var counter = 0;
+            // Sending a notification messages that mentioned data has been updated
+            var updateMsg = function (msg) {
+                $("#infoUpdated").remove();
+                var info = $("<p>");
+                info.html(msg)
+                        .attr("id", 'infoUpdated');
+                $("#container").prepend(info);
 
-            var timer = setInterval(function () {
-                counter++;
-                console.log(counter);
-                if(counter >= 5){
+                var counter = 0;
 
-                    clearInterval(timer);
-                    $("#infoUpdated").remove();
+                var timer = setInterval(function () {
+                    counter++;
+                    console.log(counter);
+                    if(counter >= 5){
 
-                }
+                        clearInterval(timer);
+                        $("#infoUpdated").remove();
 
-            }, 1000)
+                    }
 
-        }; // End of Update Msg
+                }, 1000)
 
+            }; // End of Update Msg
 
 
+            // Getting values from the users
+            var getValue = function () {
+                var firstname = $("#firstname").val().trim(), lastname = $("#lastname").val().trim(),
+                        phoneNumber = $("#phonenumber").val().trim(), email = $("#email").val().trim(),
+                        github = $("#github").val().trim();
 
-        // Getting the user input from the DOM
-        var firstname = $("#firstname").val().trim(), lastname = $("#lastname").val().trim(),
-                phoneNumber = $("#phonenumber").val().trim(), email = $("#email").val().trim(),
-                github = $("#github").val().trim();
+                var profileInfo = {
+                    firstname: firstname,
+                    lastname: lastname,
+                    email: email,
+                    phoneNumber: phoneNumber,
+                    github: github
+                };
 
-
-
-
-
-        ////////////////////////////////////////////////////////////
-        //////////////////////Update Profile////////////////////////
-        ////////////////////////////////////////////////////////////
-
-        var update = function () {
-            event.preventDefault();
-
-            firstname = $("#firstname").val().trim(), lastname = $("#lastname").val().trim(),
-                    phoneNumber = $("#phonenumber").val().trim(), email = $("#email").val().trim(),
-                    github = $("#github").val().trim();
+                $('input[type="checkbox"]:checked').each(function() {
+                    profileInfo[this.value] = true;
+                });
 
 
+                console.log(profileInfo);
 
-            var profileInfo = {
-                firstname: firstname,
-                lastname: lastname,
-                email: email,
-                phoneNumber: phoneNumber,
-                github: github
+
+                return profileInfo;
+            }; // end of getting values
+
+
+            // Updating profile info
+            var update = function () {
+                event.preventDefault();
+
+                $("#imageSubmit").on("click", function (event) {
+                    event.preventDefault();
+                });
+
+                // Posting to the Database
+                $.post("/update/profile", getValue(), function (data) {
+                    console.log("Data has successfully been posted!!!");
+                    if(data === "ok"){
+                        location.reload();
+                        updateMsg("Your info has been updated!");
+
+                    }else if(data !== "ok"){
+                        //location.reload();
+                        updateMsg("Sorry we were not able to update your profile");
+                    }
+                });
+
             };
 
-            $("#imageSubmit").on("click", function (event) {
-                event.preventDefault();
-            });
 
-            // Posting to the Database
-            $.post("/update/profile", profileInfo, function (data) {
-                console.log("Data has successfully been posted!!!");
-                if(data === "ok"){
-                    updateMsg("Your info has been updated!");
-
-                }else{
-                    updateMsg("Sorry we were not able to update your profile");
-                }
-            });
-
-        };
-
-        $("#update").on("click", update);// updating
+            // Clearing values when user clicks
+            var clear = function () {
+                $("#firstname").val("");
+                $("#lastname").val("");
+                $("#phonenumber").val("");
+                $("#github").val("");
+            };
 
 
-        ////////////////////////////////////////////////////////////
-        //////////////////////Clear Input///////////////////////////
-        ////////////////////////////////////////////////////////////
-        var clear = function () {
-            $("#firstname").val("");
-            $("#lastname").val("");
-            $("#phonenumber").val("");
-            $("#github").val("");
-        };
 
-        $("#clear").on("click", clear);
+            // Main process of the app
+            var mainProcess = function () {
+                $("#update").on("click", update);// updating
+                $("#clear").on("click", clear); // Clearing values
+
+            };
+
+
+
+            return {
+                start: mainProcess
+
+            }
+
+
+        })();
+
+ app.start();
+
     </script>
 
 
