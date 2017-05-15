@@ -52,14 +52,14 @@ root = d3.hierarchy(root);
 
 var i = 0;
 
-var transform = d3.zoomIdentity;;
+var transform = d3.zoomIdentity;
 
 var nodeSvg, linkSvg, simulation, nodeEnter, linkEnter ;
 
 var svg = d3.select(".tree").append("svg")
     .attr("width", width)
     .attr("height", height)
-    .call(d3.zoom().scaleExtent([1 / 2, 8]).on("zoom", zoomed))
+    //.call(d3.zoom().scaleExtent([1 / 2, 8]).on("zoom", zoomed))
     .append("g");
     // .attr("transform", "translate(230,100)");
 
@@ -87,7 +87,7 @@ linkSvg.exit().remove();
 var linkEnter = linkSvg.enter()
     .append("line")
     .attr("class", "link");
-    
+
 linkSvg = linkEnter.merge(linkSvg)
 
 nodeSvg = svg.selectAll(".node")
@@ -114,7 +114,7 @@ var nodeEnter = nodeSvg.enter()
     .attr("x", function(d) { return d.children ? -8 : 8; })
     .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
     .text(function(d) { return d.data.name; });
-    
+
 nodeSvg = nodeEnter.merge(nodeSvg);
 
     simulation
