@@ -6,7 +6,7 @@ var express = require('express'),
     exphbs = require("express-handlebars");
 
 var app = express(),
-    port = process.env.PORT || 8080;
+    PORT = process.env.PORT || 8080;
 
 // Static directory
 app.use(express.static("./app/public"));
@@ -52,10 +52,10 @@ require('./app/config/passport/passport.js')(passport, db);
 
 
 //Sync Database
-db.sequelize.sync({}).then(function() {
+db.sequelize.sync({ }).then(function() {
     console.log('Nice! Database looks fine');
 
-    app.listen(port, function(err) {
+    app.listen(PORT, function(err) {
 
         if (!err)
             console.log("Site is live");

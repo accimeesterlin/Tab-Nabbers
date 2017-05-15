@@ -79,38 +79,28 @@ module.exports = function(sequelize, Sequelize) {
             },
 
             //Skills
-            html: {
-                type: Sequelize.BOOLEAN,
-                validate: {
-                    defaultValue: false
-                }
+            HTML: {
+                type: Sequelize.BOOLEAN
+
             },
-            css: {
-                type: Sequelize.BOOLEAN,
-                validate: {
-                    defaultValue: false
-                }
+            CSS: {
+                type: Sequelize.BOOLEAN
             },
 
-            javascript: {
-                type: Sequelize.BOOLEAN,
-                validate: {
-                    defaultValue: false
-                }
+            JavaScript: {
+                type: Sequelize.BOOLEAN
             },
 
-            node: {
-                type: Sequelize.BOOLEAN,
-                validate: {
-                    defaultValue: false
-                }
+            Nodejs: {
+                type: Sequelize.BOOLEAN
+            },
+
+            PHP: {
+                type: Sequelize.BOOLEAN
             },
 
             database: {
-                type: Sequelize.BOOLEAN,
-                validate: {
-                    defaultValue: false
-                }
+                type: Sequelize.BOOLEAN
             }
         },
         //Associations
