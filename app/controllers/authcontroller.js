@@ -168,8 +168,9 @@ router.post("/update/profile", function (req, res) {
 
 });
 
-router.route('/upload').post(function (req, res, next) {
-    var form = new formidable.IncomingForm();
+router.post('/upload', function (req, res, next) {
+
+  var form = new formidable.IncomingForm();
     //Formidable uploads to operating systems tmp dir by default
     form.uploadDir = "app/public/img/profile_images";       //set upload directory
     form.keepExtensions = true;     //keep file extension
@@ -198,7 +199,7 @@ router.route('/upload').post(function (req, res, next) {
         };
         db.user.update(profileUpdate, {
             where:{
-                id: user.id
+                id: req.user.id
             }
         }).then(function (data) {
             console.log("Data has successfully beeen updated!!", data);
@@ -209,5 +210,24 @@ router.route('/upload').post(function (req, res, next) {
         });
     });
 });
+
+////////////////////////////////////////////////////////////////////
+///////////////////Delete Request Go below////////////////////////////
+////////////////////////////////////////////////////////////////////
+
+router.delete("/delete", function(req, res) {
+    console.log(user.id);
+    db.user.destroy({
+      where: {
+        id: user.id
+      }
+    }).then(function(data) {
+        res.redirect("/index");
+    }).catch(function (err) {
+        console.log(err);
+        res.json("err");
+    });
+});
+
 
 module.exports = router;

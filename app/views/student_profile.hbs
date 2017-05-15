@@ -193,7 +193,7 @@
                     <div class="col-md-2 hidden-xs">
                       <div class="profile wow fadeInRight" data-wow-delay="0.2s">
                       <h2 class="editprof">Edit BootCruit Profile</h2>
-                        <img src="../img/profile_images/{{photo}}" class="img-responsive img-thumbnail img-circle">
+                        <img src="../img/profile_images/{{photo}}" onerror="this.src='http://websamplenow.com/30/userprofile/images/avatar.jpg'" class="img-responsive img-thumbnail img-circle">
                         <!-- Rounded switch -->
                         <p>Profile Visibility:</p>
                         <label class="switch">
@@ -208,7 +208,7 @@
 
                             <a href="#" class="btn btn-deep-orange" value="" id="clear"><i class="fa fa-eraser" aria-hidden="true"></i> Clear</a>
 
-                          <a href="#" class="btn btn" value=""><i class="fa fa-trash" aria-hidden="true"></i> Delete Account</a>
+                          <a href="/delete" id="delete" class="btn btn" value=""><i class="fa fa-trash" aria-hidden="true"></i> Delete Account</a>
                         </div>
                     </div>
                 </div>
@@ -225,7 +225,7 @@
                     </div>
                 <div class="modal-body">
                     <center>
-                    <img src="../img/profile_images/{{photo}}" name="aboutme" width="200" height="200" border="0" class="img-responsive img-thumbnail"></a>
+                    <img src="../img/profile_images/{{photo}}" onerror="this.src='http://websamplenow.com/30/userprofile/images/avatar.jpg'" name="aboutme" width="200" height="200" border="0" class="img-responsive img-thumbnail"></a>
                     <h3 class="media-heading"><h2>{{firstname}} {{lastname}}</h2>
                     {{institution}}</h3><br><hr>
                     <span><strong>Skills: </strong></span>
@@ -357,8 +357,17 @@
                     updateMsg("Sorry we were not able to update your profile");
                 }
             });
-
         };
+
+        $("#delete").on("click", function (event) {
+            event.preventDefault();
+            $.ajax({
+                method: "DELETE",
+                url: "/delete"
+            }).done(function() {
+                updateMsg("Your account has been deleted.");
+            });
+        });
 
         $("#update").on("click", update);// updating
 
