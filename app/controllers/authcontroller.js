@@ -168,14 +168,9 @@ router.post("/update/profile", function (req, res) {
 
 });
 
-<<<<<<< HEAD
 router.post('/upload', function (req, res, next) {
 
   var form = new formidable.IncomingForm();
-=======
-router.route('/upload').post(function (req, res, next) {
-    var form = new formidable.IncomingForm();
->>>>>>> db2a7576dc1e99eaf5aafe9afc0f711f5fbaa51b
     //Formidable uploads to operating systems tmp dir by default
     form.uploadDir = "app/public/img/profile_images";       //set upload directory
     form.keepExtensions = true;     //keep file extension
