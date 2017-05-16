@@ -219,16 +219,17 @@ router.post('/upload', function (req, res, next) {
 ////////////////////////////////////////////////////////////////////
 
 router.delete("/delete", function(req, res) {
-    console.log(user.id);
-    db.user.destroy({
-      where: {
-        id: user.id
-      }
-    }).then(function(data) {
-        res.redirect("/index");
-    }).catch(function (err) {
-        console.log(err);
-        res.json("err");
+    req.session.destroy(function (err) {
+        db.user.destroy({
+            where: {
+                id: user.id
+            }
+        }).then(function(data) {
+            res.send('/index');
+        }).catch(function (err) {
+            console.log(err);
+            res.json("err");
+        });
     });
 });
 
