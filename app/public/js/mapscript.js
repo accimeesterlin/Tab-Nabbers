@@ -1,178 +1,240 @@
-var map = d3.select(".map");
+// some colour variables
+  var tcBlack = "#130C0E";
 
-var path = d3.geoPath();
+// rest of vars
+var w = 1200,
+    h = 800,
+    maxNodeSize = 50,
+    x_browser = 20,
+    y_browser = 25,
+    root;
+ 
+var vis;
+var force = d3.layout.force(); 
 
-d3.json("https://unpkg.com/us-atlas@1/us/10m.json", function(error, us) {
-if (error) throw error;
+vis = d3.select("#vis").append("svg").attr("width", w).attr("height", h);
+ 
+d3.json("atlanta.json", function(json) {
+  root = json;
+  root.fixed = true;
+  root.x = w / 2;
+  root.y = h / 4;
+ 
+ 
+        // Build the path
+  var defs = vis.insert("svg:defs")
+      .data(["end"]);
+ 
+ 
+  defs.enter().append("svg:path")
+      .attr("d", "M0,-5L10,0L0,5");
+ 
+     update();
 
-map.append("path")
-    .attr("stroke-width", 0.5)
-    .attr("d", path(topojson.mesh(us, us.objects.states, function(a, b) { return a !== b; })));
+   function collapse(d) {
+     if(d.children) {
+       d._children = d.children;
+       d._children.forEach(collapse);
+       d.children = null;
+     }
+   }
 
-map.append("path")
-    .attr("d", path(topojson.feature(us, us.objects.nation)));
+   function collapseAll() {
+     collapse(root);
+     update();
+   }
+   collapseAll();
 });
 
-var width = 960,
-    height = 600;
 
-var root = {
-    "name": "Atlanta",
-    "children": [{
-        "name": "GT Bootcamp",
-        "_children": null,
-        "children": [{
-            "name": "Cohort 1"
-        }, {
-            "name": "Cohort 2"
-        }]
-    }, {
-        "name": "IronYard",
-        "_children": null,
-        "children": [{
-            "name": "server984"
-        }, {
-            "name": "server983"
-        }]
-    }, {
-        "name": "General Assembly",
-        "_children": null,
-        "children": [{
-            "name": "server999",
-            "_children": null,
-            "children": [{
-                "name": "server992",
-            }]
-        }]
-    }]
-};
-
-//initialising hierarchical data
-root = d3.hierarchy(root);
-
-var i = 0;
-
-var transform = d3.zoomIdentity;;
-
-var nodeSvg, linkSvg, simulation, nodeEnter, linkEnter ;
-
-var svg = d3.select(".tree").append("svg")
-    .attr("width", width)
-    .attr("height", height)
-    .call(d3.zoom().scaleExtent([1 / 2, 8]).on("zoom", zoomed))
-    .append("g");
-    // .attr("transform", "translate(230,100)");
-
-function zoomed() {
-    svg.attr("transform", d3.event.transform);
-}
-
-simulation = d3.forceSimulation()
-.force("link", d3.forceLink().id(function(d) { return d.id; }))
-.force("charge", d3.forceManyBody())
-.force("center", d3.forceCenter(width / 2, height / 2))
-.on("tick", ticked);
-
-update();
-
+ 
+ 
+/**
+ *   
+ */
 function update() {
-var nodes = flatten(root);
-var links = root.links();
+  var nodes = flatten(root),
+      links = d3.layout.tree().links(nodes);
+ 
+  // Restart the force layout.
+  force.nodes(nodes)
+        .links(links)
+        .gravity(0.05)
+        .charge(-1500)
+        .linkDistance(100)
+        .friction(0.5)
+        .linkStrength(function(l, i) {return 1; })
+        .size([w, h])
+        .on("tick", tick)
+        .start();
+ 
+   var path = vis.selectAll("path.link")
+      .data(links, function(d) { return d.target.id; });
+ 
+    path.enter().insert("svg:path")
+      .attr("class", "link")
+      // .attr("marker-end", "url(#end)")
+      .style("stroke", "#eee");
+ 
+ 
+  // Exit any old paths.
+  path.exit().remove();
 
-linkSvg = svg.selectAll(".link")
-    .data(links, function(d) { return d.target.id; })
+ 
+  // Update the nodes…
+  var node = vis.selectAll("g.node")
+      .data(nodes, function(d) { return d.id; });
+ 
+ 
+  // Enter any new nodes.
+  var nodeEnter = node.enter().append("svg:g")
+      .attr("class", "node")
+      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
+      .on("click", click);
+    //   .call(force.drag);
+ 
+  // Append a circle
+  nodeEnter.append("svg:circle")
+      .attr("r", function(d) { return Math.sqrt(d.size) / 10 || 4.5; })
+      .style("fill", "#eee");
+ 
+   
+  // Append images
+  var images = nodeEnter.append("svg:image")
+        .attr("xlink:href",  function(d) { return d.img;})
+        .attr("x", function(d) { return -25;})
+        .attr("y", function(d) { return -25;})
+        .attr("height", 50)
+        .attr("width", 50);
+  
+  // make the image grow a little on mouse over and add the text details on click
+  var setEvents = images
+          // Append hero text
+          .on( 'click', function (d) {
+              d3.select("h1").html(d.hero); 
+              d3.select("h2").html(d.name); 
+              d3.select("h3").html ("Take me to " + "<a href='" + d.link + "' >"  + d.hero + " web page ⇢"+ "</a>" ); 
+           })
 
-linkSvg.exit().remove();
+          .on( 'mouseenter', function() {
+            // select element in current context
+            d3.select( this )
+              .transition()
+              .attr("x", function(d) { return -60;})
+              .attr("y", function(d) { return -60;})
+              .attr("height", 100)
+              .attr("width", 100);
+          })
+          // set back
+          .on( 'mouseleave', function() {
+            d3.select( this )
+              .transition()
+              .attr("x", function(d) { return -25;})
+              .attr("y", function(d) { return -25;})
+              .attr("height", 50)
+              .attr("width", 50);
+          });
 
-var linkEnter = linkSvg.enter()
-    .append("line")
-    .attr("class", "link");
-    
-linkSvg = linkEnter.merge(linkSvg)
-
-nodeSvg = svg.selectAll(".node")
-    .data(nodes, function(d) { return d.id; })
-
-nodeSvg.exit().remove();
-
-var nodeEnter = nodeSvg.enter()
-    .append("g")
-    .attr("class", "node")
-    .on("click", click)
-    .call(d3.drag()
-        .on("start", dragstarted)
-        .on("drag", dragged)
-        .on("end", dragended))
-
-    nodeEnter.append("circle")
-    .attr("r", 4  )
-    .append("title")
-        .text(function(d) { return d.data.name; })
-
-    nodeEnter.append("text")
-    .attr("dy", 3)
-    .attr("x", function(d) { return d.children ? -8 : 8; })
-    .style("text-anchor", function(d) { return d.children ? "end" : "start"; })
-    .text(function(d) { return d.data.name; });
-    
-nodeSvg = nodeEnter.merge(nodeSvg);
-
-    simulation
-    .nodes(nodes)
-
-    simulation.force("link")
-    .links(links);
-
+  // Append hero name on roll over next to the node as well
+  nodeEnter.append("text")
+      .attr("class", "nodetext")
+      .attr("x", x_browser)
+      .attr("y", y_browser +15)
+      .attr("fill", tcBlack)
+      .text(function(d) { return d.hero; });
+ 
+ 
+  // Exit any old nodes.
+  node.exit().remove();
+ 
+ 
+  // Re-select for update.
+  path = vis.selectAll("path.link");
+  node = vis.selectAll("g.node");
+ 
+function tick() {
+ 
+ 
+    path.attr("d", function(d) {
+ 
+     var dx = d.target.x - d.source.x,
+           dy = d.target.y - d.source.y,
+           dr = Math.sqrt(dx * dx + dy * dy);
+           return   "M" + d.source.x + "," 
+            + d.source.y 
+            + "A" + dr + "," 
+            + dr + " 0 0,1 " 
+            + d.target.x + "," 
+            + d.target.y;
+  });
+    node.attr("transform", nodeTransform);    
+  }
 }
 
-function ticked() {
-linkSvg
-    .attr("x1", function(d) { return d.source.x; })
-    .attr("y1", function(d) { return d.source.y; })
-    .attr("x2", function(d) { return d.target.x; })
-    .attr("y2", function(d) { return d.target.y; });
-
-nodeSvg
-    .attr("transform", function(d) { return "translate(" + d.x + ", " + d.y + ")"; });
+ 
+/**
+ * Gives the coordinates of the border for keeping the nodes inside a frame
+ * http://bl.ocks.org/mbostock/1129492
+ */ 
+function nodeTransform(d) {
+  d.x =  Math.max(maxNodeSize, Math.min(w - (d.imgwidth/2 || 16), d.x));
+    d.y =  Math.max(maxNodeSize, Math.min(h - (d.imgheight/2 || 16), d.y));
+    return "translate(" + d.x + "," + d.y + ")";
+   }
+ 
+/**
+ * Toggle children on click.
+ */ 
+function click(d) {
+  if (d.children) {
+    d._children = d.children;
+    d.children = null;
+  } else {
+    d.children = d._children;
+    d._children = null;
+  }
+  update();
 }
-
-function click (d) {
-    if (d.children) {
-        d._children = d.children;
-        d.children = null;
-    update();
-    simulation.restart();
-    } else {
-        d.children = d._children;
-        d._children = null;
-    update();
-    simulation.restart();
-    }
-}
-
-function dragstarted(d) {
-if (!d3.event.active) simulation.alphaTarget(0.3).restart()
-simulation.fix(d);
-}
-
-function dragged(d) {
-simulation.fix(d, d3.event.x, d3.event.y);
-}
-
-function dragended(d) {
-if (!d3.event.active) simulation.alphaTarget(0);
-simulation.unfix(d);
-}
-
-function flatten (root) {
-// hierarchical data to flat data for force layout
-var nodes = [];
-function recurse(node) {
-    if (node.children) node.children.forEach(recurse);
-    if (!node.id) node.id = ++i;
-    else ++i;
+ 
+ 
+/**
+ * Returns a list of all nodes under the root.
+ */ 
+function flatten(root) {
+  var nodes = []; 
+  var i = 0;
+ 
+  function recurse(node) {
+    if (node.children) 
+      node.children.forEach(recurse);
+    if (!node.id) 
+      node.id = ++i;
     nodes.push(node);
+  }
+ 
+  recurse(root);
+  return nodes;
 }
-recurse(root);
-return nodes;
-}
+
+var width = 960,
+    height = 500;
+
+var path = d3.geo.path();
+
+var svg = d3.select("#map").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+var url = "https://gist.githubusercontent.com/mbostock/4090846/raw/d534aba169207548a8a3d670c9c2cc719ff05c47/us.json"
+d3.json(url, function(error, topology) {
+  if (error) throw error;
+  
+  console.log("topojson", topology)
+  var geojson = topojson.feature(topology, topology.objects.states);
+  console.log("geojson", geojson)
+
+  svg.selectAll("path")
+      .data(geojson.features)
+    .enter().append("path")
+      .attr("d", path);
+});

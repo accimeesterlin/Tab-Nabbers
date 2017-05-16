@@ -63,9 +63,10 @@
     <!--Mask-->
     <div class="view hm-black-strong">
         <div class="full-bg-img flex-center">
-            <div class="map-container">
-                <svg class="tree" width="960" height="800"></svg>
-                <svg class="map" width="960" height="800" fill="none" stroke="#000" stroke-linejoin="round" stroke-linecap="round"></svg>
+            <!-- container for force layout visualisation  -->
+            <div class="container">
+                <div  id="map"></div>
+                <div id="vis"></div>
             </div>
         </div>
     </div>
@@ -94,8 +95,8 @@
     <!-- MDB core JavaScript -->
     <script type="text/javascript" src="./js/mdb.min.js"></script>
 
-    <script src="https://d3js.org/d3.v4.min.js"></script>
-    <script src="https://unpkg.com/topojson-client@3"></script>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="//d3js.org/topojson.v1.min.js"></script>
     <script src="./js/mapscript.js"></script>
 
     <!-- Animations init-->
