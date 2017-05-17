@@ -74,8 +74,14 @@ footer.page-footer {
 
 .card {
     width: 600px;
+    margin-top: 80px;
 }
 
+/*about section*/
+img {
+    max-width: 100%;
+    max-height: 250px;
+}
 
 /* Edit Profile styles */
 
@@ -193,11 +199,6 @@ input:checked + .slider:before {
 #cardfeature, #cardcontact{
   width: 100%;
 }
-
-
-/* Map styles */
-
-
 
 
 /* Map styles */
