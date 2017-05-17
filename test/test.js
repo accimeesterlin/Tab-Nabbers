@@ -1,28 +1,67 @@
-/**
- * Created by esterlingaccime on 5/16/17.
- */
-"use strict";
 
-var should = require("chai").should();
+var Nightmare = require('nightmare');
+var should = require('chai').should();
+var expect = require('chai').expect;
 
-var multiply = function (x, y) {
-    if(typeof x !== 'number' || typeof y !== 'number'){
-        throw new Error("X or y is not a number");
-    }
-    if (typeof x !== "number" || typeof y !== "number") {
-        throw new Error("x or y is not a number.");
-    }
-    else return x * y;
-};
+var url = 'http://localhost:8080';
 
-describe("Test", function () {
-    it("should multiply 4 * 5", function () {
-       multiply(4, 5).should.equal(20);
+describe('BootCruit Demo', function() {
+
+    beforeEach(function() {
+        var server = require('../server');
     });
 
-    it("should throw when not passed numbers", function() {
-        (function() {
-            multiply(2, "4");
-        }).should.throw(Error);
-    });
-});
+
+    describe('Open Homepage', function() {
+        this.timeout(10000);
+        it('should open the homepage', function(done) {
+            var nightmare = Nightmare({ show: true });
+            nightmare
+                .goto(url)
+                .evaluate(function() {
+                    return document.querySelectorAll('.btn').length;
+                }).then(function(result) {
+                    result.should.equal(2);
+                    done();
+                })
+        });
+    })
+
+    describe('Open Student Signin', function() {
+        this.timeout(10000);
+        it('should open student signin form', function(done) {
+            var nightmare = Nightmare({ show: true });
+            nightmare
+                .goto(url)
+                .wait('#studentBtn')
+                .click('#studentBtn')
+                .wait('#signin')
+                .evaluate(function() {
+                    return document.querySelectorAll('.md-form').length;
+                }).then(function(result) {
+                    result.should.equal(2);
+                    done();
+                })
+        })
+    })
+
+    describe('Open Recruiter Signin', function() {
+        this.timeout(10000);
+        it('should open recruiter signin form', function(done) {
+            var nightmare = Nightmare({ show: true });
+            nightmare
+                .goto(url)
+                .wait('#recruiterBtn')
+                .click('#recruiterBtn')
+                .wait('#signin')
+                .evaluate(function() {
+                    return document.querySelectorAll('.md-form').length;
+                }).then(function(result) {
+                    result.should.equal(2);
+                    done();
+                })
+        })
+    })
+
+})
+

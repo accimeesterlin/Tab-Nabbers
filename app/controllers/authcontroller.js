@@ -4,7 +4,7 @@
 var express = require("express"),
     passport = require("passport"),
     formidable = require('formidable'),
-    path = require('path'),    //used for file path
+    path = require('path'), //used for file path
     fs = require('fs-extra');
 
 
@@ -15,31 +15,31 @@ var router = express.Router();
 var user;
 
 // Verified that the user needs to sign in
-var isLoggedIn = function (req, res, next) {
-    if(req.isAuthenticated()){
+var isLoggedIn = function(req, res, next) {
+    if (req.isAuthenticated()) {
         return next();
     }
+    console.log(req.isAuthenticated());
     res.redirect("/signin");
 };
 
 
 // Home page
-router.get("/index", function (req, res) {
+router.get("/index", function(req, res) {
     res.render("index");
 });
 
 // About page
-router.get("/about", function (req, res) {
+router.get("/about", function(req, res) {
     res.render("about");
 });
 
 // Sign in for Recruiters and Students
-router.get("/signin/:name?", function (req, res) {
-    if(req.params.name === 'recruiter'){
+router.get("/signin/:name?", function(req, res) {
+    if (req.params.name === 'recruiter') {
         res.render("recruiter_login");
 
-    }
-    else if(req.params.name === "student"){
+    } else if (req.params.name === "student") {
         res.render("student_login");
 
     }
@@ -49,13 +49,11 @@ router.get("/signin/:name?", function (req, res) {
 
 
 // Sigin up Routers for Recruiters and Students
-router.get("/signup/:name?", function (req, res) {
-    if(req.params.name === 'recruiter'){
+router.get("/signup/:name?", function(req, res) {
+    if (req.params.name === 'recruiter') {
         res.render("recruiter_signup");
 
-    }
-
-    else if(req.params.name === "student"){
+    } else if (req.params.name === "student") {
         res.render("student_signup");
 
     }
@@ -65,21 +63,21 @@ router.get("/signup/:name?", function (req, res) {
 
 // Dashboard included the map that recruiters see
 // If user not logged in, they're not able to see it
-router.get("/dashboard", isLoggedIn, function (req, res) {
+router.get("/dashboard", isLoggedIn, function(req, res) {
     res.render("dashboard");
 });
 
 
 // Profile page for Students
 // If user not logged in, they're not able to see it
-router.get("/profile", isLoggedIn, function (req, res) {
+router.get("/profile", isLoggedIn, function(req, res) {
     var currentUser = req.user;
     user = currentUser;
     db.bootcamp.findOne({
-        where:{
+        where: {
             id: currentUser.id
         }
-    }).then(function (data) {
+    }).then(function(data) {
         // console.log(data.get());
         currentUser.institution = data.get().institution;
         //console.log(currentUser);
@@ -93,14 +91,14 @@ router.get("/profile", isLoggedIn, function (req, res) {
 
 // Log the user out
 // If user not logged in, they're not able to see it
-router.get("/logout", isLoggedIn, function (req, res) {
-    req.session.destroy(function (err) {
+router.get("/logout", isLoggedIn, function(req, res) {
+    req.session.destroy(function(err) {
         res.redirect("/index");
     });
 });
 
 
-router.get("*", function (req, res) {
+router.get("*", function(req, res) {
     res.render("index");
 });
 
@@ -142,7 +140,7 @@ router.post('/signin/student', passport.authenticate("student-signin", {
 }));
 
 
-router.post("/update/profile", function (req, res) {
+router.post("/update/profile", function(req, res) {
 
 
     var student = req.body;
@@ -158,25 +156,25 @@ router.post("/update/profile", function (req, res) {
     // };
 
     db.user.update(student, {
-        where:{
+        where: {
             id: user.id
         }
-    }).then(function (data) {
+    }).then(function(data) {
         console.log("Data has successfully beeen updated!!", data);
         res.json("ok");
-    }).catch(function (err) {
+    }).catch(function(err) {
         console.log(err);
         res.json("err");
     });
 
 });
 
-router.post('/upload', function (req, res, next) {
+router.post('/upload', function(req, res, next) {
 
-  var form = new formidable.IncomingForm();
+    var form = new formidable.IncomingForm();
     //Formidable uploads to operating systems tmp dir by default
-    form.uploadDir = "app/public/img/profile_images";       //set upload directory
-    form.keepExtensions = true;     //keep file extension
+    form.uploadDir = "app/public/img/profile_images"; //set upload directory
+    form.keepExtensions = true; //keep file extension
 
     console.log(form.uploadDir);
     form.parse(req, function(err, fields, files) {
@@ -184,14 +182,14 @@ router.post('/upload', function (req, res, next) {
         // res.write('received upload:\n\n');
         console.log("form.bytesReceived");
         //TESTING
-        console.log("file size: "+JSON.stringify(files.fileUploaded.size));
-        console.log("file path: "+JSON.stringify(files.fileUploaded.path));
-        console.log("file name: "+JSON.stringify(files.fileUploaded.name));
-        console.log("file type: "+JSON.stringify(files.fileUploaded.type));
-        console.log("astModifiedDate: "+JSON.stringify(files.fileUploaded.lastModifiedDate));
+        console.log("file size: " + JSON.stringify(files.fileUploaded.size));
+        console.log("file path: " + JSON.stringify(files.fileUploaded.path));
+        console.log("file name: " + JSON.stringify(files.fileUploaded.name));
+        console.log("file type: " + JSON.stringify(files.fileUploaded.type));
+        console.log("astModifiedDate: " + JSON.stringify(files.fileUploaded.lastModifiedDate));
         //Formidable changes the name of the uploaded file
         //Rename the file to its original name
-        fs.rename(files.fileUploaded.path, 'app/public/img/profile_images/'+files.fileUploaded.name, function(err) {
+        fs.rename(files.fileUploaded.path, 'app/public/img/profile_images/' + files.fileUploaded.name, function(err) {
             if (err)
                 throw err;
             console.log('renamed complete');
@@ -201,13 +199,13 @@ router.post('/upload', function (req, res, next) {
             photo: files.fileUploaded.name
         };
         db.user.update(profileUpdate, {
-            where:{
+            where: {
                 id: req.user.id
             }
-        }).then(function (data) {
+        }).then(function(data) {
             console.log("Data has successfully beeen updated!!", data);
             res.redirect("/profile");
-        }).catch(function (err) {
+        }).catch(function(err) {
             console.log(err);
             // res.json("err");
         });
@@ -219,14 +217,14 @@ router.post('/upload', function (req, res, next) {
 ////////////////////////////////////////////////////////////////////
 
 router.delete("/delete", function(req, res) {
-    req.session.destroy(function (err) {
+    req.session.destroy(function(err) {
         db.user.destroy({
             where: {
                 id: user.id
             }
         }).then(function(data) {
             res.send('/index');
-        }).catch(function (err) {
+        }).catch(function(err) {
             console.log(err);
             res.json("err");
         });
