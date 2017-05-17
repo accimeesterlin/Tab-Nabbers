@@ -73,6 +73,8 @@ router.get("/dashboard", isLoggedIn, function(req, res) {
 router.get("/profile", isLoggedIn, function(req, res) {
     var currentUser = req.user;
     user = currentUser;
+    console.log(user);
+
     db.bootcamp.findOne({
         where: {
             id: currentUser.id

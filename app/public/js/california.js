@@ -107,11 +107,11 @@ function update() {
 
   // make the image grow a little on mouse over and add the text details on click
   var setEvents = images
-          // Append hero text
+          // Append name text
           .on( 'click', function (d) {
-              d3.select("h1").html(d.hero);
+              d3.select("h1").html(d.name);
               d3.select("h2").html(d.name);
-              d3.select("h3").html ("Take me to " + "<a href='" + d.link + "' >"  + d.hero + " web page ⇢"+ "</a>" );
+              d3.select("h3").html ("Take me to " + "<a href='" + d.link + "' >"  + d.name + " web page ⇢"+ "</a>" );
            })
 
           .on( 'mouseenter', function() {
@@ -133,13 +133,13 @@ function update() {
               .attr("width", 50);
           });
 
-  // Append hero name on roll over next to the node as well
+  // Append name name on roll over next to the node as well
   nodeEnter.append("text")
       .attr("class", "nodetext")
       .attr("x", x_browser)
       .attr("y", y_browser +15)
       .attr("fill", tcBlack)
-      .text(function(d) { return d.hero; });
+      .text(function(d) { return d.name; });
 
 
   // Exit any old nodes.
