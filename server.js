@@ -14,7 +14,7 @@ app.use(express.static("./app/public"));
 
 
 //For BodyParser
-app.use(bodyParser({defer: true}));
+app.use(bodyParser({ defer: true }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
@@ -49,13 +49,13 @@ app.use("/", routes);
 require('./app/config/passport/passport.js')(passport, db);
 
 
-
+var server;
 
 //Sync Database
-db.sequelize.sync({ }).then(function() {
+db.sequelize.sync({}).then(function() {
     console.log('Nice! Database looks fine');
 
-    app.listen(PORT, function(err) {
+    server = app.listen(PORT, function(err) {
 
         if (!err)
             console.log("Site is live");
@@ -66,3 +66,5 @@ db.sequelize.sync({ }).then(function() {
 }).catch(function(err) {
     console.log(err, "Something went wrong with the Database Update!");
 });
+
+module.exports = server;
