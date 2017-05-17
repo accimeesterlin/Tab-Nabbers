@@ -1,39 +1,43 @@
-.map-container {
-    margin: 0 auto;
-    height: 600px;
-    width: 960px;
+/*@import url(http://fonts.googleapis.com/css?family=Source+Code+Pro:400,600);*/
+/*body {font-family: "Source Code Pro", Consolas, monaco, monospace; line-height: 160%; font-size: 16px;  margin: 0; }*/
+path.link {
+fill: none;
+stroke-width: 2px;
 }
 
-svg {
+.node:not(:hover) .nodetext {
+display: none;
+
+}
+h1 { font-size: 36px; margin: 10px 0; text-transform: uppercase; font-weight: normal;}
+h2, h3 { font-size: 18px; margin: 5px 0 ; font-weight: normal;}
+header {padding: 20px; position: absolute; top: 0; left: 0;}
+a:link { color: #EE3124; text-decoration: none;}
+a:visited { color: #EE3124; }
+a:hover { color: #A4CD39; text-decoration: underline;}
+a:active { color: #EE3124; }
+
+path {
+fill: #ccc;
+stroke: #fff;
+stroke-width: .5px;
+}
+
+.container {
+    position: relative;
+    display: block;
+    width: 960px;
+    margin: 0 auto;
+
+}
+
+#vis {
+    z-index: 9999;
+    top: 130px;
+    left: 80px;
     position: absolute;
 }
 
-.tree {
-    z-index:9999;
-    /*top: 110px; 
-    left: 235px; 
-    position: absolute;*/
-}
-
-.map > path {
-    stroke: white;
-    /*fill: white;*/
-}
-
-line {
-    stroke: white;
-    fill: white;
-}
-
-.node {
-    pointer-events: all;
-}
-
-circle {
-    stroke: none;
-    stroke-width: 40px;
-}
-
-.node text {
-    font: 8px sans-serif;
-}
+/*path:hover {
+fill: red;
+}*/
