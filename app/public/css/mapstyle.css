@@ -4,8 +4,10 @@ path.link {
 fill: none;
 stroke-width: 2px;
 }
+
 .node:not(:hover) .nodetext {
 display: none;
+
 }
 h1 { font-size: 36px; margin: 10px 0; text-transform: uppercase; font-weight: normal;}
 h2, h3 { font-size: 18px; margin: 5px 0 ; font-weight: normal;}
@@ -26,13 +28,13 @@ stroke-width: .5px;
     display: block;
     width: 960px;
     margin: 0 auto;
-    
+
 }
 
 #vis {
     z-index: 9999;
-    top: 130px; 
-    left: 80px; 
+    top: 130px;
+    left: 80px;
     position: absolute;
 }
 
