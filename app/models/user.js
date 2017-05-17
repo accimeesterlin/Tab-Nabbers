@@ -51,10 +51,10 @@ module.exports = function(sequelize, Sequelize) {
             phoneNumber: {
                 type: Sequelize.STRING,
                 allowNull: true
-                // validate: {
-                //     notEmpty: true,
-                //     len: [10]
-                // }
+                    // validate: {
+                    //     notEmpty: true,
+                    //     len: [10]
+                    // }
             },
 
             photo: {
@@ -107,10 +107,18 @@ module.exports = function(sequelize, Sequelize) {
         {
             classMethods: {
                 associate: function(models) {
+                    User.belongsTo(models.cohort, {
+                        foreignKey: {
+                            allowNull: false
+                        },
+                        onDelete: "CASCADE"
+                    });
+
                     User.belongsTo(models.bootcamp, {
                         foreignKey: {
                             allowNull: false
-                        }
+                        },
+                        onDelete: "CASCADE"
                     });
                 }
             }

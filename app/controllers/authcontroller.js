@@ -46,6 +46,23 @@ router.get("/signin/:name?", function(req, res) {
 
 });
 
+//API endpoint for getting Bootcamp info to populate signup form, STUDENT ID, NAME, PHOTO return for mapping function
+router.get("/api/bootcamps/:bootcampID?", function(req, res) {
+    if (req.params.bootcampID) {
+        console.log(req.params.bootcampID);
+        db.cohort.findAll({
+            where: {
+                bootcampid: req.params.bootcampID
+            }
+        }).then(function(data) {
+            res.json(data);
+        })
+    } else {
+        db.bootcamp.findAll().then(function(data) {
+            res.json(data);
+        });
+    }
+});
 
 
 // Sigin up Routers for Recruiters and Students
