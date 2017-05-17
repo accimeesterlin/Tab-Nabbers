@@ -29,10 +29,23 @@ stroke-width: .5px;
     
 }
 
-#vis {
+#atlantaVis {
     z-index: 9999;
-    top: 130px; 
-    left: 80px; 
+    top: -120px; 
+    left: -120px; 
+    position: absolute;
+}
+
+.node {
+    top: 200px; 
+    left: 200px; 
+    position: absolute;
+}
+
+#caliVis {
+    z-index: 9998;
+    top: -130px; 
+    left: -80px; 
     position: absolute;
 }
 
