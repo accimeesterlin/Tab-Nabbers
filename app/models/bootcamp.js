@@ -10,33 +10,24 @@ module.exports = function(sequelize, Sequelize) {
             institution: {
                 type: Sequelize.STRING,
                 notEmpty: true
-            },
-
-            cohort: {
-                type: Sequelize.STRING,
-                notEmpty: true
-            },
-
-            startDate: {
-                type: Sequelize.DATE,
-                validate: {
-                    allowNull: false
-                }
-            },
-
-            endDate: {
-                type: Sequelize.DATE,
-                validate: {
-                    allowNull: false
-                }
             }
         },
         //Associations
         {
             classMethods: {
                 associate: function(models) {
+                    Bootcamp.hasMany(models.cohort, {
+                        foreignKey: {
+                            allowNull: false
+                        },
+                        onDelete: "CASCADE"
+                    });
+
                     Bootcamp.hasMany(models.user, {
-                        onDelete: "cascade"
+                        foreignKey: {
+                            allowNull: false
+                        },
+                        onDelete: "CASCADE"
                     });
                 }
             }
