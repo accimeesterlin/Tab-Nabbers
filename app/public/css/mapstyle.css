@@ -23,31 +23,31 @@ stroke: #fff;
 stroke-width: .5px;
 }
 
-.container {
+.d3container {
     position: relative;
     display: block;
     width: 960px;
     margin: 0 auto;
-
+    margin-top: 90px;
 }
 
 #atlantaVis {
     z-index: 9999;
-    top: -120px; 
-    left: -120px; 
+    top: -120px;
+    left: -120px;
     position: absolute;
 }
 
 .node {
-    top: 200px; 
-    left: 200px; 
+    top: 200px;
+    left: 200px;
     position: absolute;
 }
 
 #caliVis {
     z-index: 9998;
-    top: -130px; 
-    left: -80px; 
+    top: -130px;
+    left: -80px;
     position: absolute;
 }
 
