@@ -5,9 +5,11 @@ var expect = require('chai').expect;
 var url = 'http://localhost:8080';
 
 describe('BootCruit Demo', function() {
+
     beforeEach(function() {
         var server = require('../server');
     });
+
 
     describe('Open Homepage', function() {
         this.timeout(10000);
@@ -27,7 +29,7 @@ describe('BootCruit Demo', function() {
     describe('Open Student Signin', function() {
         this.timeout(10000);
         it('should open student signin form', function(done) {
-            var nightmare = Nightmare();
+            var nightmare = Nightmare({ show: true });
             nightmare
                 .goto(url)
                 .wait('#studentBtn')
@@ -45,7 +47,7 @@ describe('BootCruit Demo', function() {
     describe('Open Recruiter Signin', function() {
         this.timeout(10000);
         it('should open recruiter signin form', function(done) {
-            var nightmare = Nightmare();
+            var nightmare = Nightmare({ show: true });
             nightmare
                 .goto(url)
                 .wait('#recruiterBtn')
