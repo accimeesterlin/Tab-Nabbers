@@ -11,7 +11,7 @@
      {
        "cohort": "Cohort 1",
        "link": "#",
-       "img":  "http://vector.me/files/images/2/8/28227/georgia_tech_yellow_jackets.png",
+       "img":  "./img/cohort_1.png",
        "size": 40000,
        "children": [
          {
@@ -36,7 +36,7 @@
      }, {
        "cohort": "Cohort 2",
        "link": "#",
-       "img":  "http://vector.me/files/images/2/8/28227/georgia_tech_yellow_jackets.png",
+       "img":  "./img/cohort_2.png",
        "size": 40000,
        "children": [
 
@@ -45,7 +45,7 @@
      {
        "cohort": "Cohort 3",
        "link": "#",
-       "img":  "http://vector.me/files/images/2/8/28227/georgia_tech_yellow_jackets.png",
+       "img":  "./img/cohort_3.png",
        "size": 40000,
        "children": [
          
@@ -62,7 +62,7 @@
      {
        "cohort": "Cohort 1",
        "link": "#",
-       "img":  "http://vector.me/files/images/2/8/28227/georgia_tech_yellow_jackets.png",
+       "img":  "./img/cohort_1.png",
        "size": 40000,
        "children": [
 
@@ -70,7 +70,7 @@
      }, {
        "cohort": "Cohort 2",
        "link": "#",
-       "img":  "http://vector.me/files/images/2/8/28227/georgia_tech_yellow_jackets.png",
+       "img":  "./img/cohort_2.png",
        "size": 40000,
        "children": [
 
@@ -79,7 +79,7 @@
      {
        "cohort": "Cohort 3",
        "link": "#",
-       "img":  "http://vector.me/files/images/2/8/28227/georgia_tech_yellow_jackets.png",
+       "img":  "./img/cohort_3.png",
        "size": 40000,
        "children": [
 
@@ -97,7 +97,7 @@
      {
        "cohort": "Cohort 1",
        "link": "#",
-       "img":  "http://vector.me/files/images/2/8/28227/georgia_tech_yellow_jackets.png",
+       "img":  "./img/cohort_1.png",
        "size": 40000,
        "children": [
 
@@ -105,7 +105,7 @@
      }, {
        "cohort": "Cohort 2",
        "link": "#",
-       "img":  "http://vector.me/files/images/2/8/28227/georgia_tech_yellow_jackets.png",
+       "img":  "./img/cohort_2.png",
        "size": 40000,
        "children": [
 
@@ -114,7 +114,7 @@
      {
        "cohort": "Cohort 3",
        "link": "#",
-       "img":  "http://vector.me/files/images/2/8/28227/georgia_tech_yellow_jackets.png",
+       "img":  "./img/cohort_3.png",
        "size": 40000,
        "children": [
 

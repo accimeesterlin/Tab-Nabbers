@@ -5,8 +5,23 @@ var express = require("express"),
     passport = require("passport"),
     formidable = require('formidable'),
     path = require('path'), //used for file path
-    fs = require('fs-extra');
+    fs = require('fs-extra'),
+    atlanta = require('../public/atlanta.json');
 
+var gtBootcamp = atlanta.children[0].children,
+    gtCohort1 = gtBootcamp[0].children,
+    gtCohort2 = gtBootcamp[1].children,
+    gtCohort3 = gtBootcamp[2].children;
+
+var gaBootcamp = atlanta.children[1].children,
+    gaCohort1 = gaBootcamp[0].children,
+    gaCohort2 = gaBootcamp[1].children,
+    gaCohort3 = gaBootcamp[2].children;
+
+var iyBootcamp = atlanta.children[2].children,
+    iyCohort1 = iyBootcamp[0].children,
+    iyCohort2 = iyBootcamp[1].children,
+    iyCohort3 = iyBootcamp[2].children;
 
 var db = require("../models");
 
@@ -81,6 +96,22 @@ router.get("/signup/:name?", function(req, res) {
 // Dashboard included the map that recruiters see
 // If user not logged in, they're not able to see it
 router.get("/dashboard", isLoggedIn, function(req, res) {
+    var newItem = { 
+        name: 'New Hero',
+        id: '',
+        img: 'http://websamplenow.com/30/userprofile/images/avatar.jpg',
+        size: 40000 
+    }
+    gtCohort1.push(newItem);
+    console.log(gtCohort1);
+    console.log(atlanta);
+    fs.readFile('../public/atlanta.json', 'utf8', function readFileCallback(err, data){
+        if (err){
+            console.log(err);
+        } else {
+        json = JSON.stringify(atlanta); //convert it back to json
+        fs.writeFile('../public/atlanta.json', json, 'utf8'); // write it back 
+    }});
     res.render("dashboard");
 });
 
@@ -88,6 +119,8 @@ router.get("/dashboard", isLoggedIn, function(req, res) {
 // Profile page for Students
 // If user not logged in, they're not able to see it
 router.get("/profile", isLoggedIn, function(req, res) {
+    // var json = fs.JSON.parse("atlanta.json");
+
     var currentUser = req.user;
     user = currentUser;
     console.log(user);
