@@ -1,7 +1,7 @@
 # Tab Nabbers
 
  ```
-School's project. Description's coming soon
+Building the tool to make job hunts easier for fellow developers in Coding BootCamp, and make hiring process easier for Hiring Manager
  ```
 
 ### Getting Started
@@ -71,6 +71,9 @@ Happy Contributing!
 * JQuery
 * AngularJS 4
 * MVC Design patterns
+* D3.js
+* Mocha
+* Chai
 
 ```
 
