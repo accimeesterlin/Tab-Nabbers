@@ -198,7 +198,9 @@ module.exports = function(passport, user) {
                         email: email,
                         password: userPassword,
                         firstname: req.body.firstname,
-                        lastname: req.body.lastname
+                        lastname: req.body.lastname,
+                        bootcampId: req.body.bootcamp,
+                        cohortId: req.body.cohort
                     };
 
 
@@ -217,24 +219,24 @@ module.exports = function(passport, user) {
                 return done(null, false, { message: 'Something went wrong with your Signup' });
             });
 
-            // Adding data to the BootCamp Tables
-            var data = {
-                email: email,
-                firstname: req.body.firstname,
-                lastname: req.body.lastname,
-                institution: req.body.bootcamp,
-                cohort: req.body.cohort
-            };
+            // // Adding data to the BootCamp Tables
+            // var data = {
+            //     email: email,
+            //     firstname: req.body.firstname,
+            //     lastname: req.body.lastname,
+            //     institution: req.body.bootcamp,
+            //     cohort: req.body.cohort
+            // };
 
-            BootCamp.create(data).then(function(newUser, created) {
-                if (!newUser) {
-                    return done(null, false);
-                }
-                if (newUser) {
-                    // return done(null, newUser);
-                    console.log("New user added");
-                }
-            });
+            // BootCamp.create(data).then(function(newUser, created) {
+            //     if (!newUser) {
+            //         return done(null, false);
+            //     }
+            //     if (newUser) {
+            //         // return done(null, newUser);
+            //         console.log("New user added");
+            //     }
+            // });
         }
     ));
 

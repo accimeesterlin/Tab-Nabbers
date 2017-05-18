@@ -51,10 +51,10 @@ module.exports = function(sequelize, Sequelize) {
             phoneNumber: {
                 type: Sequelize.STRING,
                 allowNull: true
-                // validate: {
-                //     notEmpty: true,
-                //     len: [10]
-                // }
+                    // validate: {
+                    //     notEmpty: true,
+                    //     len: [10]
+                    // }
             },
 
             photo: {
@@ -80,37 +80,98 @@ module.exports = function(sequelize, Sequelize) {
 
             //Skills
             HTML: {
-                type: Sequelize.BOOLEAN
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
 
             },
             CSS: {
-                type: Sequelize.BOOLEAN
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
             },
 
             JavaScript: {
-                type: Sequelize.BOOLEAN
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
             },
 
             Nodejs: {
-                type: Sequelize.BOOLEAN
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
             },
 
-            PHP: {
-                type: Sequelize.BOOLEAN
+            mySQL: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
             },
 
-            database: {
-                type: Sequelize.BOOLEAN
+            Express: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
+            },
+
+            Handlebars: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
+            },
+
+            Bootstrap: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
+            },
+
+            Python: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
+            },
+
+            Angular: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
+            },
+
+            Ruby: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
+            },
+
+            Flask: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
+            },
+
+            Java: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
+            },
+
+            Cplusplus: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
+            },
+
+            Python: {
+                type: Sequelize.BOOLEAN,
+                defaultValue: false
             }
+
         },
+
         //Associations
         {
             classMethods: {
                 associate: function(models) {
+                    User.belongsTo(models.cohort, {
+                        foreignKey: {
+                            allowNull: false
+                        },
+                        onDelete: "CASCADE"
+                    });
+
                     User.belongsTo(models.bootcamp, {
                         foreignKey: {
                             allowNull: false
-                        }
+                        },
+                        onDelete: "CASCADE"
                     });
                 }
             }
