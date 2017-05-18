@@ -99,18 +99,18 @@ router.get("/dashboard", isLoggedIn, function(req, res) {
     var newItem = { 
         name: 'New Hero',
         id: '',
-        img: 'http://websamplenow.com/30/userprofile/images/avatar.jpg',
+        img: './img/avatar-default.png',
         size: 40000 
     }
     gtCohort1.push(newItem);
-    console.log(gtCohort1);
-    console.log(atlanta);
-    fs.readFile('../public/atlanta.json', 'utf8', function readFileCallback(err, data){
+    
+    fs.readFile('./app/public/atlanta.json', 'utf8', function readFileCallback(err, data){
         if (err){
             console.log(err);
         } else {
         json = JSON.stringify(atlanta); //convert it back to json
-        fs.writeFile('../public/atlanta.json', json, 'utf8'); // write it back 
+        console.log
+        fs.writeFile('./app/public/atlanta.json', json, 'utf8'); // write it back 
     }});
     res.render("dashboard");
 });
@@ -204,7 +204,7 @@ router.post("/update/profile", function(req, res) {
     //     lastname: student.lastname,
     //     github: student.github,
     //     phoneNumber: student.phoneNumber
-    //     // HTML: student.HTML
+    //     HTML: student.HTML
     // };
 
     db.user.update(student, {
