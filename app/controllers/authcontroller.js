@@ -96,22 +96,22 @@ router.get("/signup/:name?", function(req, res) {
 // Dashboard included the map that recruiters see
 // If user not logged in, they're not able to see it
 router.get("/dashboard", isLoggedIn, function(req, res) {
-    var newItem = { 
+    var newItem = {
         name: 'New Hero',
         id: '',
         img: './img/avatar-default.png',
-        size: 40000 
-    }
+        size: 40000
+    };
     gtCohort1.push(newItem);
-    
-    fs.readFile('./app/public/atlanta.json', 'utf8', function readFileCallback(err, data){
-        if (err){
+
+    fs.readFile('./app/public/atlanta.json', 'utf8', function readFileCallback(err, data) {
+        if (err) {
             console.log(err);
         } else {
-        json = JSON.stringify(atlanta); //convert it back to json
-        console.log
-        fs.writeFile('./app/public/atlanta.json', json, 'utf8'); // write it back 
-    }});
+            json = JSON.stringify(atlanta); //convert it back to json
+            fs.writeFile('./app/public/atlanta.json', json, 'utf8'); // write it back 
+        }
+    });
     res.render("dashboard");
 });
 
@@ -133,7 +133,7 @@ router.get("/profile", isLoggedIn, function(req, res) {
         // console.log(data.get());
         currentUser.institution = data.get().institution;
         //console.log(currentUser);
-
+        console.log(currentUser);
         // console.log(req.user);
         res.render("student_profile", currentUser);
     });
