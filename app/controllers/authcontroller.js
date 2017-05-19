@@ -95,7 +95,7 @@ router.get("/signup/:name?", function(req, res) {
 
 // Dashboard included the map that recruiters see
 // If user not logged in, they're not able to see it
-router.get("/dashboard", isLoggedIn, function(req, res) {
+router.get("/dashboard", function(req, res) {
     var newItem = {
         name: 'New Hero',
         id: '',
