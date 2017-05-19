@@ -87,9 +87,7 @@ router.get("/signup/:name?", function(req, res) {
 
     } else if (req.params.name === "student") {
         res.render("student_signup");
-
     }
-
 });
 
 
@@ -102,6 +100,7 @@ router.get("/dashboard", function(req, res) {
         img: './img/avatar-default.png',
         size: 40000
     };
+
     gtCohort1.push(newItem);
 
     fs.readFile('./app/public/atlanta.json', 'utf8', function readFileCallback(err, data) {
@@ -119,8 +118,6 @@ router.get("/dashboard", function(req, res) {
 // Profile page for Students
 // If user not logged in, they're not able to see it
 router.get("/profile", isLoggedIn, function(req, res) {
-    // var json = fs.JSON.parse("atlanta.json");
-
     var currentUser = req.user;
     user = currentUser;
     console.log(user);
