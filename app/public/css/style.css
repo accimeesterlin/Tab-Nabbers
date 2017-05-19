@@ -61,6 +61,10 @@ footer.page-footer {
     color: #1C2331;
 }
 
+.avatar {
+    margin-bottom: 20px;
+}
+
 
 /* Login styles */
 
@@ -83,6 +87,10 @@ img {
     max-height: 250px;
 }
 
+.socialLinks {
+    color: white;
+    text-decoration: none;
+}
 /* Edit Profile styles */
 
 #editform {
