@@ -45,18 +45,13 @@ stroke-width: .5px;
     position: absolute;
 }
 
-
-/*path:hover {
-fill: red;
-}*/
-
 /*modal*/
 
 #modal {
     position:fixed;
     left:400px;
     top:200px;
-    z-index:9998;
+    z-index:9996;
     background: white;
     border: 1px black solid;
     box-shadow: 10px 10px 5px #888888;
@@ -73,4 +68,10 @@ fill: red;
     top: -0px;
     right: -0px;
     z-index: 9999;
+}
+
+.modalName, .modalId {
+    z-index: 9997;
+    padding-left: 10px;
+    color: black;
 }
