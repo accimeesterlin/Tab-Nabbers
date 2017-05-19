@@ -117,7 +117,8 @@ function update() {
           .on( 'click', function imgClick(d) {
               if (logos.indexOf(d.img) == -1) {
                 var newContent = "<img src=" + d.img + ">";
-                newContent += "<p>" + "Name: " + d.name + "</p>";
+                newContent += "<p class='modalName'>" + "Name: " + d.name + "</p>";
+                newContent += "<p class='modalId'>" + "Id: " + d.id + "</p>";
                 d3.select("#modal").style("display", "block").select("#content").html(newContent);
               }    
             })
