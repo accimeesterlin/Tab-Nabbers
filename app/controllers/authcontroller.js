@@ -98,27 +98,38 @@ router.get("/signup/:name?", function(req, res) {
 // Dashboard included the map that recruiters see
 // If user not logged in, they're not able to see it
 router.get("/dashboard", function(req, res) {
-    var newItem = {
-        name: 'Esterling Accime',
-        id: '',
-        img: './img/profile_images/esterlin.jpg',
-        size: 40000
-    };
 
     db.user.findAll({raw : true }).then(function (data) {
-        console.log(data);
+        // gtBootcamp[0].children = [];
+        // console.log(gtCohort1);
+
+            data.map(function (el) {
+                //console.log(el);
+                var obj = {
+                    name: el.firstname,
+                    id: el.id,
+                    img: "./img/profile_images/" + el.photo
+                };
+                //gtCohort1.push(obj);
+
+
+            });
+
+        console.log(gtCohort1);
+
+        fs.readFile('./app/public/atlanta.json', 'utf8', function readFileCallback(err, data) {
+            if (err) {
+                console.log(err);
+            } else {
+                json = JSON.stringify(atlanta); //convert it back to json
+                fs.writeFile('./app/public/atlanta.json', json, 'utf8'); // write it back
+                res.render("dashboard");
+            }
+        });
+
     });
     //gtCohort1.push(newItem);
-    fs.readFile('./app/public/atlanta.json', 'utf8', function readFileCallback(err, data) {
-        if (err) {
-            console.log(err);
-        } else {
-            json = JSON.stringify(atlanta); //convert it back to json
-            console.log
-            fs.writeFile('./app/public/atlanta.json', json, 'utf8'); // write it back
-            res.render("dashboard");
-        }
-    });
+
 
 });
 
