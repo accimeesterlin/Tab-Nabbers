@@ -104,77 +104,77 @@
                             <form class="form-inline">
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox1" value="HTML">
+                                    <input type="checkbox" class="filled-in" id="HTML" value="{{HTML}}">
                                     <label for="checkbox1">HTML</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox2" value="CSS">
+                                    <input type="checkbox" class="filled-in" id="CSS" value="{{CSS}}">
                                     <label for="checkbox2">CSS</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox3" value="JavaScript">
+                                    <input type="checkbox" class="filled-in" id="JavaScript" value="{{JavaScript}}">
                                     <label for="checkbox3">Javascript</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox4" value="Nodejs">
+                                    <input type="checkbox" class="filled-in" id="Nodejs" value="{{Nodejs}}">
                                     <label for="checkbox4">Node.js</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox5" value="mySQL">
+                                    <input type="checkbox" class="filled-in" id="mySQL" value="{{mySQL}}">
                                     <label for="checkbox5">mySQL</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox6" value="Express">
+                                    <input type="checkbox" class="filled-in" id="Express" value="{{Express}}">
                                     <label for="checkbox6">Express</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox7" value="Handlebars">
+                                    <input type="checkbox" class="filled-in" id="Handlebars" value="{{Handlebars}}">
                                     <label for="checkbox7">Handlebars</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox8" value="Boostrap">
+                                    <input type="checkbox" class="filled-in" id="Bootstrap" value="{{Boostrap}}">
                                     <label for="checkbox8">Bootstrap</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox9" value="Python">
+                                    <input type="checkbox" class="filled-in" id="Python" value="{{Python}}">
                                     <label for="checkbox9">Python</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox10" value="Angular">
+                                    <input type="checkbox" class="filled-in" id="Angular" value="{{Angular}}">
                                     <label for="checkbox10">Angular</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox11" value="Ruby">
+                                    <input type="checkbox" class="filled-in" id="Ruby" value="{{Ruby}}">
                                     <label for="checkbox11">Ruby</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox12" value="Flask">
+                                    <input type="checkbox" class="filled-in" id="Flask" value="{{Flask}}">
                                     <label for="checkbox12">Flask</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox13" value="Java">
+                                    <input type="checkbox" class="filled-in" id="Java" value="{{Java}}">
                                     <label for="checkbox13">Java</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox14" value="C++">
+                                    <input type="checkbox" class="filled-in" id="Cplusplus" value="{{Cplusplus}}">
                                     <label for="checkbox14">C++</label>
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="checkbox15" value="PHP">
+                                    <input type="checkbox" class="filled-in" id="PHP" value="{{PHP}}">
                                     <label for="checkbox15">PHP</label>
                                 </fieldset>
                                 <br>
@@ -283,6 +283,7 @@
 
     <!-- Animations init-->
     <script>
+    $(document).ready(function(){
         new WOW().init();
 
         var app = (function () {
@@ -326,8 +327,12 @@
                     github: github
                 };
 
+                $('input[type="checkbox"]:not(:checked)').each(function(){
+                    profileInfo[$(this).attr('id')] = false;
+                })
+
                 $('input[type="checkbox"]:checked').each(function() {
-                    profileInfo[this.value] = true;
+                    profileInfo[$(this).attr('id')] = true;
                 });
 
 
@@ -403,6 +408,13 @@
         })();
 
  app.start();
+
+ $('input[type="checkbox"]').each(function(){
+    if($(this).val() === "true"){
+        $(this).prop('checked',true);    
+    }
+ });
+});
 
     </script>
 

@@ -108,11 +108,12 @@ function update() {
   // make the image grow a little on mouse over and add the text details on click
   var setEvents = images
           // Append name text
-          .on( 'click', function (d) {
-              d3.select("h1").html(d.name);
-              d3.select("h2").html(d.name);
-              d3.select("h3").html ("Take me to " + "<a href='" + d.link + "' >"  + d.name + " web page ⇢"+ "</a>" );
-           })
+          .on( 'click', function imgClick(d) {
+              var newContent = "<img src=" + d.img + ">";
+              newContent += "<p>" + "Name: " + d.name + "</p>";
+
+              d3.select("#modal").style("display", "block").select("#content").html(newContent);
+            })
 
           .on( 'mouseenter', function() {
             // select element in current context
@@ -213,3 +214,11 @@ function flatten(root) {
   recurse(root);
   return nodes;
 }
+
+/*modal close*/
+
+function nodeOut() {
+      d3.selectAll(".hoverLabel").remove();
+      d3.selectAll("circle").style("opacity", 1).style("stroke", "black").style("stroke-width", "1px");
+      d3.selectAll("line").style("opacity", 0.25);
+      }
