@@ -23,6 +23,8 @@ var iyBootcamp = atlanta.children[2].children,
     iyCohort2 = iyBootcamp[1].children,
     iyCohort3 = iyBootcamp[2].children;
 
+
+
 var db = require("../models");
 
 var router = express.Router();
@@ -97,23 +99,29 @@ router.get("/signup/:name?", function(req, res) {
 // If user not logged in, they're not able to see it
 router.get("/dashboard", function(req, res) {
     var newItem = {
-        name: 'New Hero',
+        name: 'Esterling Accime',
         id: '',
-        img: './img/avatar-default.png',
+        img: './img/profile_images/esterlin.jpg',
         size: 40000
     };
-    gtCohort1.push(newItem);
 
+    db.user.findAll({raw : true }).then(function (data) {
+        console.log(data);
+    });
+    //gtCohort1.push(newItem);
     fs.readFile('./app/public/atlanta.json', 'utf8', function readFileCallback(err, data) {
         if (err) {
             console.log(err);
         } else {
             json = JSON.stringify(atlanta); //convert it back to json
-            fs.writeFile('./app/public/atlanta.json', json, 'utf8'); // write it back 
+            console.log
+            fs.writeFile('./app/public/atlanta.json', json, 'utf8'); // write it back
+            res.render("dashboard");
         }
     });
-    res.render("dashboard");
+
 });
+
 
 
 // Profile page for Students
