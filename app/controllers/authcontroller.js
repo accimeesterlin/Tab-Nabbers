@@ -106,16 +106,10 @@ router.get("/dashboard", function(req, res) {
 
     db.user.findAll({raw : true }).then(function (data) {
 
-
-        // console.log(gtCohort1);
-
             data.map(function (el) {
-                //console.log(el);
-                clear();
-
                 var obj = {
                     name: el.firstname,
-                    id: "",
+                    id: "'" + el.id + "'",
                     img: "./img/profile_images/" + el.photo,
                     size: 40000
                 };
@@ -124,15 +118,15 @@ router.get("/dashboard", function(req, res) {
                 var gaTech = function () {
 
                     if(el.cohortId === 1){
-                        gtCohort1.push(obj);
+                        gtBootcamp[0].children.push(obj);
                     }
 
                     if(el.cohortId === 2){
-                        gtCohort2.push(obj);
+                        gtBootcamp[1].children.push(obj);
                     }
 
                     if(el.cohortId === 3){
-                        gtCohort3.push(obj);
+                        gtBootcamp[2].children.push(obj);
 
                     }
                 };
@@ -157,30 +151,22 @@ router.get("/dashboard", function(req, res) {
                         break;
                     default:
                         console.log("User not found");
-                };
+                }
 
-                //gtCohort1.push(obj);
 
             });
 
 
-
-
-
+        fs.readFile('./app/public/atlanta.json', 'utf8', function readFileCallback(err, data) {
+            if (err) {
+                console.log(err);
+            } else {
+                json = JSON.stringify(atlanta); //convert it back to json
+                fs.writeFile('./app/public/atlanta.json', json, 'utf8'); // write it back
+                res.render("dashboard");
+            }
+        });
     });
-
-    fs.readFile('./app/public/atlanta.json', 'utf8', function readFileCallback(err, data) {
-        if (err) {
-            console.log(err);
-        } else {
-            json = JSON.stringify(atlanta); //convert it back to json
-            fs.writeFile('./app/public/atlanta.json', json, 'utf8'); // write it back
-            res.render("dashboard");
-            //console.log(gtCohort1);
-        }
-    });
-    //gtCohort1.push(newItem);
-
 
 });
 
