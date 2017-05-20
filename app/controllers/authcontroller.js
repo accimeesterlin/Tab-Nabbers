@@ -26,6 +26,7 @@ var iyBootcamp = atlanta.children[2].children,
 
 
 
+
 var db = require("../models");
 
 var router = express.Router();
@@ -96,17 +97,29 @@ router.get("/signup/:name?", function(req, res) {
 
 // Dashboard included the map that recruiters see
 // If user not logged in, they're not able to see it
-router.get("/dashboard", function(req, res) {
-
+router.get("/dashboard", isLoggedIn, function(req, res) {
+        // Reset Georgia Tech Coding BootCamp
         gtBootcamp[0].children = [];
         gtBootcamp[1].children = [];
         gtBootcamp[2].children = [];
+
+        // Reset Iron Yard Coding BootCamp
+        iyBootcamp[0].children = [];
+        iyBootcamp[1].children = [];
+        iyBootcamp[2].children = [];
+
+        // Reset General Assembly Coding Bootcamp
+        gaBootcamp[0].children = [];
+        gaBootcamp[1].children = [];
+        gaBootcamp[2].children = [];
 
 
 
     db.user.findAll({raw : true }).then(function (data) {
 
             data.map(function (el) {
+                console.log(el.photo);
+
                 var obj = {
                     name: el.firstname,
                     id: "'" + el.id + "'",
@@ -117,6 +130,16 @@ router.get("/dashboard", function(req, res) {
                     github: el.github,
                     lastname: el.lastname
                 };
+
+                if(el.photo === null){
+                    obj.img = "./img/avatar-default.png";
+                } if(el.phone === undefined){
+                    obj.phone = "";
+
+                } if(el.github === null){
+                    obj.github = "";
+
+                }
 
 
                 var gaTech = function () {
@@ -135,23 +158,45 @@ router.get("/dashboard", function(req, res) {
                     }
                 };
 
-                // var ironYard = function () {
-                //
-                // };
+                var ironYard = function () {
+                    if(el.cohortId === 4){
+                        iyBootcamp[0].children.push(obj);
+                    }
 
-                // var gAssembly = function () {
-                //
-                // };
+                    if(el.cohortId === 5){
+                        iyBootcamp[1].children.push(obj);
+                    }
+
+                    if(el.cohortId === 6){
+                        iyBootcamp[2].children.push(obj);
+
+                    }
+                };
+
+                var gAssembly = function () {
+                    if(el.cohortId === 7){
+                        gaBootcamp[0].children.push(obj);
+                    }
+
+                    if(el.cohortId === 8){
+                        gaBootcamp[1].children.push(obj);
+                    }
+
+                    if(el.cohortId === 9){
+                        gaBootcamp[2].children.push(obj);
+
+                    }
+                };
 
                 switch(el.bootcampId){
                     case 1:
                         gaTech();
                         break;
                     case 2:
-                        // ironYard();
+                        ironYard();
                         break;
                     case 3:
-                        // gAssembly();
+                        gAssembly();
                         break;
                     default:
                         console.log("User not found");
