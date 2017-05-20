@@ -23,10 +23,6 @@ var iyBootcamp = atlanta.children[2].children,
     iyCohort2 = iyBootcamp[1].children,
     iyCohort3 = iyBootcamp[2].children;
 
-
-
-
-
 var db = require("../models");
 
 var router = express.Router();
@@ -99,7 +95,7 @@ router.get("/signup/:name?", function(req, res) {
 // If user not logged in, they're not able to see it
 router.get("/dashboard", isLoggedIn, function(req, res) {
         // Reset Georgia Tech Coding BootCamp
-        gtBootcamp[0].children = [];
+        // gtBootcamp[0].children = [];
         gtBootcamp[1].children = [];
         gtBootcamp[2].children = [];
 
@@ -112,7 +108,6 @@ router.get("/dashboard", isLoggedIn, function(req, res) {
         gaBootcamp[0].children = [];
         gaBootcamp[1].children = [];
         gaBootcamp[2].children = [];
-
 
 
     db.user.findAll({raw : true }).then(function (data) {
@@ -141,20 +136,22 @@ router.get("/dashboard", isLoggedIn, function(req, res) {
 
                 }
 
-
                 var gaTech = function () {
-
                     if(el.cohortId === 1){
+                        var currentIds = [];
+                        for (var i = 0; i < gtCohort1.length; i++) {
+                            currentIds.push(gtCohort1[i].id);
+                            console.log(currentIds);
+                        }
+
+                        console.log(obj.id);
                         gtBootcamp[0].children.push(obj);
                     }
-
                     if(el.cohortId === 2){
                         gtBootcamp[1].children.push(obj);
                     }
-
                     if(el.cohortId === 3){
                         gtBootcamp[2].children.push(obj);
-
                     }
                 };
 
@@ -201,10 +198,7 @@ router.get("/dashboard", isLoggedIn, function(req, res) {
                     default:
                         console.log("User not found");
                 }
-
-
             });
-
 
         fs.readFile('./app/public/atlanta.json', 'utf8', function readFileCallback(err, data) {
             if (err) {
@@ -216,7 +210,6 @@ router.get("/dashboard", isLoggedIn, function(req, res) {
             }
         });
     });
-
 });
 
 
@@ -233,8 +226,9 @@ router.get("/profile", isLoggedIn, function(req, res) {
             id: currentUser.id
         }
     }).then(function(data) {
+        console.log(data);
         // console.log(data.get());
-        currentUser.institution = data.get().institution;
+        // currentUser.institution = data.get().institution;
         //console.log(currentUser);
         console.log(currentUser);
         // console.log(req.user);
