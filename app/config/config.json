@@ -1,9 +1,8 @@
 {
 
-
     "development": {
         "username": "root",
-        "password": "Septembre1",
+        "password": "Z",
         "database": "sequelize_passport",
         "host": "localhost",
         "dialect": "mysql"
@@ -23,6 +22,5 @@
         "dialect": "mysql",
         "use_env_variable": "JAWSDB_URL"
     }
-
 
 }

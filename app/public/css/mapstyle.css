@@ -49,18 +49,24 @@ stroke-width: .5px;
 
 #modal {
     position:fixed;
-    left:400px;
-    top:200px;
+    width: 30%;
+    height: 450px;
+    padding: 30px;
+    left:50%;
+    top:50%;
     z-index:9996;
     background: white;
     border: 1px black solid;
     box-shadow: 10px 10px 5px #888888;
     display: none;
+    transform: translate(-50%, -50%);
+    font-family: monospace;
 }
 
 #content {
     max-height: 400px;
     overflow: auto;
+    text-align: center;
 }
 
 #modalClose {
@@ -70,8 +76,19 @@ stroke-width: .5px;
     z-index: 9999;
 }
 
-.modalName, .modalId {
+#profile {
+  margin: auto;
+}
+
+.modalName, .modalId, .modalEmail, .modalPhone, .modalGit {
     z-index: 9997;
     padding-left: 10px;
     color: black;
+}
+
+.modalName {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 20px;
+  color: steelblue;
 }
