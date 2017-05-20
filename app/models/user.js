@@ -147,11 +147,6 @@ module.exports = function(sequelize, Sequelize) {
             Cplusplus: {
                 type: Sequelize.BOOLEAN,
                 defaultValue: false
-            },
-
-            Python: {
-                type: Sequelize.BOOLEAN,
-                defaultValue: false
             }
 
         },
