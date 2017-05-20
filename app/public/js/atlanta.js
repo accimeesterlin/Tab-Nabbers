@@ -1,6 +1,12 @@
 // some colour variables
 var tcBlack = "#130C0E";
 
+var logos = ["http://warehousenews.co.uk/wp-content/uploads/2009/08/atlanta-logo.jpg",
+             "http://vector.me/files/images/2/8/28227/georgia_tech_yellow_jackets.png",
+             "http://www.ethanjfriedman.com/assets/General_Assembly_logo.png",
+             "https://pbs.twimg.com/profile_images/552955646346145793/DKlUDGsR.png",
+             "./img/cohort_1.png", "./img/cohort_2.png", "./img/cohort_3.png"]
+
 // rest of vars
 var w = 1200,
     h = 800,
@@ -109,10 +115,12 @@ function update() {
   var setEvents = images
           // Append name text
           .on( 'click', function imgClick(d) {
-              var newContent = "<img src=" + d.img + ">";
-              newContent += "<p>" + "Name: " + d.name + "</p>";
-
-              d3.select("#modal").style("display", "block").select("#content").html(newContent);
+              if (logos.indexOf(d.img) == -1) {
+                var newContent = "<img src=" + d.img + ">";
+                newContent += "<p class='modalName'>" + "Name: " + d.name + "</p>";
+                newContent += "<p class='modalId'>" + "Id: " + d.id + "</p>";
+                d3.select("#modal").style("display", "block").select("#content").html(newContent);
+              }    
             })
 
           .on( 'mouseenter', function() {

@@ -25,6 +25,7 @@ var iyBootcamp = atlanta.children[2].children,
 
 
 
+
 var db = require("../models");
 
 var router = express.Router();
@@ -89,44 +90,90 @@ router.get("/signup/:name?", function(req, res) {
 
     } else if (req.params.name === "student") {
         res.render("student_signup");
-
     }
-
 });
 
 
 // Dashboard included the map that recruiters see
 // If user not logged in, they're not able to see it
 router.get("/dashboard", function(req, res) {
-
+    var clear = function () {
+        gtBootcamp[0].children = [];
+        gtBootcamp[1].children = [];
+        gtBootcamp[2].children = [];
+    };
+    clear();
     db.user.findAll({raw : true }).then(function (data) {
-        // gtBootcamp[0].children = [];
+
         // console.log(gtCohort1);
 
             data.map(function (el) {
-                //console.log(el);
+                console.log(el);
+
                 var obj = {
                     name: el.firstname,
-                    id: el.id,
-                    img: "./img/profile_images/" + el.photo
+                    id: "",
+                    img: "./img/profile_images/" + el.photo,
+                    size: 40000
                 };
-                //gtCohort1.push(obj);
 
+
+                var gaTech = function () {
+                    if(el.cohortId === 1){
+                        gtCohort1.push(obj);
+                    }
+
+                    if(el.cohortId === 2){
+                        gtCohort2.push(obj);
+                    }
+
+                    if(el.cohortId === 3){
+                        gtCohort3.push(obj);
+
+                    }
+                };
+
+                // var ironYard = function () {
+                //
+                // };
+
+                // var gAssembly = function () {
+                //
+                // };
+
+                switch(el.bootcampId){
+                    case 1:
+                        gaTech();
+                        break;
+                    case 2:
+                        // ironYard();
+                        break;
+                    case 3:
+                        // gAssembly();
+                        break;
+                    default:
+                        console.log("User not found");
+                };
+
+                //gtCohort1.push(obj);
 
             });
 
-        console.log(gtCohort1);
 
-        fs.readFile('./app/public/atlanta.json', 'utf8', function readFileCallback(err, data) {
-            if (err) {
-                console.log(err);
-            } else {
-                json = JSON.stringify(atlanta); //convert it back to json
-                fs.writeFile('./app/public/atlanta.json', json, 'utf8'); // write it back
-                res.render("dashboard");
-            }
-        });
 
+
+
+    });
+
+    fs.readFile('./app/public/atlanta.json', 'utf8', function readFileCallback(err, data) {
+        if (err) {
+            console.log(err);
+        } else {
+            json = JSON.stringify(atlanta); //convert it back to json
+            fs.writeFile('./app/public/atlanta.json', json, 'utf8'); // write it back
+            res.render("dashboard");
+            //console.log(gtCohort1);
+        }
     });
     //gtCohort1.push(newItem);
 
@@ -138,8 +185,6 @@ router.get("/dashboard", function(req, res) {
 // Profile page for Students
 // If user not logged in, they're not able to see it
 router.get("/profile", isLoggedIn, function(req, res) {
-    // var json = fs.JSON.parse("atlanta.json");
-
     var currentUser = req.user;
     user = currentUser;
     console.log(user);
