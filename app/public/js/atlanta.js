@@ -117,10 +117,10 @@ function update() {
           .on( 'click', function imgClick(d) {
               if (logos.indexOf(d.img) == -1) {
                 var newContent = "<img id='profile' src=" + d.img + "><hr>";
-                newContent += "<p class='modalName'>"+ d.name + "</p><br>";
-                newContent += "<p class='modalEmail'>" + "<i class='fa fa-envelope' aria-hidden='true'></i> " + "[email]" + "</p>";
-                newContent += "<p class='modalPhone'>" + "<i class='fa fa-phone' aria-hidden='true'></i> " + "[Phone]" + "</p>";
-                newContent += "<p class='modalGit'>" + "<i class='fa fa-github' aria-hidden='true'></i> " + "[GitHub]" + "</p>";
+                newContent += "<p class='modalName'>"+ d.name + "</p>" + "<p class='modalName'>"+ d.lastname + "</p><br>";
+                newContent += "<p class='modalEmail'>" + "<i class='fa fa-envelope' aria-hidden='true'></i> " + d.email + "</p>";
+                newContent += "<p class='modalPhone'>" + "<i class='fa fa-phone' aria-hidden='true'></i> " + d.phone + "</p>";
+                newContent += "<p class='modalGit'>" + "<i class='fa fa-github' aria-hidden='true'></i> " + d.github + "</p>";
                 d3.select("#modal").style("display", "block").select("#content").html(newContent);
               }
             })
