@@ -1,3 +1,4 @@
+
 var Nightmare = require('nightmare');
 var should = require('chai').should();
 var expect = require('chai').expect;
@@ -63,3 +64,4 @@ describe('BootCruit Demo', function() {
     })
 
 })
+

@@ -155,6 +155,7 @@ module.exports = function(sequelize, Sequelize) {
             }
 
         },
+
         //Associations
         {
             classMethods: {

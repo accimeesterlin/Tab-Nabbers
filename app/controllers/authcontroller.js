@@ -23,6 +23,7 @@ var iyBootcamp = atlanta.children[2].children,
     iyCohort2 = iyBootcamp[1].children,
     iyCohort3 = iyBootcamp[2].children;
 
+
 var db = require("../models");
 
 var router = express.Router();
@@ -93,27 +94,69 @@ router.get("/signup/:name?", function(req, res) {
 
 // Dashboard included the map that recruiters see
 // If user not logged in, they're not able to see it
-router.get("/dashboard", isLoggedIn, function(req, res) {
-    var newItem = {
-        name: 'New Hero',
-        id: '',
-        img: './img/avatar-default.png',
-        size: 40000
-    }
+router.get("/dashboard", function(req, res) {
+    
 
-    gtCohort1.push(newItem);
+    db.user.findAll({raw : true }).then(function (data) {
+            data.map(function (el) {
+                var obj = {
+                    name: el.firstname,
+                    id: el.id,
+                    img: "./img/profile_images/" + el.photo,
+                    size: 40000
+                };
+                var gaTech = function () {
+                    if(el.cohortId === 1){
+                        var currentIds = [];
+                        for (var i = 0; i < gtCohort1.length; i++) {
+                            currentIds.push(gtCohort1[i].id);
+                            console.log(currentIds);
+                        }
 
-    fs.readFile('./app/public/atlanta.json', 'utf8', function readFileCallback(err, data) {
-        if (err) {
-            console.log(err);
-        } else {
-            json = JSON.stringify(atlanta); //convert it back to json
-            console.log
-            fs.writeFile('./app/public/atlanta.json', json, 'utf8'); // write it back 
-        }
+                        console.log(obj.id);
+
+                        gtCohort1.push(obj);
+                    }
+                    if(el.cohortId === 2){
+                        gtCohort2.push(obj);
+                    }
+                    if(el.cohortId === 3){
+                        gtCohort3.push(obj);
+                    }
+                };
+                // var ironYard = function () {
+                //
+                // };
+                // var gAssembly = function () {
+                //
+                // };
+                switch(el.bootcampId){
+                    case 1:
+                        gaTech();
+                        break;
+                    case 2:
+                        // ironYard();
+                        break;
+                    case 3:
+                        // gAssembly();
+                        break;
+                    default:
+                        console.log("User not found");
+                }
+                
+            });
+        fs.readFile('./app/public/atlanta.json', 'utf8', function readFileCallback(err, data) {
+            if (err) {
+                console.log(err);
+            } else {
+                json = JSON.stringify(atlanta); //convert it back to json
+                fs.writeFile('./app/public/atlanta.json', json, 'utf8'); // write it back
+                res.render("dashboard");
+            }
+        });
     });
-    res.render("dashboard");
 });
+
 
 
 // Profile page for Students
