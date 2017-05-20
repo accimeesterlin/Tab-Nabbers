@@ -53,11 +53,7 @@ var server;
 
 //Sync Database
 
-<<<<<<< HEAD
 db.sequelize.sync({  }).then(function() {
-=======
-db.sequelize.sync({ force : true }).then(function() {
->>>>>>> 13e7a8479924374da1d682b70de8030e20e88c66
 
     console.log('Nice! Database looks fine');
 

@@ -139,7 +139,7 @@
                                 </fieldset>
 
                                 <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="Bootstrap" value="{{Boostrap}}">
+                                    <input type="checkbox" class="filled-in" id="Bootstrap" value="{{Bootstrap}}">
                                     <label for="checkbox8">Bootstrap</label>
                                 </fieldset>
 
@@ -171,11 +171,6 @@
                                 <fieldset class="form-group">
                                     <input type="checkbox" class="filled-in" id="Cplusplus" value="{{Cplusplus}}">
                                     <label for="checkbox14">C++</label>
-                                </fieldset>
-
-                                <fieldset class="form-group">
-                                    <input type="checkbox" class="filled-in" id="PHP" value="{{PHP}}">
-                                    <label for="checkbox15">PHP</label>
                                 </fieldset>
                                 <br>
                             </form>
@@ -235,8 +230,15 @@
                         {{#if JavaScript}}<span class="badge badge-info"> JavaScript </span>{{/if}}
                         {{#if Angularjs}}<span class="badge badge-warning"> Angular.JS </span>{{/if}}
                         {{#if Nodejs}}<span class="badge badge-danger"> Node.js </span>{{/if}}
-                        {{#if PHP}}<span class="badge badge-primary"> PHP </span>{{/if}}
-
+                        {{#if mySQL}}<span class="badge badge-success"> mySQL </span>{{/if}}
+                        {{#if Express}}<span class="badge badge-info"> Express </span>{{/if}}
+                        {{#if Handlebars}}<span class="badge badge-warning"> Handlebars </span>{{/if}}
+                        {{#if Bootstrap}}<span class="badge badge-danger"> Bootstrap</span>{{/if}}
+                        {{#if Python}}<span class="badge badge-primary"> Python </span>{{/if}}
+                        {{#if Ruby}}<span class="badge badge-success"> Ruby </span>{{/if}}
+                        {{#if Flask}}<span class="badge badge-info"> Flask </span>{{/if}}
+                        {{#if Java}}<span class="badge badge-warning"> Java </span>{{/if}}
+                        {{#if Cplusplus}}<span class="badge badge-danger"> C++ </span>{{/if}}
                     </center>
                     <hr>
                     <center>
@@ -411,7 +413,7 @@
 
  $('input[type="checkbox"]').each(function(){
     if($(this).val() === "true"){
-        $(this).prop('checked',true);    
+        $(this).prop('checked',true);
     }
  });
 });
