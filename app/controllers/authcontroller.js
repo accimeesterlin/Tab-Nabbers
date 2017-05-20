@@ -98,15 +98,24 @@ router.get("/dashboard", function(req, res) {
     
 
     db.user.findAll({raw : true }).then(function (data) {
+<<<<<<< HEAD
             data.map(function (el) {
                 var obj = {
                     name: el.firstname,
                     id: el.id,
+=======
+
+            data.map(function (el) {
+                var obj = {
+                    name: el.firstname,
+                    id: "'" + el.id + "'",
+>>>>>>> 13e7a8479924374da1d682b70de8030e20e88c66
                     img: "./img/profile_images/" + el.photo,
                     size: 40000
                 };
                 var gaTech = function () {
                     if(el.cohortId === 1){
+<<<<<<< HEAD
                         var currentIds = [];
                         for (var i = 0; i < gtCohort1.length; i++) {
                             currentIds.push(gtCohort1[i].id);
@@ -116,12 +125,20 @@ router.get("/dashboard", function(req, res) {
                         console.log(obj.id);
 
                         gtCohort1.push(obj);
+=======
+                        gtBootcamp[0].children.push(obj);
+>>>>>>> 13e7a8479924374da1d682b70de8030e20e88c66
                     }
                     if(el.cohortId === 2){
-                        gtCohort2.push(obj);
+                        gtBootcamp[1].children.push(obj);
                     }
                     if(el.cohortId === 3){
+<<<<<<< HEAD
                         gtCohort3.push(obj);
+=======
+                        gtBootcamp[2].children.push(obj);
+
+>>>>>>> 13e7a8479924374da1d682b70de8030e20e88c66
                     }
                 };
                 // var ironYard = function () {
@@ -143,8 +160,16 @@ router.get("/dashboard", function(req, res) {
                     default:
                         console.log("User not found");
                 }
+<<<<<<< HEAD
                 
             });
+=======
+
+
+            });
+
+
+>>>>>>> 13e7a8479924374da1d682b70de8030e20e88c66
         fs.readFile('./app/public/atlanta.json', 'utf8', function readFileCallback(err, data) {
             if (err) {
                 console.log(err);
@@ -155,6 +180,10 @@ router.get("/dashboard", function(req, res) {
             }
         });
     });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 13e7a8479924374da1d682b70de8030e20e88c66
 });
 
 

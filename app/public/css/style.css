@@ -44,8 +44,19 @@ footer.page-footer {
     color: #fff;
 }
 
-.view {
+#indexCover, .view {
     background: url("https://images.unsplash.com/photo-1487446929682-f62f73984006?dpr=2&auto=format&fit=crop&w=1500&h=1000&q=80&cs=tinysrgb&crop=&bg=")no-repeat center center fixed;
+}
+
+#aboutCover {
+    background: url("https://images.unsplash.com/photo-1443557661966-8b4795a6f62c?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;s=6e4b02239488939003b8601f95e9f41f")no-repeat center center fixed;
+}
+
+#dashboardCover {
+    background: url("https://images.unsplash.com/photo-1474010446775-db2bc33f1845?ixlib=rb-0.3.5&amp;q=80&amp;fm=jpg&amp;crop=entropy&amp;cs=tinysrgb&amp;w=1080&amp;fit=max&amp;s=7b4cde73cc5f9e8b9eda609242fb54f0")no-repeat center center fixed;
+}
+
+#indexCover, #aboutCover, #dashboardCover, .view {
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
