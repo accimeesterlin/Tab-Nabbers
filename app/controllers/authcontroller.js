@@ -111,7 +111,11 @@ router.get("/dashboard", function(req, res) {
                     name: el.firstname,
                     id: "'" + el.id + "'",
                     img: "./img/profile_images/" + el.photo,
-                    size: 40000
+                    size: 40000,
+                    email: el.email,
+                    phone: el.phone,
+                    github: el.github,
+                    lastname: el.lastname
                 };
 
 
