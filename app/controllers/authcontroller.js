@@ -97,18 +97,21 @@ router.get("/signup/:name?", function(req, res) {
 // Dashboard included the map that recruiters see
 // If user not logged in, they're not able to see it
 router.get("/dashboard", function(req, res) {
-    var clear = function () {
+
         gtBootcamp[0].children = [];
         gtBootcamp[1].children = [];
         gtBootcamp[2].children = [];
-    };
-    clear();
+
+
+
     db.user.findAll({raw : true }).then(function (data) {
+
 
         // console.log(gtCohort1);
 
             data.map(function (el) {
-                console.log(el);
+                //console.log(el);
+                clear();
 
                 var obj = {
                     name: el.firstname,
@@ -119,6 +122,7 @@ router.get("/dashboard", function(req, res) {
 
 
                 var gaTech = function () {
+
                     if(el.cohortId === 1){
                         gtCohort1.push(obj);
                     }
